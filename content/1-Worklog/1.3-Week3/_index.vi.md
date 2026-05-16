@@ -22,7 +22,7 @@ pre: " <b> 1.3. </b> "
 
 | Thứ | Công việc | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu |
 | --- | --- | --- | --- | --- |
-| 2 | - Đọc phần Introduction to Amazon EC2 <br> - Nắm tổng quan workshop và kiến trúc thực hành <br> - Chuẩn bị tài khoản AWS, Region, Key Pair và môi trường kết nối | 11/05/2026 | 11/05/2026 | https://000004.awsstudygroup.com/ |
+| 2 | - Đọc phần Introduction từ Amazon EC2 <br> - Nắm tổng quan workshop và kiến trúc thực hành <br> - Chuẩn bị tài khoản AWS, Region, Key Pair và môi trường kết nối | 11/05/2026 | 11/05/2026 | https://000004.awsstudygroup.com/ |
 | 3 | - Module 2.1: Create a Linux VPC <br> - Module 2.2: Create VPC for Windows Instance <br> - Module 2.3: Create Security Group for Linux Instance <br> - Module 2.4: Create Security Group for Windows Instance | 12/05/2026 | 12/05/2026 | https://000004.awsstudygroup.com/ |
 | 4 | - Module 3.1: Launch Microsoft Windows Server 2022 Instance <br> - Module 3.2: Connect from Computer to Windows Instance <br> - Kiểm tra Remote Desktop và key pair đăng nhập Windows | 13/05/2026 | 13/05/2026 | https://000004.awsstudygroup.com/ |
 | 5 | - Module 4.1: Launch Amazon Linux Instance <br> - Module 4.2: Connect to Amazon Linux Instance <br> - Thực hành SSH vào Linux Instance bằng key pair | 14/05/2026 | 14/05/2026 | https://000004.awsstudygroup.com/ |
