@@ -90,24 +90,24 @@ pre: " <b> 1.1. </b> "
 - Truy cập [aws.amazon.com/free](https://aws.amazon.com/free) và tạo tài khoản mới.
 - Chọn **Paid Plan** để toàn quyền truy cập dịch vụ.
 - Nhận $100 credit tự động sau khi tạo tài khoản thành công.
-- ![Ảnh minh chứng: màn hình AWS Console sau khi đăng nhập lần đầu](/images/1-Worklog/1.1-Week1/aws-billing-100-credit.png)
-- ![Ảnh minh chứng: AWS Billing Console hiển thị $100 credit](/images/1-Worklog/1.1-Week1/aws-billing-100-credit.png)
+- ![Ảnh minh chứng: màn hình AWS Console sau khi đăng nhập lần đầu](/1-Worklog/1.1-Week1/aws-billing-100-credit.png)
+- ![Ảnh minh chứng: AWS Billing Console hiển thị $100 credit](/1-Worklog/1.1-Week1/aws-billing-100-credit.png)
 
 **Lab01-02 — Cài đặt Virtual MFA Device:**
 
 - Kích hoạt MFA cho tài khoản root bằng ứng dụng Authenticator.
-- ![Ảnh minh chứng: màn hình xác nhận MFA đã được kích hoạt thành công](/images/1-Worklog/1.1-Week1/mfa-activated.png)
+- ![Ảnh minh chứng: màn hình xác nhận MFA đã được kích hoạt thành công](/1-Worklog/1.1-Week1/mfa-activated.png)
 
 **Lab01-03 — Tạo admin group và admin user:**
 
 - Tạo IAM Group `AdminGroup` với quyền `AdministratorAccess`.
 - Tạo IAM User và gán vào group.
-- ![Ảnh minh chứng: danh sách IAM Users và Groups trong Console](/images/1-Worklog/1.1-Week1/iam-users-groups-console.png)
+- ![Ảnh minh chứng: danh sách IAM Users và Groups trong Console](/1-Worklog/1.1-Week1/iam-users-groups-console.png)
 
 **Lab01-04 — Hỗ trợ xác thực tài khoản:**
 
 - Thực hành liên hệ AWS Support để xác thực tài khoản khi cần.
-- ![Ảnh minh chứng: màn hình tạo support case thành công](/images/1-Worklog/1.1-Week1/support-case-success.png)
+- ![Ảnh minh chứng: màn hình tạo support case thành công](/1-Worklog/1.1-Week1/support-case-success.png)
 
 **Lab07 — Thực hành AWS Budgets:**
 
@@ -117,7 +117,7 @@ pre: " <b> 1.1. </b> "
 - Lab07-04: Tạo RI Budget để theo dõi Reserved Instance.
 - Lab07-05: Tạo Savings Plans Budget.
 - Lab07-06: Xóa toàn bộ Budgets sau khi thực hành (clean up).
-- 📸 _Ảnh minh chứng: danh sách các Budgets đã tạo trong AWS Budgets Console._
+-  _Ảnh minh chứng: danh sách các Budgets đã tạo trong AWS Budgets Console._
 
 **Lab09 — Thực hành AWS Support:**
 
@@ -125,7 +125,7 @@ pre: " <b> 1.1. </b> "
 - Lab09-02: Phân biệt các loại yêu cầu hỗ trợ (Account & billing, Technical...).
 - Lab09-03: Thực hành thay đổi gói Support.
 - Lab09-04: Tạo, theo dõi và quản lý support case.
-- 📸 _Ảnh minh chứng: màn hình tạo support case và trạng thái case._
+-  _Ảnh minh chứng: màn hình tạo support case và trạng thái case._
 
 **5 nhiệm vụ nhận $200 credit:**
 
@@ -133,28 +133,28 @@ pre: " <b> 1.1. </b> "
   - Tạo EC2 instance tên `Test Instance`, chọn AMI, cấu hình Security Group.
   - Tạo key pair `first-kp` (RSA, .pem).
   - Terminate instance sau khi hoàn thành (clean up).
-  - 📸 _Ảnh minh chứng: EC2 instance ở trạng thái running._
+  -  _Ảnh minh chứng: EC2 instance ở trạng thái running._
 
 - **Task 2 — Amazon Bedrock Playground (+$20):**
   - Truy cập Bedrock Console, chọn model **Claude 3 Haiku**.
   - Gửi use case details và chạy thử prompt.
-  - 📸 _Ảnh minh chứng: kết quả response từ Bedrock Playground._
+  -  _Ảnh minh chứng: kết quả response từ Bedrock Playground._
 
 - **Task 3 — Set up AWS Budgets (+$20):**
   - Tạo cost budget với cảnh báo qua email.
-  - 📸 _Ảnh minh chứng: Budget đã tạo thành công._
+  -  _Ảnh minh chứng: Budget đã tạo thành công._
 
 - **Task 4 — Create Lambda Web App (+$20):**
   - Tạo Lambda function `http-function-url-tutorial` từ blueprint.
   - Delete function sau khi hoàn thành (clean up).
-  - 📸 _Ảnh minh chứng: Lambda function đã tạo thành công._
+  -  _Ảnh minh chứng: Lambda function đã tạo thành công._
 
 - **Task 5 — Create RDS Database (+$20):**
   - Tạo Aurora (PostgreSQL Compatible) database bằng Easy Create.
   - Xóa DB instance và cluster sau khi hoàn thành (clean up).
-  - 📸 _Ảnh minh chứng: RDS database ở trạng thái Available._
+  -  _Ảnh minh chứng: RDS database ở trạng thái Available._
 
-- 📸 _Ảnh minh chứng tổng: AWS Billing Console hiển thị đủ $200 credit._
+-  _Ảnh minh chứng tổng: AWS Billing Console hiển thị đủ $200 credit._
 
 ---
 
@@ -178,17 +178,17 @@ pre: " <b> 1.1. </b> "
 
 #### Minh chứng
 
-- 📸 AWS Console sau khi đăng nhập lần đầu
-- 📸 $100 credit hiển thị trong Billing Console
-- 📸 MFA đã kích hoạt thành công
-- 📸 IAM Users và Groups đã tạo
-- 📸 Danh sách Budgets đã tạo (Cost, Usage, RI, Savings Plans)
-- 📸 Support case đã tạo thành công
-- 📸 EC2 instance ở trạng thái running (Task 1)
-- 📸 Bedrock Playground response (Task 2)
-- 📸 Lambda function đã tạo (Task 4)
-- 📸 RDS database Available (Task 5)
-- 📸 $200 credit đầy đủ trong Billing Console
+-  AWS Console sau khi đăng nhập lần đầu
+-  $100 credit hiển thị trong Billing Console
+-  MFA đã kích hoạt thành công
+-  IAM Users và Groups đã tạo
+-  Danh sách Budgets đã tạo (Cost, Usage, RI, Savings Plans)
+-  Support case đã tạo thành công
+-  EC2 instance ở trạng thái running (Task 1)
+-  Bedrock Playground response (Task 2)
+-  Lambda function đã tạo (Task 4)
+-  RDS database Available (Task 5)
+-  $200 credit đầy đủ trong Billing Console
 
 ---
 
