@@ -1,4 +1,3 @@
-```md
 ---
 title: "Worklog Week 7"
 date: 2026-06-08
@@ -7,141 +6,158 @@ chapter: false
 pre: " <b> 1.7. </b> "
 ---
 
-## Week 7 Objectives
+### Week 7 Objectives:
 
 - Learn the fundamentals of Amazon CloudWatch.
 - Understand the role of CloudWatch in monitoring AWS resources and applications.
-- Practice working with CloudWatch Metrics and visualization.
+- Practice using CloudWatch Metrics to monitor system performance.
 - Learn Search Expressions, Math Expressions, and Dynamic Labels.
 - Explore CloudWatch Logs and CloudWatch Logs Insights.
-- Create Metric Filters from application logs.
+- Create Metric Filters from log data.
 - Configure CloudWatch Alarms for monitoring and notifications.
 - Build CloudWatch Dashboards for centralized monitoring.
 - Perform resource cleanup after completing the lab.
+- Improve AWS monitoring and troubleshooting skills.
 
 ---
 
-## Tasks Completed This Week
+### Tasks Completed This Week:
 
-| Day | Tasks | Start Date | Completion Date |
-|------|------|------|------|
-| Monday | Learn the overview of Amazon CloudWatch and prepare the lab environment | 08/06/2026 | 08/06/2026 |
-| Tuesday | Explore CloudWatch Metrics and visualize application metrics | 09/06/2026 | 09/06/2026 |
-| Wednesday | Practice Search Expressions, Math Expressions, and Dynamic Labels | 10/06/2026 | 10/06/2026 |
-| Thursday | Work with CloudWatch Logs and CloudWatch Logs Insights | 11/06/2026 | 11/06/2026 |
-| Friday | Create Metric Filters and CloudWatch Alarms | 12/06/2026 | 12/06/2026 |
-| Saturday | Build CloudWatch Dashboards | 13/06/2026 | 13/06/2026 |
-| Sunday | Review monitoring resources and clean up the lab environment | 14/06/2026 | 14/06/2026 |
-
----
-
-## Results Achieved
-
-### Amazon CloudWatch
-
-- Learned the purpose of Amazon CloudWatch as a monitoring and observability service.
-- Understood how CloudWatch collects and analyzes metrics and logs.
-- Learned the importance of monitoring system health and application performance.
-
-### CloudWatch Metrics
-
-- Viewed and analyzed CloudWatch Metrics.
-- Practiced Search Expressions and Math Expressions.
-- Used Dynamic Labels to improve metric visualization.
-
-### CloudWatch Logs
-
-- Collected and analyzed application logs.
-- Queried logs using CloudWatch Logs Insights.
-- Created Metric Filters from log events.
-
-### CloudWatch Alarms
-
-- Created alarms based on metrics.
-- Configured SNS notifications.
-- Monitored system status through alarms.
-
-### CloudWatch Dashboards
-
-- Built monitoring dashboards.
-- Visualized metrics and alarms.
-- Created a centralized monitoring view.
+| Day | Tasks | Start Date | Completion Date | Reference |
+| --- | --- | --- | --- | --- |
+| Monday | - Read the Amazon CloudWatch workshop overview <br> - Learn the role of CloudWatch in AWS <br> - Prepare the lab environment | 08/06/2026 | 08/06/2026 | https://000008.awsstudygroup.com/1-introduction/ |
+| Tuesday | - Explore CloudWatch Metrics <br> - View and analyze Metrics <br> - Practice Search Expressions | 09/06/2026 | 09/06/2026 | https://000008.awsstudygroup.com/3-cloud-watch-metric/ |
+| Wednesday | - Practice Math Expressions <br> - Use Dynamic Labels <br> - Visualize metric data | 10/06/2026 | 10/06/2026 | https://000008.awsstudygroup.com/3-cloud-watch-metric/ |
+| Thursday | - Work with CloudWatch Logs <br> - Query logs using CloudWatch Logs Insights <br> - Create Metric Filters from Logs | 11/06/2026 | 11/06/2026 | https://000008.awsstudygroup.com/4-cloud-watch-logs/ |
+| Friday | - Create CloudWatch Alarms <br> - Configure SNS Notifications <br> - Test Alarm functionality | 12/06/2026 | 12/06/2026 | https://000008.awsstudygroup.com/5-cloud-watch-alarm/ |
+| Saturday | - Build CloudWatch Dashboards <br> - Add Metrics and Alarms to Dashboards <br> - Monitor data from a centralized view | 13/06/2026 | 13/06/2026 | https://000008.awsstudygroup.com/6-cloud-watch-dashboard/ |
+| Sunday | - Review created resources <br> - Perform resource cleanup <br> - Summarize knowledge gained during the week | 14/06/2026 | 14/06/2026 | https://000008.awsstudygroup.com/7-clean-up/ |
 
 ---
 
-## Hands-on Practice
+### Results Achieved in Week 7:
 
-### Module 1 – Introduction
+#### Knowledge
+
+**What is Amazon CloudWatch?**
+
+- Understood Amazon CloudWatch as a monitoring and observability service on AWS.
+- Learned how CloudWatch collects and analyzes Metrics and Logs.
+- Understood the importance of monitoring AWS resources and applications.
+
+**CloudWatch Metrics**
+
+- Learned how to view and analyze Metrics.
+- Understood how to use Search Expressions for filtering data.
+- Used Math Expressions to calculate metric values.
+- Applied Dynamic Labels to improve data visualization.
+
+**CloudWatch Logs**
+
+- Learned how to collect and store Logs.
+- Queried Logs using CloudWatch Logs Insights.
+- Created Metric Filters from Log events.
+
+**CloudWatch Alarms**
+
+- Understood how CloudWatch Alarms work.
+- Configured thresholds for monitoring events.
+- Integrated SNS notifications for alerting.
+
+**CloudWatch Dashboards**
+
+- Built dashboards for system monitoring.
+- Displayed Metrics and Alarms on a single interface.
+- Monitored system performance in real time.
+
+---
+
+#### Hands-on Practice
+
+##### Module 1 — Introduction
 
 - Accessed Amazon CloudWatch.
-- Reviewed monitoring concepts and use cases.
+- Reviewed CloudWatch architecture and core features.
+- Prepared the lab environment.
 
-### Module 2 – CloudWatch Metrics
+📸 *Evidence: Amazon CloudWatch Overview.*
 
-- Viewed application metrics.
+##### Module 2 — CloudWatch Metrics
+
+- Viewed AWS resource Metrics.
 - Used Search Expressions.
-- Performed Math Expressions.
+- Practiced Math Expressions.
 - Configured Dynamic Labels.
 
-### Module 3 – CloudWatch Logs
+📸 *Evidence: CloudWatch Metrics.*
 
-- Explored Log Groups and Log Streams.
-- Queried logs using Logs Insights.
+##### Module 3 — CloudWatch Logs
+
+- Created and managed Log Groups.
+- Queried Logs using Logs Insights.
 - Created Metric Filters.
 
-### Module 4 – CloudWatch Alarms
+📸 *Evidence: CloudWatch Logs.*
 
-- Created custom alarms.
-- Configured SNS notifications.
-- Tested alarm conditions.
+##### Module 4 — CloudWatch Alarms
 
-### Module 5 – CloudWatch Dashboards
+- Created new Alarms.
+- Configured SNS Notifications.
+- Tested Alarm status changes.
 
-- Created a CloudWatch Dashboard.
-- Added metrics and alarms.
-- Customized dashboard widgets.
+📸 *Evidence: CloudWatch Alarm.*
 
-### Module 6 – Clean Up Resources
+##### Module 5 — CloudWatch Dashboards
+
+- Created a new Dashboard.
+- Added Metrics and Alarms.
+- Customized Dashboard widgets.
+
+📸 *Evidence: CloudWatch Dashboard.*
+
+##### Module 6 — Cleanup Resources
 
 - Reviewed created resources.
-- Deleted unnecessary monitoring resources.
+- Removed unnecessary resources.
 - Verified successful cleanup.
 
+📸 *Evidence: Resource Cleanup.*
+
 ---
 
-## Challenges Encountered
+### Week 7 Evaluation:
 
-- Understanding the relationship between Metrics, Logs, Metric Filters, and Alarms.
+- Understood the role of Amazon CloudWatch within AWS.
+- Learned how to work with Metrics, Logs, and Alarms.
+- Successfully practiced Search Expressions and Math Expressions.
+- Created Metric Filters and CloudWatch Alarms.
+- Built a complete CloudWatch Dashboard.
+- Improved AWS monitoring and troubleshooting skills.
+
+---
+
+### Challenges Encountered:
+
+- Understanding the relationship between Metrics, Logs, and Metric Filters.
 - Learning advanced features such as Search Expressions and Math Expressions.
-- Configuring SNS notifications correctly.
-- Interpreting logs efficiently using CloudWatch Logs Insights.
+- Becoming familiar with CloudWatch Logs Insights.
+- Correctly configuring SNS Notifications.
 
 ---
 
-## Solutions
+### Solutions:
 
-- Followed workshop instructions carefully.
-- Practiced repeatedly with metrics and logs.
-- Reviewed CloudWatch documentation and examples.
-- Verified SNS subscriptions before testing alarms.
-
----
-
-## Week 7 Summary
-
-- Learned Amazon CloudWatch monitoring and observability services.
-- Practiced CloudWatch Metrics, Logs, Metric Filters, and Alarms.
-- Built CloudWatch Dashboards for centralized monitoring.
-- Gained hands-on experience in monitoring AWS applications and infrastructure.
-- Successfully completed the workshop and cleaned up resources.
+- Carefully followed the workshop instructions.
+- Practiced repeatedly with Metrics and Logs.
+- Verified SNS configuration before testing Alarms.
+- Referenced examples from AWS Documentation.
 
 ---
 
-## Next Week Plan
+### Next Week Plan:
 
 - Learn AWS Identity and Access Management (IAM).
-- Practice creating IAM Users, Groups, and Policies.
+- Practice creating Users, Groups, and Policies.
 - Explore Multi-Factor Authentication (MFA).
-- Study AWS security best practices.
-- Prepare documentation and screenshots for the next worklog.
-```
+- Study AWS account security best practices.
+- Prepare screenshots and documentation for the next weekly report.
