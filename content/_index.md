@@ -15,7 +15,7 @@ chapter: false
 
 &emsp; **Email:** tuannam106@gmail.com
 
-&emsp; **Trường:** Đại học Sư phạm Kỹ thuật TP.HCM
+&emsp; **Trường:** Đại học Công nghệ TP.HCM (HUTECH)
 
 &emsp; **Ngành:** Công nghệ thông tin
 

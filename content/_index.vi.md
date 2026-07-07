@@ -1,41 +1,40 @@
 ---
-title: "Báo cáo thực tập"
-date: 2024-01-01
+title: "Internship Report"
+date: 2026-04-15
 weight: 1
 chapter: false
 ---
 
-# Báo cáo thực tập
-### Thông tin sinh viên:
+# Internship Report
 
-&emsp; **Họ và tên:** Trần Khánh Đông
+### Student Information:
 
-&emsp; **Phone Number:** 0818767448
+&emsp; **Full Name:** Tran Tuan Nam
 
-&emsp; **Email:** trankhhanhdongkl@gmail.com
+&emsp; **Phone Number:** 0768153659
 
-&emsp; **Trường:** Đại học Công nghệ TP.HCM (HUTECH) 
+&emsp; **Email:** tuannam106@gmail.com
 
-&emsp; **Ngành:** Công nghệ thông tin
+&emsp; **University:** Ho Chi Minh City University of Technology
 
-&emsp; **Lớp:** AWS082025
+&emsp; **Major:** Information Technology
 
-&emsp; **Công ty thực tập:** Công ty TNHH Amazon Web Services Vietnam
+&emsp; **Class:** AWS082025
 
-&emsp; **Vị trí thực tập:** FCJ Cloud Intern
+&emsp; **Internship Company:** Amazon Web Services Vietnam Co., Ltd.
 
-&emsp; **Thời gian thực tập:** Từ ngày 20/04/2026 đến ngày 20/07/2026
+&emsp; **Internship Position:** FCJ Cloud Intern
 
-![Ảnh đại diện của bạn](/AWS-HUTECHintership-report/images/avatar.png)
+&emsp; **Internship Duration:** From 20/04/2026 to 20/07/2026
 
+![Your profile picture](/aws-intership-report/images/avatar.png)
 
-
-### Nội dung báo cáo
+### Report Content
 
 1.  [Worklog](1-Worklog/)
 2.  [Proposal](2-Proposal/)
-3.  [Các bài blogs đã dịch](3-BlogsTranslated/)
-4.  [Các events đã tham gia](4-EventParticipated/)
+3.  [Translated Blogs](3-BlogsTranslated/)
+4.  [Events Participated](4-EventParticipated/)
 5.  [Workshop](5-Workshop/)
-6.  [Tự đánh giá](6-Self-evaluation/)
-7.  [Chia sẻ, đóng góp ý kiến](7-Feedback/)
+6.  [Self-evaluation](6-Self-evaluation/)
+7.  [Sharing and Feedback](7-Feedback/)
