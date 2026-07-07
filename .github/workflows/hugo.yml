@@ -38,7 +38,7 @@ jobs:
         uses: actions/configure-pages@v5
 
       - name: Build website
-        run: hugo --minify --baseURL "https://TDuongNguyen.github.io/AWS-Workshop-Otokoshi/"
+        run: hugo --minify --baseURL "https://ngtrthduong2810-art.github.io/AWS-Workshop/"
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
