@@ -130,8 +130,11 @@ pre: " <b> 1.1. </b> "
    ![Proof Image: First task completed](/aws-intership-report/images/1-Worklog/1.1-Week1/Finish_First_Mission.png)
 
 - **Task 2 — Amazon Bedrock Playground (+$20):**
-  - Accessed Bedrock Console, selected **Claude 3 Haiku** model.
-  - Submitted use case details and tested a prompt.
+ - Access the Bedrock Console, select the **Claude 3 Haiku** model.
+- Submit the use case details and test the prompt.
+  ![Screenshot: Access the Bedrock Console, select the Claude 3 Haiku model](/aws-intership-report/images/1-Worklog/1.1-Week1/Choose_Claude3_Haiku.png)
+- Complete the second mission.
+  ![Screenshot: Complete the second mission](/aws-intership-report/images/1-Worklog/1.1-Week1/Complete_Second_Mission.png)
 
 - **Task 3 — Set up AWS Budgets (+$20):**
   - Created a cost budget with email notifications.

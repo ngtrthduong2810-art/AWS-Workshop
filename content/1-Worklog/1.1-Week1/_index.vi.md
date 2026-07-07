@@ -133,6 +133,9 @@ pre: " <b> 1.1. </b> "
 - **Task 2 — Amazon Bedrock Playground (+$20):**
   - Truy cập Bedrock Console, chọn model **Claude 3 Haiku**.
   - Gửi use case details và chạy thử prompt.
+   ![Ảnh minh chứng: Truy cập Bedrock Console, chọn model Claude 3 Haiku](/aws-intership-report/images/1-Worklog/1.1-Week1/Choose_Claude3_Haiku.png)
+  - Hoàn thành nhiệm vụ hai
+   ![Ảnh minh chứng: Hoàn thành nhiệm vụ 2](/aws-intership-report/images/1-Worklog/1.1-Week1/Complete_Second_Mission.png)
 
 - **Task 3 — Set up AWS Budgets (+$20):**
   - Tạo cost budget với cảnh báo qua email.
