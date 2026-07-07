@@ -1,5 +1,5 @@
 ---
-title: "InboxIQ"
+title: "Workshop"
 date: 2026-07-07
 weight: 5
 chapter: true
