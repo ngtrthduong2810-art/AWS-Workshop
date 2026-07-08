@@ -1,5 +1,5 @@
 ---
-title: "5.3 Xây dựng Backend Serverless"
+title: "Xây dựng Backend Serverless"
 date: 2026-07-07
 weight: 3
 chapter: false

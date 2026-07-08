@@ -1,5 +1,5 @@
 ---
-title: "5.3.3 Deploy và Kiểm thử Backend"
+title: "Deploy và Kiểm thử Backend"
 date: 2026-07-07
 weight: 3
 chapter: false

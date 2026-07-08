@@ -1,5 +1,5 @@
 ---
-title: "5.3.2 Lambda Worker"
+title: "Lambda Worker"
 date: 2026-07-07
 weight: 2
 chapter: false

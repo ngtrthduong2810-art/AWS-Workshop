@@ -1,5 +1,5 @@
 ---
-title: "5.3.1 Lambda Producer"
+title: "Lambda Producer"
 date: 2026-07-07
 weight: 1
 chapter: false
