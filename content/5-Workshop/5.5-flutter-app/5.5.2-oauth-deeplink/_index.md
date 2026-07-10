@@ -44,7 +44,7 @@ const String amplifyConfig = '''{
 The original playbook used `authenticationFlowType: "USER_SRP_AUTH"`. In the actual project, the App Client on Cognito **only has `USER_PASSWORD_AUTH` enabled** (verify this in Cognito Console → App client → Authentication flows) — using `USER_SRP_AUTH` by mistake will cause `signIn()` to always fail with an unsupported flow error. Always match the exact value enabled on the Console instead of blindly copying defaults from the documentation.
 {{% /notice %}}
 
-![Cognito App Client — Authentication flows are on USER_PASSWORD_AUTH](/images/5-Workshop/5.5-Flutter-app/cognito-auth-flow.jpg)
+![Cognito App Client — Authentication flows are on USER_PASSWORD_AUTH](/images/5-Workshop/5.5-flutter-app/cognito-auth-flow.jpg)
 
 #### 2. AuthService — Wrapping All Amplify Auth Operations
 
@@ -101,7 +101,7 @@ On real devices, when the virtual keyboard pops up, it can obscure the login but
 
 A real-world bug encountered during login testing on a phone: the virtual keyboard automatically added a trailing space at the end of the password field (due to text suggestions/autocorrect features), causing `signIn()` to return "Incorrect username or password" even though the password was typed correctly. Solution: disable keyboard suggestions for the password field, or call `.trim()` on the value before submitting.
 
-![The login screen is running on a real Samsung S23 Ultra device](/images/5-Workshop/5.5-Flutter-app/login-screen-device.jpg)
+![The login screen is running on a real Samsung S23 Ultra device](/images/5-Workshop/5.5-flutter-app/login-screen-device.jpg)
 
 #### 4. Client-side Gmail OAuth Flow — REST Init + Browser Launch + Deep Link Callback
 
@@ -160,7 +160,7 @@ User clicks "Connect Gmail"
 
 The `meta refresh` still attempts to auto-redirect after 1 second (succeeding on many browsers/devices), while the fallback link guarantees a manual escape route if the browser blocks the operation.
 
-![Callback page with backup link: "Click here if it doesn't redirect automatically"](/images/5-Workshop/5.5-Flutter-app/callback-fallback-link.jpg)
+![Callback page with backup link: "Click here if it doesn't redirect automatically"](/images/5-Workshop/5.5-flutter-app/callback-fallback-link.jpg)
 
 #### 6. Achieved Results After This Section
 
@@ -168,4 +168,4 @@ The `meta refresh` still attempts to auto-redirect after 1 second (succeeding on
 * The complete Gmail OAuth flow runs successfully from the real app: clicking the button → browser opens consent → permissions granted → automatically (or manually) returns to the app → UI updates the connected state.
 * Verified on a Samsung S23 Ultra device via USB debugging — the hardest milestone of the entire Flutter section.
 
-![On the home screen after the OAuth deep linking is complete, the "Gmail Connected" button will appear](/images/5-Workshop/5.5-Flutter-app/gmail-connected-home.jpg)
+![On the home screen after the OAuth deep linking is complete, the "Gmail Connected" button will appear](/images/5-Workshop/5.5-flutter-app/gmail-connected-home.jpg)

@@ -17,13 +17,13 @@ pre: "  5.5.3.  "
 
 Checking CloudWatch Logs for the `inboxiq-ws-whoami` Lambda revealed that the log group **did not even exist** — definitive proof that the request never reached the Lambda. The error lay within the API Gateway routing layer, not the code.
 
-![Log group does not exist](/images/5-Workshop/5.5-Flutter-app/whoami-log-group-not-exist.jpg)
+![Log group does not exist](/images/5-Workshop/5.5-flutter-app/whoami-log-group-not-exist.jpg)
 
 **Cause:** Verification inside the Console showed that the `WsWhoamiFunction`, `WhoamiRoute`, and `WhoamiIntegration` resources all had a `CREATE_COMPLETE` status in the CloudFormation stack — the route had indeed been created. However, navigating to **API Gateway → WebSocket API → Stages → prod → Deployment history**, the stage was still active on a deployment that **predated the route creation**. This meant that while CloudFormation successfully created the `AWS::ApiGatewayV2::Route` resource, it **did not automatically generate a new deployment for the `prod` stage**, despite the declared `DependsOn` relation between `AWS::ApiGatewayV2::Deployment` and that route. The `DependsOn` attribute only guarantees the creation order of resources; it does not force CloudFormation to interpret it as a "change" requiring a re-deployment.
 
 **Solution:** Go to the API Gateway Console → select the WebSocket API → **Deploy API** → choose the `prod` stage → confirm. Once the new deployment was live, the route functioned immediately without any code modifications or CloudFormation re-deployments.
 
-![New deployment after manual API deployment](/images/5-Workshop/5.5-Flutter-app/deployment-history-fixed.jpg)
+![New deployment after manual API deployment](/images/5-Workshop/5.5-flutter-app/deployment-history-fixed.jpg)
 
 **Lesson:** When managing `AWS::ApiGatewayV2` with SAM/CloudFormation, adding a new route does not automatically mean that route is "live" on the running stage. Always verify via the Deployment history after every route modification, or consider structuring the template so that the `Deployment` logical ID changes based on the route content (e.g., embedding a hash) to force CloudFormation to generate a new deployment every time.
 
@@ -89,7 +89,7 @@ WARN WebSocket push failed for gTg3TG75DQAYKABzSA==: GoneException UnknownError
 
 ```
 
-![Log GoneException 410 khi push WebSocket](/images/5-Workshop/5.5-Flutter-app/worker-gone-exception.jpg)
+![Log GoneException 410 khi push WebSocket](/images/5-Workshop/5.5-flutter-app/worker-gone-exception.jpg)
 
 **Cause:** Cross-referencing timestamps between the two logs revealed the following sequence:
 
@@ -148,7 +148,7 @@ Flutter App → Cognito Auth → REST API → SQS → Worker
 
 ```
 
-![The summarized email list is displayed in the app](/images/5-Workshop/5.5-Flutter-app/summaries-displayed.jpg)
+![The summarized email list is displayed in the app](/images/5-Workshop/5.5-flutter-app/summaries-displayed.jpg)
 
 #### 7. Remaining Backlog Marked for Future Maintenance Task Items
 

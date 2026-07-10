@@ -73,7 +73,7 @@ dependencies:
 flutter pub get
 
 ```
-![pubspec.yaml after adding all dependencies](/images/5-Workshop/5.5-Flutter-app/pubspec-dependencies.jpg)
+![pubspec.yaml sau khi thêm đầy đủ dependencies](/images/5-Workshop/5.5-flutter-app/pubspec-dependencies.jpg)
 
 #### 4. `lib/` Directory Structure
 
@@ -99,7 +99,7 @@ lib/
 
 ```
 
-![The lib/ directory structure in Android Studio](/images/5-Workshop/5.5-Flutter-app/lib-folder-structure.jpg)
+![The lib/ directory structure in Android Studio](/images/5-Workshop/5.5-flutter-app/lib-folder-structure.jpg)
 
 #### 5. Architectural Decision: Instance-based, No Static Used
 
@@ -151,7 +151,7 @@ Add the intent-filter for deep linking (used in the Gmail OAuth step, see sectio
 **Do not** add `android:autoVerify="true"` to this intent-filter. That attribute is used for App Links (requiring a real domain with an `assetlinks.json` verification file hosted on `https://`), which does not apply to a custom scheme (`inboxiq://`). Adding it will cause Android lint to report a missing https host/scheme configuration — which is unnecessary and creates noise in build warnings.
 {{% /notice %}}
 
-![AndroidManifest.xml after adding permissions and deep link intent-filter](/images/5-Workshop/5.5-Flutter-app/android-manifest-deeplink.jpg)
+![AndroidManifest.xml after adding permissions and deep link intent-filter](/images/5-Workshop/5.5-flutter-app/android-manifest-deeplink.jpg)
 
 #### 7. Achieved Results After This Section
 
