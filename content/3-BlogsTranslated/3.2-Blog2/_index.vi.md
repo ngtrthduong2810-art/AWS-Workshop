@@ -82,3 +82,8 @@ Không chỉ dừng lại ở việc phục vụ static content (nội dung tĩn
 **Amazon CloudFront** là một thành phần không thể thiếu trong các kiến trúc cloud hiện đại, đặc biệt đối với những hệ thống cần phục vụ lượng người dùng phân tán trên nhiều vùng địa lý. Dịch vụ này không chỉ giúp tăng tốc độ tải nội dung, mà còn giúp bảo vệ origin khỏi tình trạng quá tải, cải thiện độ ổn định và tăng cường bảo mật toàn diện.
 
 Điểm hay nhất của CloudFront là bạn có thể bắt đầu từ những use case rất đơn giản như phân phối vài bức ảnh từ S3, sau đó dần dần mở rộng ra để phục vụ website tĩnh, API, video stream hoặc các hệ thống production phức tạp. Nếu ứng dụng của bạn cần nhanh hơn, ổn định hơn và tối ưu hơn, CloudFront chắc chắn là một mảnh ghép bạn nên áp dụng ngay!
+
+---
+## Link bài và hình ảnh bài viết
+https://www.facebook.com/share/p/1awB5jr9Yd/?
+![Hình bài viết](/images/3-BlogsTranslated/Blog2/imageblog.jpg)

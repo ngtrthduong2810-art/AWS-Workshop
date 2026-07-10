@@ -112,3 +112,10 @@ Example of an AI-proposed transformation plan (diff) to replace a synchronous AP
 +    .eventBusName("EcommerceEventBus")
 +    .build();
 + eventBridgeClient.putEvents(PutEventsRequest.builder().entries(eventEntry).build());
+```
+
+---
+
+## Link and images
+https://www.facebook.com/share/p/1F4YjnnJxV/?
+![Images](/images/3-BlogsTranslated/Blog3/imageblog.jpg)

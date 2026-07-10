@@ -111,3 +111,7 @@ Through this hands-on implementation of private Amazon S3 access, our team gathe
 2. **Integrated Security Mindset**: A VPC Endpoint is more than just a network configuration; it reduces the attack surface by completely eliminating the need for public internet connections when they aren't necessary.
 3. **Synergy of Multiple Services**: A well-architected cloud system is the intersection of Network knowledge (Route tables, Endpoints) and Security practices (IAM, Bucket Policies, Logging). Understanding exactly where a request travels and at which layer permissions are enforced is the key to running a secure, optimized, and operational system.
 
+---
+## Link and images
+https://www.facebook.com/share/p/1GpRVWSJhz/?
+![Images](/images/3-BlogsTranslated/Blog1/imageblog.jpg)

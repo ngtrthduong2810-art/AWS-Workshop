@@ -114,3 +114,9 @@ Ví dụ về một bản kế hoạch chuyển đổi (diff) do AI đề xuất
 + eventBridgeClient.putEvents(PutEventsRequest.builder().entries(eventEntry).build());
 
 ```
+---
+
+## Link bài và hình ảnh bài viết
+https://www.facebook.com/share/p/1F4YjnnJxV/?
+![Hình bài viết](/images/3-BlogsTranslated/Blog3/imageblog.jpg)
+

@@ -1,5 +1,5 @@
 ---
-title: "Translated Blogs"
+title: "Blogs"
 date: 2026-07-02
 weight: 3
 chapter: false
