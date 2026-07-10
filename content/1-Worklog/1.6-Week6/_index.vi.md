@@ -1,330 +1,126 @@
 ---
 title: "Worklog Tuần 6"
-date: 2026-06-01
-weight: 6
+date: 2026-05-20
+weight: 7
 chapter: false
 pre: " <b> 1.6. </b> "
 ---
 
-### Mục tiêu tuần 6:
+### Mục tiêu tuần 6: Định hình tư duy Observability trong vận hành hạ tầng
 
-- Tìm hiểu tổng quan về quản lý chi phí trên AWS bằng dịch vụ AWS Budgets.
-- Hiểu vai trò của AWS Budgets trong việc theo dõi, kiểm soát và cảnh báo chi phí sử dụng dịch vụ AWS.
-- Thực hành tạo Budget bằng template có sẵn để thiết lập ngân sách nhanh.
-- Tạo Cost Budget để theo dõi chi phí sử dụng AWS theo tháng.
-- Tạo Usage Budget để theo dõi mức sử dụng tài nguyên AWS, đặc biệt là các dịch vụ tính phí theo thời gian sử dụng.
-- Tìm hiểu Reservation Budget để giám sát mức sử dụng Reserved Instances.
-- Tìm hiểu Savings Plans Budget để giám sát mức sử dụng Savings Plans.
-- Cấu hình alert threshold và email notification để nhận cảnh báo khi chi phí hoặc mức sử dụng vượt ngưỡng.
-- Biết cách kiểm tra Budget history, Budget health và trạng thái cảnh báo.
-- Thực hành xóa các Budget đã tạo sau khi hoàn thành lab để tránh nhận thông báo không cần thiết.
+Trong tuần thứ 6 của chương trình cloud journey 12 tuần này, mục tiêu cốt lõi đã chuyển dịch từ việc triển khai tài nguyên sang việc thiết lập "đôi mắt thần" cho toàn bộ kiến trúc. Là một lập trình viên, việc đưa mã nguồn lên server là chưa đủ; việc duy trì và thấu hiểu trạng thái hệ thống là yếu tố sống còn. Các mục tiêu trọng điểm bao gồm:
+
+- **Khám phá nền tảng giám sát:** Tìm hiểu tổng quan về Amazon CloudWatch và hiểu rõ vai trò của CloudWatch trong việc giám sát tài nguyên và ứng dụng trên AWS.
+- **Đo lường hiệu năng cốt lõi:** Thực hành sử dụng CloudWatch Metrics để theo dõi hiệu năng hệ thống, từ đó đánh giá được tình trạng sức khỏe thực tế của các máy chủ và dịch vụ.
+- **Làm chủ công cụ phân tích dữ liệu:** Tìm hiểu và ứng dụng linh hoạt các cú pháp nâng cao như Search Expressions, Math Expressions và Dynamic Labels để tinh chỉnh và biến đổi dữ liệu thô thành các chỉ số có ý nghĩa.
+- **Khai thác nhật ký hệ thống:** Khám phá chuyên sâu vào CloudWatch Logs và khả năng truy vấn mạnh mẽ của CloudWatch Logs Insights. Bứt phá giới hạn bằng cách tạo Metric Filters từ dữ liệu log, biến những dòng văn bản tĩnh thành các biểu đồ động.
+- **Tự động hóa phản ứng sự cố:** Tiến hành cấu hình CloudWatch Alarms để theo dõi và cảnh báo sự cố, giúp đội ngũ vận hành phản ứng theo thời gian thực (real-time) trước khi ứng dụng sập hoàn toàn.
+- **Trực quan hóa và Tối ưu:** Xây dựng CloudWatch Dashboards để trực quan hóa dữ liệu giám sát quy tụ về một màn hình duy nhất. Cuối cùng, thực hiện dọn dẹp tài nguyên sau khi hoàn thành bài thực hành nhằm tối ưu chi phí và nâng cao kỹ năng giám sát và quản lý hệ thống trên AWS.
 
 ---
 
-### Các công việc cần triển khai trong tuần này:
+### Lộ trình và các công việc triển khai trong tuần:
 
-| Thứ | Công việc | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu |
+| Thứ | Hạng mục công việc chuyên sâu | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu tham khảo |
 | --- | --- | --- | --- | --- |
-| 2 | - Đọc tổng quan workshop Cost Management with AWS Budgets <br> - Tìm hiểu vai trò của AWS Budgets trong quản lý chi phí AWS <br> - Truy cập AWS Billing and Cost Management <br> - Làm quen với giao diện Budgets trong AWS Console | 01/06/2026 | 01/06/2026 | https://000007.awsstudygroup.com/1-create-budget/ |
-| 3 | - Tạo Budget bằng template có sẵn <br> - Chọn template Monthly cost budget <br> - Nhập tên Budget, số tiền ngân sách hàng tháng và ngưỡng cảnh báo <br> - Kiểm tra Budget đã tạo thành công và xem Budget history | 02/06/2026 | 02/06/2026 | https://000007.awsstudygroup.com/1-create-budget/ |
-| 4 | - Tạo Cost Budget bằng chế độ Customize <br> - Chọn loại ngân sách Cost budget <br> - Cấu hình Period, Budget effective dates, Budgeting method và Budgeted amount <br> - Cấu hình Budget scope áp dụng cho All AWS services và Unblended costs | 03/06/2026 | 03/06/2026 | https://000007.awsstudygroup.com/2-cost-budgets/ |
-| 5 | - Cấu hình alert threshold cho Cost Budget <br> - Thêm email nhận cảnh báo khi chi phí vượt ngưỡng <br> - Review lại toàn bộ cấu hình Cost Budget <br> - Tạo Budget và xác nhận trạng thái hoạt động | 04/06/2026 | 04/06/2026 | https://000007.awsstudygroup.com/2-cost-budgets/ |
-| 6 | - Tạo Usage Budget để theo dõi mức sử dụng tài nguyên <br> - Chọn Usage budget trong Budget types <br> - Cấu hình Usage type groups, ví dụ EC2: ELB - Running Hours <br> - Thiết lập giới hạn usage hours và alert threshold | 05/06/2026 | 05/06/2026 | https://000007.awsstudygroup.com/3-usage-budget/ |
-| 7 | - Tìm hiểu Reservation Budget cho Reserved Instances <br> - Tìm hiểu Savings Plans Budget cho Savings Plans <br> - Thực hành hoặc xem hướng dẫn tạo RI Budget và Savings Plans Budget <br> - Cấu hình coverage threshold, utilization threshold và email alert | 06/06/2026 | 06/06/2026 | https://000007.awsstudygroup.com/4-reservation-budget/ <br> https://000007.awsstudygroup.com/5-saving-plans-budget/ |
-| CN | - Kiểm tra danh sách Budget đã tạo <br> - Xem Budget health và Budget history <br> - Xóa các Budget đã tạo trong quá trình thực hành <br> - Ghi nhận kết quả, khó khăn, hướng khắc phục và bài học rút ra | 07/06/2026 | 07/06/2026 | https://000007.awsstudygroup.com/6-clean-up/ |
+| 2 | - **Nghiên cứu nền tảng:** Đọc tổng quan workshop Amazon CloudWatch. <br> - Phân tích lý thuyết để tìm hiểu vai trò của CloudWatch trong AWS như một trung tâm dữ liệu tập trung. <br> - Chuẩn bị môi trường thực hành bằng cách khởi tạo các tài nguyên cần thiết. | 08/06/2026 | 08/06/2026 | https://000008.awsstudygroup.com/1-introduction/ |
+| 3 | - **Khai thác Metrics:** Bắt đầu tìm hiểu CloudWatch Metrics để thu thập số liệu. <br> - Trực tiếp xem và phân tích Metrics từ các tài nguyên đang chạy. <br> - Thực hành Search Expressions để lọc và tìm kiếm chính xác các chỉ số bị ẩn sâu. | 09/06/2026 | 09/06/2026 | https://000008.awsstudygroup.com/3-cloud-watch-metric/ |
+| 4 | - **Biến đổi Dữ liệu:** Thực hành Math Expressions để thực hiện các phép toán (cộng, trừ, tính tỷ lệ) trên nhiều luồng Metrics. <br> - Sử dụng Dynamic Labels để biểu đồ tự động hiển thị tên tài nguyên thay vì các ID khô khan. <br> - Trực quan hóa dữ liệu Metrics để dễ dàng đánh giá xu hướng hiệu năng. | 10/06/2026 | 10/06/2026 | https://000008.awsstudygroup.com/3-cloud-watch-metric/ |
+| 5 | - **Quản trị Nhật ký:** Làm việc với CloudWatch Logs để thu thập đầu ra của ứng dụng. <br> - Viết các câu lệnh truy vấn log bằng CloudWatch Logs Insights nhằm tìm kiếm nguyên nhân gốc rễ (root cause). <br> - Thiết lập và tạo Metric Filters từ Logs để đếm số lần xuất hiện của các từ khóa báo lỗi. | 11/06/2026 | 11/06/2026 | https://000008.awsstudygroup.com/4-cloud-watch-logs/ |
+| 6 | - **Hệ thống Cảnh báo:** Tạo CloudWatch Alarms dựa trên các ngưỡng sinh tử của hệ thống. <br> - Tích hợp và cấu hình SNS Notifications để đẩy luồng cảnh báo qua email/SMS. <br> - Chủ động kiểm tra hoạt động của Alarms bằng cách giả lập tải trọng cao. | 12/06/2026 | 12/06/2026 | https://000008.awsstudygroup.com/5-cloud-watch-alarm/ |
+| 7 | - **Quy tụ Thông tin:** Xây dựng CloudWatch Dashboards chuyên nghiệp. <br> - Tùy chỉnh bằng cách thêm Metrics và Alarms vào Dashboard. <br> - Tạo ra một giao diện duy nhất để theo dõi dữ liệu tập trung. | 13/06/2026 | 13/06/2026 | https://000008.awsstudygroup.com/6-cloud-watch-dashboard/ |
+| CN | - **Bảo trì và Đúc kết:** Kiểm tra các tài nguyên đã tạo trong suốt quá trình. <br> - Nghiêm túc thực hiện Cleanup Resources để bảo vệ hóa đơn AWS. <br> - Tổng kết kiến thức đã học trong tuần để chuyển hóa thành kinh nghiệm thực chiến. | 14/06/2026 | 14/06/2026 | https://000008.awsstudygroup.com/7-clean-up/ |
 
 ---
 
-### Kết quả đạt được tuần 6:
+### Kết quả đạt được tuần 6: Đúc kết lý thuyết chuyên sâu
 
-#### Kiến thức
+#### 1. Kiến trúc hệ sinh thái Amazon CloudWatch
+Trải qua quá trình nghiên cứu, tôi hiểu Amazon CloudWatch là dịch vụ giám sát và quan sát hệ thống trên AWS. Nó đóng vai trò như một hệ thần kinh trung ương, liên tục lắng nghe nhịp đập của hạ tầng. Bằng cách biết cách thu thập và phân tích dữ liệu từ Metrics và Logs, người quản trị có thể dự đoán trước các nguy cơ hỏng hóc. Do đó, tôi hoàn toàn hiểu tầm quan trọng của việc giám sát tài nguyên và ứng dụng để đảm bảo tính sẵn sàng cao (High Availability).
 
-**AWS Budgets là gì?**
+#### 2. Phân tích Dữ liệu Đo lường (CloudWatch Metrics)
+Metrics là những con số biết nói. Tôi đã biết cách xem và phân tích Metrics như CPU Utilization hay Network In/Out. Tuy nhiên, khi hệ thống phình to, việc tìm kiếm thủ công là bất khả thi. Vì vậy, tôi đã hiểu cách sử dụng Search Expressions để lọc dữ liệu một cách vô cùng hiệu quả. Vượt lên trên dữ liệu thô, tôi có thể sử dụng Math Expressions để tính toán dữ liệu Metrics (ví dụ: tính toán tỷ lệ lỗi bằng công thức `Errors / RequestCount`). Để giao diện thân thiện hơn với con người, tôi áp dụng Dynamic Labels để hiển thị dữ liệu trực quan hơn.
 
-- Hiểu AWS Budgets là dịch vụ dùng để theo dõi chi phí, mức sử dụng tài nguyên và các cam kết tiết kiệm chi phí trên AWS.
-- AWS Budgets giúp người dùng đặt ngân sách theo ngày, tháng, quý hoặc năm.
-- Khi chi phí hoặc mức sử dụng vượt ngưỡng đã cấu hình, AWS Budgets có thể gửi cảnh báo qua email.
-- AWS Budgets phù hợp với người mới học AWS vì giúp kiểm soát chi phí trong quá trình thực hành lab.
-- Hiểu rằng AWS Budgets chỉ có chức năng giám sát và cảnh báo, không tự động dừng tài nguyên khi vượt ngân sách.
+#### 3. Khai thác sức mạnh của CloudWatch Logs
+Nhật ký hệ thống chứa mọi sự thật về ứng dụng. Tôi hiểu cách thu thập và lưu trữ Logs vào các Log Groups. Điểm đột phá là khi hệ thống gặp lỗi, thay vì đọc hàng triệu dòng text, tôi biết cách truy vấn Logs bằng CloudWatch Logs Insights thông qua các câu lệnh SQL-like. Một kỹ thuật xuất sắc khác là tạo Metric Filters từ các sự kiện Log, giúp tự động quét các log stream, bắt các từ khóa như "Exception" và chuyển đổi chúng thành một Metric đếm số lượng lỗi theo thời gian thực.
 
-**AWS Billing and Cost Management**
+#### 4. Phản ứng tự động với CloudWatch Alarms
+Việc ngồi nhìn màn hình cả ngày là không thực tế. Tôi đã thấu hiểu cơ chế hoạt động của CloudWatch Alarms. Hệ thống này hoạt động theo nguyên tắc máy trạng thái (OK, ALARM, INSUFFICIENT_DATA). Bằng cách biết cách thiết lập ngưỡng cảnh báo phù hợp, báo động sẽ được kích hoạt nếu hệ thống vượt ranh giới an toàn. Đi kèm với đó, việc cấu hình SNS để nhận thông báo khi có sự cố là mắt xích cuối cùng, giúp chuyển tiếp tín hiệu cảnh báo đến hòm thư của kỹ sư trực hệ thống.
 
-- Biết truy cập AWS Billing and Cost Management từ AWS Management Console.
-- Hiểu đây là khu vực quản lý thông tin chi phí, hóa đơn, ngân sách và cảnh báo chi phí.
-- Biết sử dụng menu Budgets để tạo, xem, chỉnh sửa hoặc xóa các Budget.
-- Biết kiểm tra trạng thái Budget sau khi tạo thành công.
-
-**Create Budget using Template**
-
-- Hiểu template giúp tạo Budget nhanh bằng các cấu hình có sẵn.
-- Biết chọn Use a template để sử dụng mẫu đơn giản.
-- Biết chọn Monthly cost budget để tạo ngân sách chi phí hàng tháng.
-- Biết nhập Budget name, monthly budget amount và alert threshold.
-- Biết kiểm tra Budget history sau khi tạo Budget thành công.
-- Hiểu rằng template phù hợp khi cần thiết lập nhanh cảnh báo chi phí cơ bản.
-
-**Cost Budget**
-
-- Hiểu Cost Budget dùng để theo dõi chi phí sử dụng AWS.
-- Biết tạo Cost Budget bằng chế độ Customize.
-- Biết chọn Budget type là Cost budget.
-- Biết cấu hình Period gồm Daily, Monthly, Quarterly hoặc Annually.
-- Biết phân biệt Recurring Budget và Expiring Budget:
-  - Recurring Budget: ngân sách lặp lại theo chu kỳ.
-  - Expiring Budget: ngân sách chỉ áp dụng trong một khoảng thời gian nhất định.
-- Biết chọn Budgeting method:
-  - Fixed: ngân sách cố định cho mỗi kỳ.
-  - Planned: ngân sách có thể thay đổi theo từng tháng.
-- Biết chọn Budget scope là All AWS services để theo dõi toàn bộ dịch vụ AWS.
-- Biết chọn Aggregate costs by là Unblended costs.
-- Biết thêm alert threshold để nhận cảnh báo khi chi phí đạt một tỷ lệ nhất định của ngân sách.
-
-**Usage Budget**
-
-- Hiểu Usage Budget dùng để theo dõi mức sử dụng tài nguyên thay vì số tiền chi phí.
-- Biết điểm khác nhau giữa Cost Budget và Usage Budget:
-  - Cost Budget theo dõi chi phí.
-  - Usage Budget theo dõi mức sử dụng tài nguyên.
-- Biết chọn Budget type là Usage budget.
-- Biết chọn Usage type groups để xác định loại tài nguyên cần theo dõi.
-- Trong lab, Usage Budget có thể dùng để theo dõi EC2: ELB - Running Hours.
-- Biết thiết lập giới hạn usage hours cho tài nguyên.
-- Biết cấu hình email alert khi mức sử dụng vượt ngưỡng.
-- Hiểu Usage Budget hữu ích với các dịch vụ tính phí theo giờ như EC2, Load Balancer hoặc các tài nguyên chạy liên tục.
-
-**Reservation Budget**
-
-- Hiểu Reservation Budget dùng để theo dõi Reserved Instances.
-- Biết Reserved Instances thường yêu cầu cam kết hoặc thanh toán trước nên trong phạm vi lab chỉ nên xem hướng dẫn hoặc thực hành ở mức demo.
-- Biết Reservation Budget giúp theo dõi coverage hoặc utilization của Reserved Instances.
-- Biết cấu hình Coverage threshold để theo dõi mức bao phủ của Reserved Instances.
-- Hiểu Reservation Budget phù hợp với môi trường doanh nghiệp đã sử dụng Reserved Instances để tối ưu chi phí dài hạn.
-
-**Savings Plans Budget**
-
-- Hiểu Savings Plans Budget dùng để theo dõi mức sử dụng Savings Plans.
-- Biết Savings Plans là hình thức cam kết sử dụng tài nguyên tính toán trong một khoảng thời gian nhất định để đổi lấy mức giá thấp hơn so với On-Demand.
-- Biết Savings Plans Budget giúp theo dõi utilization threshold.
-- Biết cấu hình email alert để nhận thông báo khi mức sử dụng Savings Plans chưa đạt kỳ vọng.
-- Hiểu Savings Plans Budget phù hợp khi hệ thống có nhu cầu sử dụng compute ổn định trong thời gian dài.
-
-**Alert Threshold và Email Notification**
-
-- Hiểu alert threshold là ngưỡng cảnh báo được đặt theo phần trăm hoặc giá trị cụ thể.
-- Biết cấu hình nhiều mức cảnh báo, ví dụ 50%, 80% và 100%.
-- Biết thêm email để nhận cảnh báo ngân sách.
-- Hiểu rằng người nhận email nên là người có trách nhiệm theo dõi chi phí hoặc quản lý tài khoản AWS.
-- Biết kiểm tra email xác nhận hoặc thông báo từ AWS Budgets sau khi cấu hình.
-
-**Budget Health và Budget History**
-
-- Hiểu Budget health cho biết trạng thái hiện tại của ngân sách so với mức đã đặt.
-- Biết dùng Budget history để xem xu hướng chi phí hoặc mức sử dụng theo thời gian.
-- Biết quan sát trạng thái ngân sách để đánh giá tài khoản AWS có đang sử dụng vượt mức dự kiến hay không.
-- Hiểu rằng dữ liệu chi phí trên AWS có thể có độ trễ, nên cần chờ một khoảng thời gian để số liệu cập nhật đầy đủ.
-
-**Cleanup AWS Budgets**
-
-- Hiểu cleanup là bước cần thiết sau khi hoàn thành lab.
-- Biết xóa các Budget đã tạo nếu chỉ dùng để thực hành.
-- Biết rằng xóa AWS Budgets không xóa tài nguyên đang chạy trong AWS account.
-- Hiểu AWS Budgets chỉ là công cụ theo dõi và cảnh báo, không phải tài nguyên xử lý ứng dụng.
-- Biết kiểm tra lại danh sách Budget sau khi xóa để đảm bảo không còn cảnh báo không cần thiết.
+#### 5. Bảng điều khiển trung tâm (CloudWatch Dashboards)
+Để giải quyết vấn đề phân mảnh thông tin, tôi tiến hành tạo Dashboard để theo dõi hệ thống. Bằng cách hiển thị Metrics và Alarms trên cùng một giao diện, người quản trị có được một "single pane of glass" (góc nhìn toàn cảnh duy nhất), hỗ trợ theo dõi hiệu suất hệ thống theo thời gian thực cực kỳ đắc lực.
 
 ---
 
-#### Thực hành
+### Trải nghiệm Thực hành: Mô phỏng từng bước triển khai
 
-**Module 1 — Create Budget**
+**Module 1 — Khởi động hệ thống (Introduction)**
+- Truy cập Amazon CloudWatch từ bảng điều khiển AWS.
+- Dành thời gian tìm hiểu kiến trúc và chức năng chính của CloudWatch qua các sơ đồ luồng dữ liệu.
+- Bắt tay chuẩn bị môi trường thực hành, thiết lập một vài phiên bản EC2 làm mục tiêu theo dõi.
 
-- Truy cập AWS Management Console.
-- Tìm kiếm và mở dịch vụ AWS Billing and Cost Management.
-- Chọn mục Budgets ở menu bên trái.
-- Nhấn Create a budget để bắt đầu tạo ngân sách.
-- Chọn Use a template (simplified).
-- Chọn template Monthly cost budget.
-- Nhập tên Budget theo yêu cầu lab.
-- Nhập số tiền ngân sách hàng tháng.
-- Cấu hình alert threshold để nhận cảnh báo khi chi phí đạt ngưỡng.
-- Nhấn Create budget để hoàn tất.
-- Kiểm tra Budget đã được tạo thành công.
-- Mở Budget history để xem lịch sử ngân sách.
-- Kiểm tra các loại alert có sẵn trong template.
-- 📸 _Ảnh minh chứng: Giao diện AWS Billing and Cost Management._
-- 📸 _Ảnh minh chứng: Chọn Budgets và Create a budget._
-- 📸 _Ảnh minh chứng: Chọn Monthly cost budget template._
-- 📸 _Ảnh minh chứng: Budget được tạo thành công._
+**Module 2 — Tinh chỉnh các số liệu đo lường (CloudWatch Metrics)**
+- Trực tiếp xem Metrics của tài nguyên AWS để đánh giá mức tiêu thụ CPU.
+- Vận dụng cú pháp mã hóa để sử dụng Search Expressions, gọi ra các thông số mạng nội bộ.
+- Triển khai thực hành Math Expressions để vẽ biểu đồ so sánh giữa trung bình tải và tải tối đa.
+- Cấu hình Dynamic Labels để nhãn biểu đồ tự động phản ánh tên của máy chủ thay vì dải IP.
 
-**Module 2 — Create Cost Budget**
+**Module 3 — Quản trị Log hệ thống (CloudWatch Logs)**
+- Tạo và quản lý Log Groups để phân loại log của web server và database riêng biệt.
+- Viết query để truy vấn Logs bằng Logs Insights, lọc ra 20 lỗi 404 gần nhất trong vòng 1 giờ qua.
+- Thiết lập và tạo Metric Filters để quét từ khóa "Error", biến nó thành chỉ số đếm liên tục trên biểu đồ.
 
-- Truy cập AWS Billing and Cost Management.
-- Chọn Budgets ở menu bên trái.
-- Nhấn Create budget.
-- Trong phần Budget setup, chọn Customize.
-- Trong Budget types, chọn Cost budget.
-- Nhấn Next để tiếp tục.
-- Ở phần Set your budget, nhập Budget name là `Monthly`.
-- Chọn Period phù hợp, ví dụ Monthly.
-- Chọn Budget effective dates:
-  - Recurring Budget nếu muốn ngân sách lặp lại.
-  - Expiring Budget nếu chỉ muốn áp dụng một lần.
-- Cấu hình Budgeting method:
-  - Fixed nếu muốn ngân sách mỗi kỳ giống nhau.
-  - Planned nếu muốn đặt ngân sách khác nhau theo từng tháng.
-- Nhập Budgeted amount theo mức chi phí mong muốn.
-- Trong Budget scope, chọn All AWS services.
-- Trong Aggregate costs by, chọn Unblended costs.
-- Nhấn Next để chuyển sang bước cấu hình cảnh báo.
-- Chọn Add an alert threshold.
-- Nhập tỷ lệ cảnh báo, ví dụ 80% hoặc 100%.
-- Nhập email nhận cảnh báo.
-- Kiểm tra lại toàn bộ cấu hình.
-- Nhấn Create budget để hoàn tất.
-- Xác nhận Budget đã xuất hiện trong danh sách Budgets.
-- 📸 _Ảnh minh chứng: Chọn Customize và Cost budget._
-- 📸 _Ảnh minh chứng: Cấu hình Period, Budget amount và Budget scope._
-- 📸 _Ảnh minh chứng: Cấu hình alert threshold._
-- 📸 _Ảnh minh chứng: Cost Budget tạo thành công._
+**Module 4 — Xây dựng rào chắn báo động (CloudWatch Alarms)**
+- Dựa trên Metric Filter vừa tạo, tôi thao tác tạo Alarm mới.
+- Liên kết với dịch vụ gửi tin nhắn bằng cách cấu hình SNS Notification và xác nhận đăng ký email.
+- Giả lập lỗi trên server và kiểm tra trạng thái Alarm chuyển sang màu đỏ, đồng thời kiểm tra hộp thư đến.
 
-**Module 3 — Create Usage Budget**
+**Module 5 — Giao diện hóa dữ liệu (CloudWatch Dashboards)**
+- Khởi tạo Dashboard mới với giao diện lưới (grid).
+- Lần lượt thêm Metrics và Alarms vào Dashboard bằng các widget dạng biểu đồ đường (Line chart) và đồng hồ đo (Gauge).
+- Tùy chỉnh Widget hiển thị để làm nổi bật các khu vực rủi ro cao.
 
-- Truy cập lại mục Budgets trong AWS Billing and Cost Management.
-- Nhấn Create budget.
-- Chọn Customize.
-- Trong Budget types, chọn Usage budget.
-- Nhấn Next để tiếp tục.
-- Nhập tên cho Usage Budget.
-- Trong phần Budget against, chọn Usage type groups.
-- Chọn loại usage cần theo dõi, ví dụ EC2: ELB - Running Hours.
-- Cấu hình Set budget amount:
-  - Chọn Period là Daily, Monthly, Quarterly hoặc Annually.
-  - Chọn Budget renewal type là Recurring hoặc Expiring.
-  - Chọn Budgeting method là Fixed hoặc Planned.
-  - Nhập số giờ sử dụng tối đa muốn theo dõi.
-- Giữ cấu hình mặc định ở Budget scope nếu phù hợp với lab.
-- Nhấn Next để cấu hình cảnh báo.
-- Chọn Add an alert threshold.
-- Nhập phần trăm cảnh báo so với ngân sách sử dụng.
-- Nhập email nhận thông báo.
-- Review lại cấu hình.
-- Nhấn Create budget để hoàn tất.
-- Kiểm tra Budget health để xem mức sử dụng hiện tại so với giới hạn.
-- Mở Budget history để theo dõi xu hướng sử dụng.
-- 📸 _Ảnh minh chứng: Chọn Usage budget._
-- 📸 _Ảnh minh chứng: Chọn Usage type groups._
-- 📸 _Ảnh minh chứng: Cấu hình usage hours và alert._
-- 📸 _Ảnh minh chứng: Usage Budget hiển thị trong danh sách._
-
-**Module 4 — Create RI Budget**
-
-- Truy cập AWS Billing and Cost Management.
-- Chọn Budgets.
-- Nhấn Create budget.
-- Trong Budget setup, chọn Customize.
-- Chọn Reservation budget.
-- Nhấn Next.
-- Nhập Budget name cho Reservation Budget.
-- Cấu hình Coverage threshold để theo dõi mức bao phủ của Reserved Instances.
-- Cấu hình Budget scope theo hướng dẫn lab.
-- Ở phần Alert setting, nhập email nhận cảnh báo.
-- Review lại thông tin.
-- Nhấn Create budget.
-- Kiểm tra Reservation Budget đã được tạo.
-- Ghi nhận rằng trong phạm vi lab không bắt buộc phải mua Reserved Instances vì có thể phát sinh chi phí hoặc yêu cầu cam kết thanh toán.
-- 📸 _Ảnh minh chứng: Chọn Reservation budget._
-- 📸 _Ảnh minh chứng: Cấu hình Coverage threshold._
-- 📸 _Ảnh minh chứng: Reservation Budget được tạo hoặc xem ở chế độ demo._
-
-**Module 5 — Create Savings Plans Budget**
-
-- Truy cập AWS Billing and Cost Management.
-- Chọn Budgets.
-- Nhấn Create budget.
-- Chọn Customize.
-- Trong Budget types, chọn Savings Plans budget.
-- Nhấn Next.
-- Nhập Budget name cho Savings Plans Budget.
-- Cấu hình Utilization threshold để theo dõi mức sử dụng Savings Plans.
-- Giữ Budget scope theo mặc định nếu phù hợp với lab.
-- Ở phần Alert setting, nhập email nhận cảnh báo.
-- Review lại toàn bộ cấu hình.
-- Nhấn Create budget để hoàn tất.
-- Kiểm tra Budget vừa tạo trong danh sách.
-- Ghi nhận rằng Savings Plans thường liên quan đến cam kết sử dụng dài hạn nên trong môi trường học tập chỉ nên thao tác theo hướng dẫn hoặc xem demo.
-- 📸 _Ảnh minh chứng: Chọn Savings Plans budget._
-- 📸 _Ảnh minh chứng: Cấu hình Utilization threshold._
-- 📸 _Ảnh minh chứng: Savings Plans Budget được tạo hoặc xem ở chế độ demo._
-
-**Module 6 — Clean Up Resources**
-
-- Truy cập AWS Billing and Cost Management.
-- Chọn Budgets ở menu bên trái.
-- Kiểm tra danh sách các Budget đã tạo trong lab.
-- Chọn Budget cần xóa.
-- Chọn Action.
-- Nhấn Delete.
-- Ở hộp thoại xác nhận, nhấn Delete để hoàn tất.
-- Lặp lại thao tác với các Budget còn lại đã tạo trong quá trình thực hành.
-- Kiểm tra lại danh sách Budgets sau khi xóa.
-- Ghi nhận rằng việc xóa Budget chỉ xóa cấu hình theo dõi và cảnh báo, không ảnh hưởng đến các tài nguyên AWS đang chạy.
-- 📸 _Ảnh minh chứng: Danh sách Budget trước khi xóa._
-- 📸 _Ảnh minh chứng: Thao tác Delete Budget._
-- 📸 _Ảnh minh chứng: Danh sách Budget sau khi cleanup._
+**Module 6 — Kỷ luật dọn dẹp hệ thống (Cleanup Resources)**
+- Rà soát và kiểm tra tài nguyên đã tạo trong toàn bộ các module.
+- Tiến hành xóa tài nguyên không cần thiết (Dashboards, Alarms, Log Groups) để cắt đứt các khoản phí lưu trữ.
+- Xác nhận hoàn tất Cleanup với một bảng điều khiển gọn gàng.
 
 ---
 
-### Đánh giá kết quả tuần 6:
+### Đánh giá mức độ hoàn thành tuần 6:
 
-- Hoàn thành việc tìm hiểu dịch vụ AWS Budgets trong quản lý chi phí AWS.
-- Biết cách tạo ngân sách bằng template có sẵn để thiết lập cảnh báo nhanh.
-- Tạo được Cost Budget để theo dõi chi phí sử dụng AWS theo tháng.
-- Tạo được Usage Budget để theo dõi mức sử dụng tài nguyên AWS.
-- Hiểu được sự khác nhau giữa Cost Budget và Usage Budget.
-- Nắm được mục đích của Reservation Budget trong việc theo dõi Reserved Instances.
-- Nắm được mục đích của Savings Plans Budget trong việc theo dõi Savings Plans.
-- Biết cấu hình alert threshold và email notification cho Budget.
-- Biết kiểm tra Budget health và Budget history để đánh giá tình trạng ngân sách.
-- Biết cleanup các Budget đã tạo trong môi trường lab.
-- Nhận thức rõ hơn về tầm quan trọng của kiểm soát chi phí khi thực hành trên AWS.
+- Hiểu vai trò của Amazon CloudWatch trong AWS như một xương sống của hệ thống vận hành.
+- Biết cách sử dụng Metrics, Logs và Alarms một cách nhuần nhuyễn.
+- Đã thực hành thành công Search Expressions và Math Expressions để nâng cao khả năng phân tích biểu đồ.
+- Nắm vững chu trình tạo được Metric Filters và CloudWatch Alarms.
+- Xây dựng được CloudWatch Dashboard hoàn chỉnh có giá trị ứng dụng cao.
+- Qua đó, nâng cao kỹ năng giám sát và xử lý sự cố trên AWS ở cấp độ chuyên nghiệp.
 
 ---
 
-### Khó khăn gặp phải:
+### Khó khăn và Rào cản phân tích:
 
-- Giao diện Billing and Cost Management có nhiều mục nên ban đầu dễ nhầm giữa Bills, Cost Explorer và Budgets.
-- Cần phân biệt rõ Cost Budget và Usage Budget vì hai loại Budget này theo dõi hai nhóm thông tin khác nhau.
-- Khi cấu hình Usage Budget, cần chọn đúng Usage type group để theo dõi đúng loại tài nguyên.
-- Một số tài khoản AWS mới có thể chưa hiển thị đầy đủ các loại Budget ngoài Cost Budget.
-- Dữ liệu chi phí và usage trên AWS có thể cập nhật chậm nên sau khi tạo Budget chưa thể thấy ngay số liệu đầy đủ.
-- Phần RI Budget và Savings Plans Budget dễ gây nhầm lẫn vì liên quan đến các hình thức cam kết sử dụng dài hạn.
-- Nếu cấu hình nhiều alert hoặc nhập sai email, người dùng có thể không nhận được cảnh báo như mong muốn.
-- Cần chú ý rằng AWS Budgets chỉ cảnh báo, không tự động dừng dịch vụ khi vượt ngân sách.
+- **Logic liên kết:** Ở giai đoạn đầu, tôi cảm thấy khá khó hiểu mối quan hệ giữa Metrics, Logs và Metric Filters. Quá trình từ log thô trở thành một biểu đồ cảnh báo đòi hỏi sự liền mạch về tư duy.
+- **Cú pháp phức tạp:** Việc sử dụng Search Expressions và Math Expressions ban đầu còn phức tạp do cấu trúc ngôn ngữ riêng biệt, rất dễ gõ sai biến số.
+- **Truy vấn Logs Insights:** Cần thời gian để làm quen với Logs Insights vì nó sử dụng một cú pháp lai giữa SQL và Regex, đòi hỏi phải thử sai (trial and error) nhiều lần.
+- **Rủi ro cấu hình luồng thông báo:** Việc cấu hình SNS Notification cần thực hiện chính xác. Nếu chọn sai Topic hoặc quên xác nhận email Subscriptions, Alarm dù có kích hoạt thì thông báo cũng không bao giờ tới tay người quản trị.
 
 ---
 
-### Hướng khắc phục:
+### Hướng khắc phục và Giải pháp:
 
-- Đọc kỹ từng bước trong workshop trước khi thao tác trên AWS Console.
-- Ghi chú lại mục đích của từng loại Budget:
-  - Cost Budget dùng để theo dõi chi phí.
-  - Usage Budget dùng để theo dõi mức sử dụng tài nguyên.
-  - Reservation Budget dùng để theo dõi Reserved Instances.
-  - Savings Plans Budget dùng để theo dõi Savings Plans.
-- Khi cấu hình cảnh báo, nên nhập đúng email và kiểm tra hộp thư để xác nhận nhận thông báo.
-- Nên đặt nhiều mức cảnh báo như 50%, 80% và 100% để chủ động kiểm soát chi phí.
-- Không nên mua Reserved Instances hoặc Savings Plans trong tài khoản học tập nếu không có yêu cầu chính thức.
-- Sau khi hoàn thành lab, cần xóa các Budget thực hành để tránh nhận thông báo không cần thiết.
-- Kiểm tra lại Billing Dashboard sau mỗi buổi lab để phát hiện chi phí bất thường.
-- Kết hợp AWS Budgets với thói quen cleanup tài nguyên để hạn chế phát sinh chi phí ngoài ý muốn.
+- **Nghiên cứu sâu:** Đọc kỹ tài liệu workshop và tài liệu AWS CloudWatch để hệ thống hóa lại các khái niệm qua sơ đồ.
+- **Học qua thực hành:** Biến lý thuyết thành phản xạ bằng cách thực hành nhiều lần với Metrics và Logs trên các môi trường giả lập khác nhau.
+- **Thử nghiệm từng phần:** Luôn kiểm tra cấu hình SNS trước khi thử nghiệm Alarms bằng cách gửi các tin nhắn test thủ công qua giao diện SNS.
+- **Kế thừa kiến thức:** Tích cực tham khảo ví dụ thực tế từ AWS Documentation để copy các mẫu query Logs Insights hiệu quả, tiết kiệm thời gian gỡ lỗi.
 
 ---
 
-### Định hướng tuần tiếp theo:
+### Định hướng mở rộng cho tuần tiếp theo:
 
-- Tiếp tục tìm hiểu sâu hơn về AWS Billing and Cost Management.
-- Nghiên cứu thêm AWS Cost Explorer để phân tích chi phí theo dịch vụ, thời gian và tài khoản.
-- Tìm hiểu cách sử dụng AWS Free Tier Dashboard để theo dõi giới hạn miễn phí.
-- Tìm hiểu AWS Cost Anomaly Detection để phát hiện chi phí bất thường.
-- Nghiên cứu thêm về AWS Organizations và cách quản lý chi phí cho nhiều tài khoản AWS.
-- Thực hành xây dựng thói quen kiểm tra Billing Dashboard sau mỗi bài lab.
-- Chuẩn bị ảnh minh chứng, ghi chú thao tác và nhận xét kết quả để hoàn thiện báo cáo tuần tiếp theo.
+Hành trình chinh phục Cloud sẽ chuyển sang một trong những trụ cột quan trọng nhất: Bảo mật (Security).
+- Chuyển hướng nghiên cứu để tìm hiểu AWS Identity and Access Management (IAM).
+- Trực tiếp thực hành tạo User, Group và Policy dựa trên nguyên tắc đặc quyền tối thiểu (Least Privilege).
+- Nâng cấp độ khó bằng cách tìm hiểu cơ chế MFA và bảo mật tài khoản AWS.
+- Đi sâu nghiên cứu quản lý quyền truy cập trên môi trường Cloud để đảm bảo kiến trúc mạng bất khả xâm phạm.
+- Cuối cùng, tiếp tục chuẩn bị hình ảnh minh chứng và hoàn thiện báo cáo thực hành tuần tiếp theo.

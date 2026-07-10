@@ -1,120 +1,213 @@
 ---
-title: "Week 5 Worklog"
-date: 2026-05-18
-weight: 5
+title: "Worklog Week 5"
+date: 2026-05-13
+weight: 6
 chapter: false
 pre: " <b> 1.5. </b> "
 ---
 
-### Week 5 Objectives:
+### Week 5 Objectives: Shaping the FinOps Mindset in Software Development
 
-- Grasp the big picture of operating the FCJ Management application combined with the power of Auto Scaling Groups.
-- Understand the automatic resource scaling mechanism (adding/removing EC2 Instances) of Amazon EC2 Auto Scaling based on actual traffic volume.
-- Know how to integrate an Application Load Balancer (ALB) with an ASG to ensure high availability and excellent fault tolerance.
-- Manually set up core network and server infrastructure, including: VPC, Subnets (Public/Private), Security Group firewalls, EC2 instances, and RDS databases.
-- Install and run the FCJ Management app on an EC2 environment, establish a successful connection with the RDS database, and maintain the application using Node.js and PM2.
-- Package the complete EC2 configuration into an AMI, then build a Launch Template as a standard blueprint to deploy new instances consistently.
-- Set up a Target Group and ALB to act as a traffic coordinator, distributing user requests evenly across the EC2 instances.
-- Initialize an Auto Scaling Group, define capacity limits (Desired, Min, Max Capacity), and synchronize this system with the Load Balancer.
-- Directly test and compare 4 resource scaling scenarios: Manual, Scheduled, Dynamic, and Predictive Scaling.
-- Monitor performance metrics through CloudWatch, analyze scaling efficiency, and systematically clean up resources to avoid unnecessary costs.
+Entering the fifth week, the core objective is no longer just about operating infrastructure, but mastering cloud economics. For a developer, designing a robust system is not enough if it consumes too much budget. This week focuses on building a "financial defense system" through detailed objectives:
 
----
-
-### Tasks Planned for This Week:
-
-| Day | Tasks | Start Date | Completion Date | Reference |
-| --- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ | --------------- | ----------------------------------------------------------------------------------- |
-| Monday | - Module 01: Introduction <br> - Module 02.1: Setup Network Infrastructure <br> - **Hands-on Practice:** <br>&emsp;+ Create `AutoScaling-Lab` VPC across 3 AZs <br>&emsp;+ Allocate Public and Private Subnets <br>&emsp;+ Configure Security Groups to secure both application and database traffic | 18/05/2026   | 18/05/2026      | https://000006.awsstudygroup.com/ |
-| Tuesday | - Module 02.2: Launch EC2 Instance <br> - Module 02.3: Launch a Database Instance with RDS <br> - **Hands-on Practice:** <br>&emsp;+ Launch `FCJ-Management` EC2 instance using Amazon Linux 2023 <br>&emsp;+ Group private subnets into a DB Subnet Group and launch RDS MySQL Instance <br>&emsp;+ Connect to RDS from EC2, build database structure, and insert mock data into the `user` table | 19/05/2026   | 19/05/2026      | https://000006.awsstudygroup.com/ |
-| Wednesday | - Module 02.4: Setup data for Database <br> - Module 02.5: Deploy Web Server <br> - Module 02.6: Prepare metric for Predictive Scaling <br> - **Hands-on Practice:** <br>&emsp;+ Set up the environment and clone FCJ Management source code from GitHub <br>&emsp;+ Install PM2, start the app via `npm start`, and configure auto-restart on boot <br>&emsp;+ Prepare mock metric data and upload it to CloudWatch | 20/05/2026   | 20/05/2026      | https://000006.awsstudygroup.com/ |
-| Thursday | - Module 03: Create Launch Template <br> - Module 04.1: Create Target Group <br> - **Hands-on Practice:** <br>&emsp;+ Create an AMI from the perfectly running EC2 instance <br>&emsp;+ Use this AMI to forge the `FCJ-Management-template` Launch Template <br>&emsp;+ Create `FCJ-Management-TG` Target Group using HTTP protocol on port `5000` | 21/05/2026   | 21/05/2026      | https://000006.awsstudygroup.com/ |
-| Friday | - Module 04.2: Create Load Balancer <br> - Module 05: Test <br> - **Hands-on Practice:** <br>&emsp;+ Deploy an Internet-facing Application Load Balancer named `FCJ-Management-LB` <br>&emsp;+ Route ALB traffic directly to the Target Group <br>&emsp;+ Access the web app using ALB's DNS name and smoothly test CRUD operations | 22/05/2026   | 22/05/2026      | https://000006.awsstudygroup.com/ |
-| Saturday | - Module 06: Create Auto Scaling Group <br> - Module 07.1: Test Manual Scaling Solution <br> - Module 07.2: Test Scheduled Scaling Solution <br> - **Hands-on Practice:** <br>&emsp;+ Initialize `FCJ-Management-ASG` based on the Launch Template <br>&emsp;+ Execute Manual Scaling test (manually terminating instances) <br>&emsp;+ Schedule a scaling action to anticipate rush hour traffic | 23/05/2026   | 23/05/2026      | https://000006.awsstudygroup.com/ |
-| Sunday | - Module 07.3: Test Dynamic Scaling Solution <br> - Module 07.4: Read Metrics of Predictive Scaling Solution <br> - Module 08: Cleanup Resources <br> - **Hands-on Practice:** <br>&emsp;+ Write a Dynamic Scaling policy to spawn instances based on ALB Request counts <br>&emsp;+ Configure and analyze a Predictive Scaling Policy <br>&emsp;+ Thoroughly wipe out the system (ASG, ALB, TG, Template, AMI, EC2, RDS) and double-check Billing | 24/05/2026   | 24/05/2026      | https://000006.awsstudygroup.com/ |
+- **Explore the FinOps philosophy:** Gain a general understanding of how to manage costs on AWS using the AWS Budgets service. Deeply understand its role not just in monitoring, but in proactive control and alerting of AWS service usage costs.
+- **Master budget deployment methods:** Practice creating a Budget using an available template to set up a budget quickly and accurately.
+- **Separate monitoring layers:** 
+  - Create a Cost Budget to directly track the cash flow of AWS usage costs on a monthly basis.
+  - Create a Usage Budget to monitor AWS resource usage levels, specifically targeting services billed by running time (like EC2).
+- **Approach enterprise cost optimization models:** Learn about Reservation Budgets to monitor the utilization of Reserved Instances, and explore Savings Plans Budgets to evaluate the utilization of Savings Plans.
+- **Build an automated alerting system:** Configure alert thresholds and set up email notifications to ensure administrators receive alerts immediately when costs or usage approach risk thresholds.
+- **System Analysis and Maintenance:** Evaluate effectiveness by checking Budget history, Budget health, and alert statuses. Simultaneously, practice cleanup (deleting created Budgets) after completing the lab to avoid being bothered by unnecessary notifications in the future.
 
 ---
 
-### Week 5 Achievements:
+### Tasks to be Implemented this Week:
 
-#### Knowledge Gained
-
-**Amazon EC2 Auto Scaling and ALB Concepts**
-- Discovered EC2 Auto Scaling as a smart tool that automatically injects or removes EC2 servers purely based on actual traffic pressure.
-- Ensures the system never runs out of resources by replacing failed instances, maintaining desired capacity, and scaling out flexibly during high traffic.
-- Mastered the Layer 7 characteristics of ALB, which is highly optimized for HTTP/HTTPS traffic to receive user requests and distribute them evenly across EC2 servers.
-- ALB protects the system by hiding Private IPs and preventing users from seeing or connecting directly to individual EC2 machines.
-
-**Target Group, AMI, and Launch Template Mechanisms**
-- Understood that a Target Group acts as a gathering point for destination devices, categorized by `Instances`, running the `HTTP` protocol on port `5000`, and automatically blocking traffic to failed nodes (Unhealthy).
-- Concept of AMI: An exact image containing the operating system, application code, and all configurations of a server used for cloning.
-- A Launch Template serves as a "technical blueprint" storing core parameters (AMI, instance type, Key Pair, network, firewall) allowing the ASG to mass-produce consistent instances.
-
-**Amazon RDS and Layered Network Architecture**
-- Applied the tiered model: completely decoupling the database from EC2 and moving it down to the private subnet zone of RDS to minimize security risks.
-- Designed a network spanning at least 3 Availability Zones to maximize High Availability and eliminate single points of failure.
-- Established strict Security Groups: The Web App SG opens application port (`5000`) to the public; whereas the Database SG completely blocks all traffic except for port `3306` originating explicitly from the Application SG.
-
-**Monitoring Systems and 4 Resource Scaling Solutions**
-- Recognized CloudWatch as a performance monitoring dashboard (CPU Utilization, Request Count) that displays visual metrics to support scaling decisions.
-- **Manual Scaling:** Adjusting the desired capacity directly on the Console. It is easy to control but requires the administrator to be on standby, reacting slowly to sudden traffic spikes.
-- **Scheduled Scaling:** Pre-programming a timetable to increase server capacity for services with predictable load cycles (rush hours, sale seasons).
-- **Dynamic Scaling:** An automatic scaling scenario based on real-time load, applying a Target Tracking Policy to closely monitor the request count sent to the Target Group.
-- **Predictive Scaling:** Leveraging Machine Learning algorithms to learn from historical data, proactively preparing servers one step ahead of the actual traffic storm.
+| Day | Deep-Dive Tasks | Start Date | End Date | Reference Sources |
+| --- | --- | --- | --- | --- |
+| Mon | - **Foundational Research:** Read the workshop overview: Cost Management with AWS Budgets. <br> - Understand the architectural role of AWS Budgets in the AWS cost management strategy. <br> - Access the central AWS Billing and Cost Management console. <br> - Analyze and get familiar with the Budgets interface in the AWS Console. | 01/06/2026 | 01/06/2026 | https://000007.awsstudygroup.com/1-create-budget/ |
+| Tue | - **Template Deployment:** Create a Budget using an available template. <br> - Analyze the benefits of selecting the Monthly cost budget template. <br> - Input identifier parameters: Budget name, monthly budget amount, and set the alert threshold. <br> - Evaluate the process by verifying the successful creation and viewing data in the Budget history. | 02/06/2026 | 02/06/2026 | https://000007.awsstudygroup.com/1-create-budget/ |
+| Wed | - **Cost Budget Customization:** Create a Cost Budget using Customize mode for deep parameter intervention. <br> - Select the Cost budget type. <br> - Flexibly configure variables: Period, Budget effective dates, Budgeting method, and Budgeted amount. <br> - Configure Budget scope to apply comprehensively to All AWS services and calculate based on Unblended costs. | 03/06/2026 | 03/06/2026 | https://000007.awsstudygroup.com/2-cost-budgets/ |
+| Thu | - **Alert Chain Setup:** Configure the alert threshold for the Cost Budget. <br> - Add an email address to receive automated alerts when costs exceed the threshold. <br> - Review the entire Cost Budget configuration. <br> - Create the Budget and verify its active status on the system. | 04/06/2026 | 04/06/2026 | https://000007.awsstudygroup.com/2-cost-budgets/ |
+| Fri | - **Hardware Capacity Control:** Create a Usage Budget to directly monitor resource utilization instead of currency. <br> - Select Usage budget from Budget types. <br> - Configure Usage type groups filters, specifically focusing on EC2: ELB - Running Hours. <br> - Establish maximum usage hours limits and configure the corresponding alert threshold. | 05/06/2026 | 05/06/2026 | https://000007.awsstudygroup.com/3-usage-budget/ |
+| Sat | - **Commitment Model Analysis:** Learn about the mechanism of Reservation Budgets applied to Reserved Instances. <br> - Learn about the mechanism of Savings Plans Budgets applied to Savings Plans. <br> - Practice or view instructions on creating RI Budgets and Savings Plans Budgets. <br> - Analyze how to configure coverage threshold, utilization threshold, and email alerts. | 06/06/2026 | 06/06/2026 | https://000007.awsstudygroup.com/4-reservation-budget/ <br> https://000007.awsstudygroup.com/5-saving-plans-budget/ |
+| Sun | - **Evaluation and Cleanup:** Comprehensively check the list of created Budgets. <br> - Read and interpret metrics from Budget health and Budget history. <br> - Proceed to delete the Budgets created during the practice. <br> - Write a report recording results, difficulties, solutions, and extracted lessons. | 07/06/2026 | 07/06/2026 | https://000007.awsstudygroup.com/6-clean-up/ |
 
 ---
 
-#### Hands-on Practice
+### Week 5 Results: Theoretical Survey and Summary
 
-**Module 2 — Setup Network Infrastructure and Deploy Database:**
-- Initialized the `AutoScaling-Lab` VPC (CIDR `10.0.0.0/16`), structuring the network with 3 public subnets and 3 private subnets spread across 3 different AZs.
-- Set up the Application Security Group (`FCJ-Management-SG`) to open ports 22, 80, 443, and 5000, while configuring the Database SG to strictly accept port 3306 only from the Application SG.
-- Built a DB Subnet Group as a launchpad for a Production-ready, Multi-AZ RDS MySQL Instance.
-- SSH'd into the initial EC2 server, installed Git and MariaDB client, and securely connected to the RDS endpoint to initialize table structures and seed data into the `user` table.
+#### 1. Architectural Analysis of AWS Budgets & AWS Billing and Cost Management
 
-- 📸 ![Proof Image: RDS MySQL Database System successfully created in Available status](/aws-intership-report/images/1-Worklog/1.5-Week5/rds-mysql-available.png)
+**AWS Budgets System Architecture Mindset**
+In a Cloud environment, resource provisioning occurs via a few lines of code or clicks. This leads to the risk of a "cost explosion" without a control mechanism. AWS Budgets is a service used to track costs, resource usage, and cost-saving commitments on AWS. It provides extreme flexibility, helping users set budgets by day, month, quarter, or year.
 
-**Module 3 & 4 — Web Server Operation, AMI Packaging, and Load Balancing:**
-- Deployed Node.js 20 environment, cloned code from GitHub, and configured the `.env` file to connect directly with the RDS Database Endpoint.
-- Installed the global PM2 manager to keep the application running in the background on port 5000, executing `pm2 startup` and `pm2 save` to ensure the app resurrects automatically upon server reboot.
-- Snapshotted the EC2 state into `FCJ-Management-AMI` and built the `FCJ-Management-template` Launch Template to standardize hardware and networking.
-- Configured the `FCJ-Management-TG` Target Group (Port 5000) and deployed an Internet-facing Application Load Balancer named `FCJ-Management-LB`.
+A crucial architectural finding: AWS Budgets only warns, it does not automatically stop services when exceeding the budget. This might seem like a flaw at first glance, but it is actually a "by design" choice by AWS. If a backend system serving thousands of users is suddenly shut down over a few dollars, the business damage would be far greater. Therefore, when costs or usage exceed the configured threshold, AWS Budgets can send alerts via email, delegating the incident response decision to humans. This proves AWS Budgets is suitable for beginners learning AWS because it helps control costs during lab practice, while remaining safe for production systems.
 
-- 📸 ![Proof Image: FCJ Management app interface loaded successfully with smooth CRUD operations via ALB's DNS](/aws-intership-report/images/1-Worklog/1.5-Week5/alb-dns-crud-success.png)
+**Central AWS Billing and Cost Management Console**
+This is the financial heart of the account. I learned how to access AWS Billing and Cost Management from the AWS Management Console. This interface doesn't just show the balance; I understand this is the area to manage cost information, bills, budgets, and cost alerts. Here, I know how to use the Budgets menu to create, view, edit, or delete Budgets and how to check the Budget status after successful creation.
 
-**Module 6 & 7 — Auto Scaling Configuration and Testing:**
-- Initialized `FCJ-Management-ASG` attached to the Launch Template with capacity limits (Min: 1, Desired: 1, Max: 3) and enabled ELB Health Checks.
-- Fired high-intensity load testing tools at the ALB's DNS link, executed **Manual Scaling** by dropping Desired capacity to 0 to watch the ASG automatically terminate instances.
-- Scheduled a **Scheduled Action** named `Rush hour` (timezone `Asia/Ho_Chi_Minh`) to scale up servers, verifying precise execution logs in the Activity tab.
-- Wrote a **Dynamic Scaling** (Target Tracking) policy based on the `ALB Request Count Per Target` at a 500-request threshold to verify autonomous scaling.
-- Used AWS CLI to push mock JSON data (CPU and instance metrics) to CloudWatch, created a **Predictive Scaling Policy** using a custom metric pair, and analyzed the AI's intelligent forecast graph.
+#### 2. Budgeting Strategies (Template vs. Customize)
 
-- 📸 ![Proof Image: Load and Capacity charts showcasing Predictive Scaling's ability to anticipate future load](/aws-intership-report/images/1-Worklog/1.5-Week5/asg-predictive-metrics-chart.png)
+**Rapid Deployment with Templates**
+In many cases, we only need a basic alert. Templates help create Budgets quickly with available configurations. By knowing to select "Use a template" for a simplified template, specifically "Monthly cost budget" to create a monthly cost budget, I saved a lot of operational time. The input fields only require entering the Budget name, monthly budget amount, and alert threshold. However, I also understand that templates are suitable when needing to quickly set up basic cost alerts. For complex systems, we must delve into Customize mode. Post-verification is always necessary by checking Budget history after successfully creating the Budget.
 
-**Module 8 — System Cleanup Process:**
-- Systematically dismantled resources in the correct order: Delete ASG -> Remove ALB -> Delete Target Group -> Delete Launch Template -> Deregister AMI -> Terminate initial EC2 -> Delete RDS Database and DB Subnet Group to prevent hidden charges.
+**Deep Customization with Cost Budget**
+For higher granularity, Cost Budgets are used to track AWS usage costs via Customize mode. I mastered the process of creating a Cost Budget using Customize mode and selecting the Budget type as Cost budget.
 
----
+This process requires an understanding of financial cycles:
+- **Time cycle:** Configure Period including Daily, Monthly, Quarterly, or Annually.
+- **Budget lifecycle:** I learned to distinguish between Recurring Budget and Expiring Budget. A Recurring Budget repeats periodically (for continuously running servers), while an Expiring Budget only applies for a specific time period (ideal for short-term testing or new feature deployments).
+- **Allocation strategy:** Choose the Budgeting method between Fixed: fixed budget for each period, and Planned: budget can change month by month.
+- **Monitoring Scope:** Choose Budget scope as All AWS services to track all AWS services, and specifically, choose Aggregate costs by Unblended costs. Unblended costs reflect the actual raw costs at the current moment, unskewed by averaged discount algorithms, providing the most transparent data. Finally, I know to add an alert threshold to receive an alert when costs reach a certain percentage of the budget.
 
-#### Difficulties and Solutions
+#### 3. Shifting Perspective from Costs to Physical Resources (Usage Budget)
 
-**Difficulties:**
-- The application ran on port `5000`, but the Application Load Balancer continuously reported connection errors and failed to load the interface because this port was not opened in the Security Group.
-- When configuring RDS MySQL, the system failed to connect or isolate network tiers due to mistakenly selecting public VPC subnets or a DB Subnet Group containing public subnets.
-- The Auto Scaling Group flagged severe errors and refused to launch new machines because the Launch Template was linked to an AMI that was still in `Pending` status (not yet `Available`).
-- High risk of incurring massive hidden billing charges from hourly-billed resources like Multi-AZ RDS and Application Load Balancer if accidentally left running after lab completion.
+Looking solely at cash flow sometimes creates a lag in detecting system errors (e.g., an infinite loop generating millions of S3 requests). Therefore, a Usage Budget is used to track resource usage levels instead of cost amounts. I clearly analyzed the difference between Cost Budget and Usage Budget: Cost Budgets track costs, whereas Usage Budgets track resource usage.
 
-**Solutions:**
-- Thoroughly reviewed Security Group Inbound rules, widely opened TCP port 5000 for the app, and applied strict security configurations so RDS only accepts port 3306 from the Application SG's ID.
-- Systematized the data flow diagram on paper before execution, accurately grouping hidden subnets into the DB Subnet Group and burying RDS entirely within the Private Subnet range.
-- Practiced patience, waiting until the AMI packaging progress bar on the EC2 Console turned completely green (`Available`) before embedding it into the Launch Template.
-- Established a rigorous cloud garbage cleanup checklist from top to bottom (including hidden resources like EBS Snapshots and CloudWatch Logs) and double-checked the Billing Dashboard.
+The setup process involves selecting the Budget type as Usage budget. The key here is the classification ability by selecting Usage type groups to specify the type of resource to track. Within the lab scope, a Usage Budget can be used to track EC2: ELB - Running Hours. By setting the usage hours limit for the resource and configuring email alerts when usage exceeds the threshold, administrators can intervene right before the bill is generated. Ultimately, I understand Usage Budgets are useful for services billed by the hour like EC2, Load Balancers, or continuously running resources.
+
+#### 4. Managing Long-term Commitments (Reservation & Savings Plans Budgets)
+
+Although these packages are rarely purchased during learning, understanding them is the standard for a true Cloud Engineer.
+- **Reservation Budget:** Understand Reservation Budgets are used to track Reserved Instances. Since Reserved Instances often require commitment or upfront payment, in the lab scope, one should only view the guide or practice at a demo level. This budget helps track coverage or utilization of Reserved Instances. Specifically, configuring the Coverage threshold to track the coverage level of Reserved Instances reveals what percentage of running servers benefit from the discounted rate. This proves Reservation Budgets are suitable for enterprise environments already using Reserved Instances for long-term cost optimization.
+- **Savings Plans Budget:** Understand Savings Plans Budgets are used to track Savings Plans usage. This is a more flexible model, as Savings Plans is a commitment to use computing resources over a specific period in exchange for lower prices compared to On-Demand. This tool helps track the utilization threshold. If the utilization rate is low, the system will warn by configuring email alerts to receive notifications when Savings Plans usage does not meet expectations. In summary, Savings Plans Budgets are suitable when the system has stable compute needs over a long period.
+
+#### 5. Alerting Systems, Health, and Cleanup Discipline
+
+- **Alert System:** Understand alert threshold is a warning threshold set by percentage or specific value. To build a solid defense system, it's necessary to configure multiple alert levels, e.g., 50%, 80%, and 100%, and add an email to receive budget alerts. It should be clearly planned that the email recipient should be someone responsible for tracking costs or managing the AWS account, and one must always check the confirmation email or notification from AWS Budgets after configuration.
+- **Diagnostics (Health & History):** Understand Budget health indicates the current status of the budget compared to the set level. For a comprehensive view, use Budget history to view cost or usage trends over time and observe budget status to assess whether the AWS account is overspending. A technical characteristic to note is that cost data on AWS may have latency, so it is necessary to wait a while for data to fully update.
+- **Cleanup Discipline:** Understand cleanup is a necessary step after completing the lab. Knowing to delete created Budgets if only used for practice helps avoid system clutter. I also clearly understand the architectural nature that deleting AWS Budgets does not delete running resources in the AWS account because AWS Budgets is only a tracking and alerting tool, not an application processing resource. Finally, always check the Budgets list again after deletion to ensure no unnecessary alerts remain.
 
 ---
 
-#### Lessons Learned
+### Hands-on Experience: Step-by-Step Configuration Analysis
 
-- A deep understanding of the classic 3-tier architecture (ALB coordinating - EC2 processing - RDS storing) helps the system eliminate single points of failure and achieve maximum security.
-- Always trust the PM2 process manager wrapping the Node.js app combined with system configuration save commands (`pm2 startup`) as an insurance policy in case the server crashes unexpectedly.
-- Realized the importance of running Dynamic Scaling in parallel with Predictive Scaling, allowing the system to react flexibly to live load while proactively stepping ahead of incoming traffic storms.
-- Quality Cloud system design always requires architects to place both Cost Optimization and Security on the balance scale right from the very first blueprint drafts.
+The practical process is divided into 6 modules, ranging from basic initialization to system cleanup.
+
+**Module 1 — Establishing the First Line of Defense (Create Budget with Template)**
+- Access the AWS Management Console.
+- Search for and open the AWS Billing and Cost Management service.
+- On the navigation bar, select Budgets in the left menu.
+- Start the process by clicking Create a budget to begin creating a budget.
+- Choose the quick method: Select Use a template (simplified).
+- Here, I select the Monthly cost budget template as it covers monthly needs well.
+- Enter the Budget name as required by the lab and enter the monthly budget amount as a safe limit.
+- Configure the alert threshold to receive an alert when costs reach the threshold.
+- Click Create budget to complete.
+- Afterward, I verified that the Budget was successfully created and opened Budget history to view the budget history. This process helped me review the types of alerts available in the template.
+
+**Module 2 — Touching Deep Settings (Create Cost Budget)**
+- Return to AWS Billing and Cost Management.
+- Select Budgets in the left menu and click Create budget.
+- This time, in the Budget setup section, select Customize to manually fine-tune.
+- In Budget types, select Cost budget and click Next to continue.
+- In the Set your budget section, enter the Budget name as `Monthly`.
+- Choose an appropriate Period, for example, Monthly.
+- Under Budget effective dates, I am required to categorize: choose Recurring Budget if you want the budget to repeat, or choose Expiring Budget if you only want it to apply once.
+- Next is configuring the Budgeting method: choose Fixed if you want the same budget for each period, or choose Planned if you want to set different budgets for each month.
+- Enter the Budgeted amount according to the desired cost level.
+- For a comprehensive view, in Budget scope, select All AWS services.
+- Ensure transparency by selecting Unblended costs under Aggregate costs by.
+- Click Next to move to the alert configuration step.
+- Select Add an alert threshold.
+- Enter the alert percentage, e.g., 80% or 100%, and enter the email to receive alerts.
+- Review the entire configuration before clicking Create budget to complete. Finally, confirm that the Budget appears in the Budgets list.
+
+**Module 3 — Binding Physical Resources (Create Usage Budget)**
+- Go back to Budgets in AWS Billing and Cost Management and click Create budget.
+- Select Customize, but under Budget types, select Usage budget and click Next to continue.
+- Enter a name for the Usage Budget.
+- In the Budget against section, select Usage type groups. This is a crucial step to select the type of usage to track, e.g., EC2: ELB - Running Hours.
+- Proceed to configure Set budget amount with these details: choose Period as Daily, Monthly, Quarterly, or Annually; choose Budget renewal type as Recurring or Expiring; choose Budgeting method as Fixed or Planned.
+- Then, enter the maximum usage hours you want to track and keep the default configuration in Budget scope if it suits the lab.
+- Click Next to configure alerts.
+- Select Add an alert threshold.
+- Enter the alert percentage compared to the usage budget and enter the email to receive notifications.
+- Review the configuration and click Create budget to complete.
+- Monitor the system by checking Budget health to see current usage against the limit and opening Budget history to track usage trends.
+
+**Module 4 & 5 — Simulating Enterprise Governance (Create RI & Savings Plans Budgets)**
+- For RI: Access AWS Billing and Cost Management > Select Budgets > Click Create budget.
+- In Budget setup, select Customize > Select Reservation budget > Click Next.
+- Enter a Budget name for the Reservation Budget.
+- Configure the Coverage threshold to track the coverage level of Reserved Instances.
+- Configure Budget scope according to the lab instructions.
+- In the Alert setting section, enter the email to receive alerts. Review the information and click Create budget.
+- Verify the Reservation Budget was created. An important extracted lesson: note that within the lab scope, it is not mandatory to purchase Reserved Instances as it may incur costs or require payment commitments.
+- For Savings Plans: Access AWS Billing and Cost Management > Select Budgets > Click Create budget > Select Customize > In Budget types, select Savings Plans budget > Click Next.
+- Enter a Budget name for the Savings Plans Budget.
+- Configure the Utilization threshold to track Savings Plans usage.
+- Keep Budget scope at default if appropriate for the lab.
+- In the Alert setting section, enter the email to receive alerts. Review the entire configuration and click Create budget to complete.
+- Check the newly created Budget in the list. Similar to RI, note that Savings Plans usually involve long-term usage commitments, so in a learning environment, you should only perform operations according to instructions or view demos.
+
+**Module 6 — System Cleanup Discipline (Clean Up Resources)**
+- Access AWS Billing and Cost Management and select Budgets in the left menu.
+- Check the list of Budgets created during the lab.
+- Select the Budget to delete and choose Action.
+- Click Delete. In the confirmation dialog, click Delete to complete.
+- Repeat the process for the remaining Budgets created during the practice.
+- Check the Budgets list again after deletion.
+- This step reinforces theoretical knowledge: note that deleting a Budget only removes the tracking and alerting configuration, and does not affect running AWS resources.
+
+---
+
+### Week 5 Results Evaluation:
+
+This week's practice sequence significantly improved my FinOps awareness:
+- Completed learning about the AWS Budgets service in AWS cost management.
+- Know how to create a budget using available templates for quick alert setup.
+- Created a Cost Budget to track AWS usage costs by month.
+- Created a Usage Budget to track AWS resource usage levels.
+- Understood the difference between Cost Budget and Usage Budget.
+- Grasped the purpose of Reservation Budgets in tracking Reserved Instances.
+- Grasped the purpose of Savings Plans Budgets in tracking Savings Plans.
+- Know how to configure alert thresholds and email notifications for Budgets.
+- Know how to check Budget health and Budget history to assess the budget status.
+- Know how to clean up Budgets created in a lab environment.
+- Thereby gaining a clearer realization of the importance of cost control when practicing on AWS.
+
+---
+
+### Difficulties Encountered During System Analysis:
+
+- **Interface Complexity:** The Billing and Cost Management interface has many sections, making it initially easy to confuse Bills, Cost Explorer, and Budgets. Distinguishing between the past (Explorer) and the future (Budgets) requires good categorization skills.
+- **Ambiguity between Concepts:** It's necessary to clearly distinguish Cost Budget and Usage Budget because these two types of Budgets track two different sets of information.
+- **UX Operational Errors:** When configuring a Usage Budget, you must select the correct Usage type group to track the right resource type. With thousands of services, one wrong click renders the Budget meaningless.
+- **Account Limitations:** Some new AWS accounts may not fully display Budget types other than Cost Budgets.
+- **Data Latency:** Cost and usage data on AWS may update slowly, so immediately after creating a Budget, full data might not be visible. This often causes a psychological panic effect when setting up the system.
+- **Abstract Nature of Commitment Systems:** The RI Budget and Savings Plans Budget sections are confusing because they relate to long-term usage commitment models.
+- **Operational Risk (Alert Fatigue):** If multiple alerts are configured or the wrong email is entered, the user may not receive desired alerts, or conversely, get spammed with emails leading to alert fatigue.
+- **Fundamental Knowledge Gaps:** It is crucial to note that AWS Budgets only alerts; it does not automatically stop services when the budget is exceeded. Misunderstanding this can lead to severe financial consequences.
+
+---
+
+### Solutions and Extracted Best Practices:
+
+- **Proactive Learning:** Read each step in the workshop carefully before operating on the AWS Console.
+- **Systematize with Notes:** Note down the purpose of each type of Budget to avoid confusion:
+  - Cost Budget is used to track costs.
+  - Usage Budget is used to track resource usage levels.
+  - Reservation Budget is used to track Reserved Instances.
+  - Savings Plans Budget is used to track Savings Plans.
+- **Information Risk Control:** When configuring alerts, enter the correct email and check the inbox to confirm receipt of notifications.
+- **Build Multi-tier Alert Strategies:** You should set multiple alert levels such as 50%, 80%, and 100% to proactively control costs.
+- **Safe Practice:** Avoid making arbitrary financial commitments. Absolutely do not purchase Reserved Instances or Savings Plans in a learning account unless formally required.
+- **System Operation Discipline:**
+  - After completing the lab, you must delete the practice Budgets to avoid receiving unnecessary notifications.
+  - Check the Billing Dashboard again after each lab session to detect abnormal costs.
+  - Combine AWS Budgets with the habit of resource cleanup to limit unexpected costs.
+
+---
+
+### Optimal Directions for Next Week:
+
+The FinOps journey doesn't stop at setting limits (Budgets) but expands into advanced analysis and detection. Upcoming research topics include:
+- Continue to learn more deeply about AWS Billing and Cost Management.
+- Research AWS Cost Explorer further to analyze costs by service, time, and account.
+- Learn how to use the AWS Free Tier Dashboard to track free limits, maximally protecting the learning budget.
+- Learn AWS Cost Anomaly Detection to detect abnormal costs (applying Machine Learning to data detection).
+- Research more about AWS Organizations and how to manage costs for multiple AWS accounts (Multi-account architecture).
+- Practice building the habit of checking the Billing Dashboard after every lab.
+- Finally, always ensure the preparation of evidence images, operation notes, and result reviews to complete the report for the following week.

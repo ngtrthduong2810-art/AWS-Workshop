@@ -26,22 +26,22 @@ tiên, và gợi ý hành động cho từng email.
 
 ## Kiến trúc tổng quan (5 layer)
 
-![Kiến trúc InboxIQ](/images/5-Workshop/5.1-overview/architecture.png)
+![Kiến trúc InboxIQ](/images/5-Workshop/5.1-overview/architecture-vi.png)
 
 | Layer | Thành phần |
 |---|---|
 | **1. User** | Users, Web/Mobile App (Flutter) |
-| **2. Backend** | Cognito, API Gateway (REST + WebSocket), Lambda (Producer + Worker) |
+| **2. Backend** | Cognito, API Gateway (REST + WebSocket), Lambda (Producer + Worker + ws-whoami) |
 | **3. Workflow** | SQS (Main Queue + Dead-Letter Queue), EventBridge Scheduler (optional) |
 | **4. Storage** | DynamoDB (6 bảng), Secrets Manager, Systems Manager Parameter Store |
 | **5. Monitoring** | CloudWatch, X-Ray, IAM Role |
 | **External** | Gmail API, OpenAI API (ngoài AWS Cloud) |
 
-## Flow xử lý (14 bước)
+## Flow xử lý (13 bước)
 
 | # | Từ → Đến | Mô tả |
 |---|---|---|
-| setup | App → API Gateway WebSocket | Connect kèm JWT → Lambda Authorizer verify → nhận `connectionId` |
+| setup | App → API Gateway WebSocket | Connect kèm JWT → Lambda Authorizer verify → app gọi route `whoami` để nhận `connectionId` (route `$connect` không thể push message về client một cách tin cậy, nên cần thêm route riêng) |
 | 1 | Users → App | Mở app, bấm "Check Gmail" |
 | 2 | App → Cognito | Xác thực, nhận JWT |
 | 3 | App → API Gateway REST | Gọi API kèm JWT + `connectionId` |
@@ -51,11 +51,16 @@ tiên, và gợi ý hành động cho từng email.
 | 7a | Lambda Worker → Secrets Manager | Lấy OpenAI API key (cache global scope) |
 | 7b | Lambda Worker → DynamoDB | Query Gmail OAuth token theo UserID |
 | 8 | Lambda Worker → Gmail API | Lấy danh sách email chưa đọc |
-| 9 | Lambda Worker → OpenAI API | Tóm tắt + phân loại ưu tiên (timeout fail-fast) |
+| 9 | Lambda Worker → OpenAI API | Tóm tắt + phân loại ưu tiên; các email được xử lý **song song** bằng `Promise.allSettled` (timeout fail-fast, một email lỗi không làm mất cả batch) |
 | 10 | Lambda Worker → DynamoDB | Ghi summary (bảng EmailSummaries, TTL 30 ngày) |
 | 11 | Lambda Worker → WebSocket → App | Push kết quả real-time dùng connectionId |
-| 13 | SQS Main → SQS DLQ | Khi retry > 3 lần |
-| 14 | EventBridge Scheduler → SQS Main Queue | Trigger tự động mỗi 30 phút (optional) |
+| 12 | SQS Main → SQS DLQ | Khi retry > 3 lần |
+| 13 | EventBridge Scheduler → SQS Main Queue | Trigger tự động mỗi 30 phút (optional) — đẩy vào SQS, không trigger thẳng Worker |
+
+> **Lưu ý:** Luồng kết nối Gmail lần đầu (OAuth qua trình duyệt → Lambda
+> callback → deep link `inboxiq://gmail-connected`, kèm fallback link do
+> Chrome chặn auto-redirect sang custom scheme) là một luồng riêng, được
+> mô tả chi tiết ở mục 5.4.
 
 ## Bảng dữ liệu (6 bảng DynamoDB)
 
@@ -65,7 +70,7 @@ tiên, và gợi ý hành động cho từng email.
 | `inboxiq-user-settings` | `userId` | — | ❌ | Cấu hình cá nhân hoá |
 | `inboxiq-gmail-connections` | `userId` | — | ❌ | Gmail OAuth token |
 | `inboxiq-email-summaries` | `userId` | `emailId` | ✅ 30 ngày | Bản tóm tắt email |
-| `inboxiq-processing-jobs` | `jobId` | — | ✅ 7 ngày | Trạng thái xử lý (debug) |
+| `inboxiq-processing-jobs` | `jobId` | — | ✅ 7 ngày | Trạng thái xử lý (dự phòng cho debug, chưa dùng ở MVP) |
 | `inboxiq-ws-connections` | `connectionId` | — | ✅ 2 giờ | Mapping connectionId ↔ userId |
 
 ## Chi phí ước tính (Free Tier + OpenAI)
@@ -82,3 +87,5 @@ tiên, và gợi ý hành động cho từng email.
 1. Chưa có multi-region failover — chấp nhận cho MVP, nêu là hướng phát triển tiếp
 2. Chưa có CI/CD pipeline — deploy bằng SAM CLI thủ công là đủ cho báo cáo
 3. Rate limiting hiện chỉ có API Gateway throttle chung, chưa per-user usage plan
+4. Lambda runtime Node.js 20.x đã qua EOL (04/2026) — không nâng cấp giữa dự án để tránh rủi ro, dự kiến nâng lên Node.js 22 ở giai đoạn sau
+5. WebSocket có thể ngắt ngầm (silently drop) khi app ở background — hiện app đọc lại `connectionId` mới nhất và tự reconnect khi bấm "Check Gmail"; chưa có cơ chế tự reconnect chủ động khi app resume (`WidgetsBindingObserver`), là hướng cải tiến tiếp theo

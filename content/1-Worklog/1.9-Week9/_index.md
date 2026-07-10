@@ -1,180 +1,161 @@
 ---
-title: "Week 9 Worklog"
-date: 2026-06-22
+title: "Worklog Week 9"
+date: 2026-06-09
 weight: 9
 chapter: false
 pre: " <b> 1.9. </b> "
 ---
 
-### Objectives of Week 9:
+### Week 9 Objective: Reviewing the architecture through the lens of a "service user" rather than a "code writer"
 
-- Learn the fundamentals of AWS Command Line Interface (AWS CLI).
-- Understand the role of AWS CLI in managing AWS services.
-- Install and configure AWS CLI on a local machine.
-- Practice inspecting AWS resources using AWS CLI.
-- Learn how to manage Amazon S3 with AWS CLI.
-- Explore Amazon SNS using AWS CLI commands.
-- Practice managing AWS Identity and Access Management (IAM) through AWS CLI.
-- Learn how to work with Amazon VPC using AWS CLI.
-- Launch and manage Amazon EC2 instances using AWS CLI.
-- Clean up AWS resources after completing the hands-on labs.
+After many weeks focusing on writing code, fixing bugs, and running tests for the InboxIQ project, week 9 is the time to pause to **synthesize and re-examine the core nature of each AWS service actually implemented in the product**. The goal is not to learn a new service, but to deeply understand *why* each service was chosen, what manual process it replaces, and what its limitations/risks are. This is an important preparation step for the thesis defense, as the examiners will undoubtedly ask "why use X instead of Y".
+
+- Review the entire 5 architectural layers of InboxIQ (User, Backend, Workflow, Storage, Monitoring) and exactly list which services are currently running in the account.
+- Deeply understand the role of Amazon Cognito in user authentication, comparing it with the alternative of manually building a JWT system.
+- Analyze the reasons for separating into two Lambdas (Producer/Worker) and an auxiliary Lambda (ws-whoami) instead of combining all logic into a single function.
+- Clearly understand the mechanism of Amazon API Gateway in both REST and WebSocket modes, as it is a service rarely used simultaneously in both modes for a student project.
+- Delve into the "buffer" role of Amazon SQS and Dead-Letter Queue in decoupling the processing speed of the client and the AI.
+- Review the design of the 6 DynamoDB tables, especially the strategy of using TTL to automatically clean up data instead of writing manual cron jobs for deletion.
+- Understand why sensitive information (OpenAI key, Gmail OAuth secret) is isolated into Secrets Manager and SSM Parameter Store rather than being left in Lambda environment variables.
+- Review the monitoring roles of CloudWatch and X-Ray in tracing a request traversing multiple asynchronous Lambdas.
+- Cross-check all used services against actual Free Tier costs, preparing data for the "estimated cost" section of the report.
 
 ---
 
-### Tasks to be completed this week:
+### Tasks to implement this week:
 
-| Day | Tasks | Start Date | Completion Date | Reference |
+| Day | In-depth task category | Start Date | End Date | Reference materials |
 | --- | --- | --- | --- | --- |
-| Monday | - Read the AWS CLI workshop introduction <br> - Learn the purpose and benefits of AWS CLI <br> - Prepare the practice environment | 22/06/2026 | 22/06/2026 | https://000011.awsstudygroup.com/1-introduction/ |
-| Tuesday | - Install AWS CLI <br> - Configure AWS credentials and Region <br> - Verify the AWS CLI installation | 23/06/2026 | 23/06/2026 | https://000011.awsstudygroup.com/2-prerequiste/ <br> https://000011.awsstudygroup.com/3-installation/ |
-| Wednesday | - Explore AWS resources using AWS CLI <br> - Practice basic AWS CLI commands | 24/06/2026 | 24/06/2026 | https://000011.awsstudygroup.com/4-check-resource/ |
-| Thursday | - Work with Amazon S3 using AWS CLI <br> - Create S3 buckets <br> - Upload and download objects | 25/06/2026 | 25/06/2026 | https://000011.awsstudygroup.com/5-cli-with-s3/ |
-| Friday | - Work with Amazon SNS using AWS CLI <br> - Create SNS Topics <br> - Publish test notifications | 26/06/2026 | 26/06/2026 | https://000011.awsstudygroup.com/6-cli-with-sns/ |
-| Saturday | - Manage IAM resources using AWS CLI <br> - Explore Amazon VPC <br> - Launch an EC2 instance using AWS CLI | 27/06/2026 | 27/06/2026 | https://000011.awsstudygroup.com/7-cli-with-iam/ <br> https://000011.awsstudygroup.com/8-cli-with-vpc/ <br> https://000011.awsstudygroup.com/9-create-ec2/ |
-| Sunday | - Review all created resources <br> - Perform resource cleanup <br> - Summarize the knowledge gained throughout the workshop | 28/06/2026 | 28/06/2026 | https://000011.awsstudygroup.com/11-clean-up/ |
+| Monday | - Redraw the 5-layer architecture diagram on paper, cross-checking each block with real resources in the AWS Console. <br> - Re-read the official documentation on Amazon Cognito User Pool: registration, login, and JWT issuance flows. <br> - Compare with how the Flutter `AuthService` calls Cognito directly. | 22/06/2026 | 22/06/2026 | https://docs.aws.amazon.com/cognito/ |
+| Tuesday | - Research AWS Lambda documentation regarding execution time limits, cold starts, and concurrency. <br> - Analyze the reasoning for splitting Producer/Worker: Producer only returns a fast `202 Accepted`, while Worker handles heavy processing (calling Gmail + OpenAI) running in the background. <br> - Understand why a separate `ws-whoami` Lambda is needed for the WebSocket route. | 23/06/2026 | 23/06/2026 | https://docs.aws.amazon.com/lambda/ |
+| Wednesday | - Research Amazon API Gateway documentation: differences between REST API and WebSocket API. <br> - Research the WebSocket connection lifecycle (`$connect`, `$disconnect`, custom route) and why `$connect` cannot push messages. <br> - Compare the Lambda Authorizer with authenticating JWTs on each REST request. | 24/06/2026 | 24/06/2026 | https://docs.aws.amazon.com/apigateway/ |
+| Thursday | - Research Amazon SQS: Standard Queue, Visibility Timeout, redrive policy, and Dead-Letter Queue. <br> - Understand Partial Batch Response for the SQS-Lambda trigger, and why it prevents reprocessing an entire batch when only 1 message fails. <br> - Understand Amazon EventBridge Scheduler and the cron-based invoke model. | 25/06/2026 | 25/06/2026 | https://docs.aws.amazon.com/sqs/ <br> https://docs.aws.amazon.com/eventbridge/ |
+| Friday | - Review DynamoDB table design: Partition Key, Sort Key, Global Secondary Index (if any), and the TTL mechanism for auto-deleting data. <br> - Cross-reference the 6 actual tables (`users`, `user-settings`, `gmail-connections`, `email-summaries`, `processing-jobs`, `ws-connections`) with the intended purpose of each table. <br> - Confirm which tables are actually being read/written in the code, and which are only declared in the SAM template. | 26/06/2026 | 26/06/2026 | https://docs.aws.amazon.com/dynamodb/ |
+| Saturday | - Understand AWS Secrets Manager and Systems Manager Parameter Store: when to use which, and how their costs differ. <br> - Research the mechanism of caching secrets at the global scope in Lambda to avoid calling Secrets Manager on every invoke (reducing cost + latency). <br> - Review CloudWatch Logs/Metrics and AWS X-Ray tracing across asynchronous Lambdas. | 27/06/2026 | 27/06/2026 | https://docs.aws.amazon.com/secretsmanager/ <br> https://docs.aws.amazon.com/xray/ |
+| Sunday | - Synthesize all used services into a quick reference table (service – role – what it replaces – risks). <br> - Cross-check with Cost Explorer/Billing Dashboard to verify actual cost metrics within the Free Tier. <br> - Write the weekly summary report: achievements, difficulties, solutions, and lessons learned. | 28/06/2026 | 28/06/2026 | Internal InboxIQ project documents |
 
 ---
 
-### Outcomes of Week 9:
+### Week 9 Achievements: Lookup Map of Services Applied to InboxIQ
 
-#### Knowledge
+#### 1. Authentication Layer — Amazon Cognito
 
-**Introduction to AWS CLI**
+Stepping back to learn about Cognito after finishing its integration helped me better understand *why* it is more worthwhile than writing a custom JWT system. Cognito User Pool handles the entire lifecycle: registration, email verification, login, and issuing/refreshing JWTs, without me having to manually store passwords or handle hashing. In the Flutter app's `AuthService`, calling Cognito directly (bypassing API Gateway) is a logical choice because Cognito already exposes a secure authentication endpoint inherently — API Gateway only needs to verify the JWT at the backend business APIs (Producer). This was a point I had mistakenly documented in last week's architecture notes and have now corrected to match the actual code.
 
-- Understand what AWS Command Line Interface (AWS CLI) is.
-- Learn how AWS CLI simplifies resource management and automation.
-- Understand the advantages of using the command line over the AWS Management Console.
+#### 2. Compute Layer — AWS Lambda (Producer / Worker / ws-whoami)
 
-**AWS CLI Installation and Configuration**
+Re-reading the Lambda documentation helped me clearly articulate the decision to split into 3 functions instead of 1:
 
-- Install AWS CLI on the local computer.
-- Configure AWS Access Key, Secret Access Key, default Region, and output format.
-- Verify connectivity to an AWS account.
+- **Lambda Producer**: does only one thing — receives the request, packages the message with `connectionId`, pushes it to SQS, and immediately returns `202 Accepted`. This keeps the API response time extremely short, preventing client-side timeouts.
+- **Lambda Worker**: handles heavy processing (calling Gmail API, calling OpenAI, writing to DynamoDB, pushing to WebSocket), and is triggered asynchronously from SQS, so it can run longer than the timeout limit of a standard API Gateway request without affecting the user experience.
+- **Lambda ws-whoami**: stems from a practical limitation of API Gateway WebSocket — the `$connect` route does not guarantee the ability to push messages back to the client immediately upon connection. Separating a distinct route for the app to proactively request the `connectionId` is an architectural solution true to its nature, not a temporary patch.
 
-**Working with Amazon S3**
+Splitting into 3 Lambdas also aligns with the IAM Least Privilege principle: each function is granted exactly the necessary permissions (Producer does not need permissions to call Gmail/OpenAI, and Worker does not need permissions to write to SQS Main aside from receiving triggers).
 
-- Create and manage S3 buckets.
-- Upload, download, list, and delete objects.
-- Remove S3 buckets using AWS CLI.
+#### 3. Entry Gateway Layer — Amazon API Gateway (REST + WebSocket)
 
-**Working with Amazon SNS**
+This is the service that surprised me the most when re-reading the docs, because most student projects only use either REST or WebSocket modes, whereas InboxIQ uses both for two different purposes:
 
-- Create SNS Topics.
-- Create Subscriptions.
-- Publish messages using AWS CLI.
+- **REST API**: receives the "Check Gmail" request — a classic request/response model, suitable because the client initiates the action proactively.
+- **WebSocket API**: used to push AI processing results back to the app in real-time, because AI processing takes anywhere from a few seconds to tens of seconds — using continuous REST polling would consume more resources and lead to a much chunkier user experience.
 
-**Working with IAM**
+The Lambda Authorizer authenticates JWTs at the REST layer, completely separating the authentication logic from the business logic within the Producer.
 
-- List IAM users, groups, and policies.
-- Inspect IAM resources through AWS CLI.
-- Understand permission management using command-line tools.
+#### 4. Asynchronous Workflow Layer — Amazon SQS and EventBridge
 
-**Working with Amazon VPC**
+Re-reading the SQS documentation helped me accurately articulate why the system is more stable with a queue in the middle: SQS acts as a "buffer," decoupling the incoming request rate (which can be sudden and massive) from the processing rate the Worker can handle (limited by OpenAI/Gmail rate limits). The **Partial Batch Response** mechanism is particularly important — when the Worker processes a batch of multiple messages, if only one message fails, SQS will retry only that specific message instead of the entire batch, avoiding unnecessary duplicate processing. After 3 failed retry attempts, the message automatically moves to the Dead-Letter Queue to prevent it from getting stuck in the main queue forever.
 
-- View VPC information.
-- List Subnets and Security Groups.
-- Inspect networking resources using AWS CLI.
+EventBridge Scheduler plays an optional role — periodically pushing messages (every 30 minutes) to the SQS Main queue exactly like a real user request, instead of triggering the Worker directly. This design ensures both flows (manual and automated) pass through the exact same single entry point, reducing the risk of having two different processing logic paths for the same task.
 
-**Working with Amazon EC2**
+#### 5. Storage Layer — Amazon DynamoDB (6 tables)
 
-- Launch an EC2 instance using AWS CLI.
-- Monitor EC2 instance status.
-- Manage EC2 resources through command-line operations.
+Reviewing the 6 tables made me clearly realize that the strategy of using **TTL (Time To Live)** to automatically clean up data was a significant effort-saving decision — there's no need to write a Lambda cron job to delete old data; DynamoDB automatically deletes items when they expire:
 
----
+| Table | Role | TTL |
+|---|---|---|
+| `inboxiq-users` | Basic user information | None |
+| `inboxiq-user-settings` | Personalization settings | None |
+| `inboxiq-gmail-connections` | Store Gmail OAuth token | None |
+| `inboxiq-email-summaries` | Email summaries | 30 days |
+| `inboxiq-processing-jobs` | Processing status (debug) | 7 days |
+| `inboxiq-ws-connections` | Mapping connectionId ↔ userId | 2 hours |
 
-#### Hands-on Practice
+An important point to note and be honest about during the defense: the `inboxiq-processing-jobs` table is currently only declared in the SAM template, and there is no code actually writing data to it yet — it must be clearly stated that this is a backup table for debugging in a later phase, not a completed feature.
 
-##### Module 1 — Introduction
+#### 6. Configuration Security Layer — Secrets Manager and SSM Parameter Store
 
-- Read the AWS CLI workshop overview.
-- Understand the architecture and workflow of AWS CLI.
-- Prepare the practice environment.
+Re-reading the documentation helped me clearly distinguish when to use which service: **Secrets Manager** is used for truly sensitive data that requires rotation (OpenAI API key), while **SSM Parameter Store** is suitable for less sensitive configurations or those not requiring auto-rotation, at a significantly lower cost. Caching secrets at the **global scope** of the Lambda (outside the handler function) is a crucial technical detail — it allows the secret to be fetched only once when the Lambda container starts up (cold start); subsequent invocations reusing the container will reuse the cached value, simultaneously reducing latency and the number of API calls to Secrets Manager (which charges per API call).
 
-##### Module 2 — Installation
+#### 7. Monitoring Layer — CloudWatch and X-Ray
 
-- Install AWS CLI.
-- Configure AWS credentials.
-- Verify the installation.
-
-##### Module 3 — Check Resources
-
-- View AWS resources using AWS CLI.
-- Practice commonly used CLI commands.
-- Become familiar with AWS CLI syntax.
-
-##### Module 4 — AWS CLI with Amazon S3
-
-- Create an S3 bucket.
-- Upload and download files.
-- Delete S3 objects and buckets.
-
-##### Module 5 — AWS CLI with Amazon SNS
-
-- Create an SNS Topic.
-- Create a Subscription.
-- Publish a test notification.
-
-##### Module 6 — AWS CLI with IAM
-
-- List IAM users.
-- Inspect IAM groups and policies.
-- Practice IAM management commands.
-
-##### Module 7 — AWS CLI with Amazon VPC
-
-- View VPC information.
-- List available Subnets.
-- Inspect Security Groups.
-
-##### Module 8 — Launch EC2 Instance
-
-- Launch an EC2 instance.
-- Verify the instance status.
-- Manage EC2 resources through AWS CLI.
-
-##### Module 9 — Cleanup Resources
-
-- Review all created AWS resources.
-- Remove unnecessary resources.
-- Verify that the cleanup process has been completed successfully.
+Since the system involves multiple Lambdas calling each other asynchronously via SQS and WebSockets, debugging a specific request (e.g., why an email wasn't summarized) cannot rely solely on the logs of a single function. CloudWatch Logs stores detailed logs for each Lambda, while X-Ray allows stitching trace segments together into a cohesive "journey" spanning Producer → SQS → Worker → DynamoDB/WebSocket, helping to pinpoint exactly which step was delayed or failed instead of just guessing.
 
 ---
 
-### Weekly Evaluation
+### Practical Experience: Cross-checking documentation with the real system
 
-- Understand the purpose and benefits of AWS CLI.
-- Successfully install and configure AWS CLI.
-- Practice managing Amazon S3 using command-line operations.
-- Use AWS CLI to interact with Amazon SNS.
-- Manage IAM and Amazon VPC resources through AWS CLI.
-- Launch and manage Amazon EC2 instances using AWS CLI.
-- Improve cloud administration skills by using command-line automation.
+**Module 1 — Checking the authentication layer**
+- Open the AWS Console and navigate to the Cognito User Pool used for InboxIQ.
+- Check the App Client, confirming that the client secret is not enabled (which is mandatory for mobile app public clients).
+- Cross-check the `InitiateAuth` flow in `AuthService` against the official Cognito documentation.
+
+**Module 2 — Checking the compute layer**
+- Open the Lambda Console and navigate to Producer, Worker, and ws-whoami one by one.
+- Check the IAM Role attached to each function, confirming adherence to the Least Privilege principle (each function only has permissions corresponding to its role).
+- Review the timeout and memory configurations for each function, matching them with their task characteristics (Producer has a short timeout, Worker has a longer timeout).
+
+**Module 3 — Checking the entry gateway layer**
+- Navigate to the API Gateway Console, check the REST route (`/check-gmail`) and WebSocket routes (`$connect`, `$disconnect`, `whoami`).
+- Verify that the Lambda Authorizer is correctly attached to the REST route that requires authentication.
+
+**Module 4 — Checking the workflow layer**
+- Go to the SQS Console, check the Main Queue and Dead-Letter Queue, and review the redrive policy (maxReceiveCount = 3).
+- Open the EventBridge Console, check that the Scheduler rule correctly points to the SQS Main Queue.
+
+**Module 5 — Checking the storage layer**
+- Open the DynamoDB Console, inspect each of the 6 tables, and verify if the TTL configuration is enabled on the correct field.
+- Run a test query on the `inboxiq-email-summaries` table to confirm that actual data is being written with the correct structure.
+
+**Module 6 — Checking the configuration security and monitoring layer**
+- Access Secrets Manager and verify that the OpenAI key is stored in the correct location and is not present in Lambda environment variables in plaintext.
+- Open CloudWatch Logs Insights and run a test query filtering logs by `connectionId` to confirm the ability to trace a specific request.
+- Open the X-Ray Service Map and verify visibility of the pathway between the Producer, SQS, and Worker.
 
 ---
 
-### Challenges
+### Week 9 Outcome Evaluation:
 
-- Becoming familiar with AWS CLI syntax and parameters.
-- Remembering service-specific commands.
-- Ensuring IAM permissions are correctly configured before executing commands.
-- Identifying AWS resource IDs when working through the command line.
-
----
-
-### Solutions
-
-- Practice AWS CLI commands regularly.
-- Refer to the AWS CLI Command Reference when necessary.
-- Verify IAM permissions before performing operations.
-- Maintain a personal cheat sheet of commonly used AWS CLI commands.
+- Built a complete "lookup map": service – role – reason for selection – risks, covering all 5 architectural layers of InboxIQ.
+- Solidified the technical reasoning behind each design decision, ready to answer "why use X" questions during the report defense.
+- Discovered and honestly documented an incomplete aspect: the `inboxiq-processing-jobs` table only exists at the infrastructure level and lacks data-writing logic.
+- Clarified the differences between Secrets Manager and SSM Parameter Store, applying the right service for the right type of data.
+- Reconfirmed that actual costs remain within the Free Tier + OpenAI API costs are as low as initially estimated.
 
 ---
 
-### Plan for Next Week
+### Difficulties encountered during the review process:
 
-- Learn the fundamentals of AWS CloudFormation.
-- Explore Infrastructure as Code (IaC).
-- Deploy AWS resources using CloudFormation templates.
-- Practice managing CloudFormation stacks.
-- Prepare screenshots and complete the weekly practical report.
+- Some old architectural notes (written last week) did not fully match the actual code — for example, incorrectly describing the flow of the App calling Cognito via API Gateway, when in reality, the App calls Cognito directly.
+- Distinguishing exactly when to use Secrets Manager vs. SSM Parameter Store was difficult just by reading docs without cross-checking the actual costs of each service.
+- Tracing an asynchronous request across multiple Lambdas using X-Ray required a clear understanding of trace segment/subsegment concepts, which was initially confusing as I was used to looking at the linear logs of a single function.
+- Realizing a DynamoDB table (`inboxiq-processing-jobs`) was declared but unused, which could easily cause misunderstandings if not carefully checked before writing the report.
+
+---
+
+### Solutions and Best Practices derived:
+
+- Always cross-check architectural documents with the Console/real code before including them in the final report, instead of fully trusting old notes.
+- Clearly state the actual status of each resource (in use / newly declared / backup) rather than assuming everything in the SAM template is actively running.
+- When comparing two similar services (Secrets Manager vs. SSM Parameter Store), create a concise comparison table based on criteria: cost, rotation capability, and appropriate sensitivity level.
+- Practice reading the X-Ray Service Map more frequently instead of relying solely on CloudWatch Logs, to get used to tracing asynchronous systems.
+- Maintain the habit of regularly checking the Billing Dashboard even if the system is on the Free Tier, to quickly detect any services incurring unexpected costs.
+
+---
+
+### Optimization directions for the next week:
+
+- Add actual logic to write data into the `inboxiq-processing-jobs` table, or consider removing it from the architecture if it is unnecessary for the MVP.
+- Learn more about AWS Cost Explorer to perform detailed cost analysis for each service in InboxIQ, serving the "estimated cost" section of the graduation report.
+- Consider adding `WidgetsBindingObserver` on the Flutter side to automatically reconnect WebSockets when the app resumes, instead of only reconnecting when the user taps a button.
+- Review the feasibility of upgrading the Lambda runtime from Node.js 20.x (which is EOL) to a newer version before submitting the final report.
+- Prepare slides and comparative cost data between "self-hosted" and "using AWS managed services" for each layer, to be used in the project defense presentation.

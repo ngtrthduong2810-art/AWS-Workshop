@@ -1,163 +1,125 @@
 ---
-title: "Week 7 Worklog"
-date: 2026-06-08
-weight: 7
+title: "Worklog Week 7"
+date: 2026-05-27
+weight: 8
 chapter: false
 pre: " <b> 1.7. </b> "
 ---
 
-### Week 7 Objectives:
+### Week 7 Objectives: Building the Core Security and Network Foundation
 
-- Learn the fundamentals of Amazon CloudWatch.
-- Understand the role of CloudWatch in monitoring AWS resources and applications.
-- Practice using CloudWatch Metrics to monitor system performance.
-- Learn Search Expressions, Math Expressions, and Dynamic Labels.
-- Explore CloudWatch Logs and CloudWatch Logs Insights.
-- Create Metric Filters from log data.
-- Configure CloudWatch Alarms for monitoring and notifications.
-- Build CloudWatch Dashboards for centralized monitoring.
-- Perform resource cleanup after completing the lab.
-- Improve AWS monitoring and troubleshooting skills.
+Entering the 7th week, we touch upon the two most critical pillars that determine the security and connectivity of any system in the Cloud: Identity Security and Isolated Network Architecture. The goal this week is to shift the mindset from merely "launching resources" to systematically "protecting and routing" them. Key objectives include:
+
+- **Mastering the Authorization System (IAM):** Learn the overview of AWS Identity and Access Management (IAM) to understand the role of IAM in identity management and authorization on AWS.
+- **Establishing Authentication Barricades:** Learn the authentication and account security mechanism with Multi-Factor Authentication (MFA) to protect the account from intrusion risks.
+- **Executing Granular Permissions:** Practice creating and managing IAM Users, Groups, Roles, and Policies, while learning security and authorization principles according to the Principle of Least Privilege.
+- **Architecting an Independent Virtual Network (VPC):** Learn the overview of Amazon Virtual Private Cloud (Amazon VPC) to understand the network architecture of Amazon VPC and its basic components that constitute a virtual data center.
+- **Routing and Network Subnetting:** Practice creating and configuring VPCs, Subnets, Route Tables, and Internet Gateways to control the inbound and outbound network traffic flow.
+- **Setting up Multi-layer Firewalls:** Practice configuring Security Groups and Network ACLs to protect servers at the network level, thereby improving security and network infrastructure management skills on AWS.
 
 ---
 
-### Tasks Completed This Week:
+### Tasks to be Implemented this Week:
 
-| Day | Tasks | Start Date | Completion Date | Reference |
+| Day | Deep-Dive Tasks | Start Date | End Date | Reference Sources |
 | --- | --- | --- | --- | --- |
-| Monday | - Read the Amazon CloudWatch workshop overview <br> - Learn the role of CloudWatch in AWS <br> - Prepare the lab environment | 08/06/2026 | 08/06/2026 | https://000008.awsstudygroup.com/1-introduction/ |
-| Tuesday | - Explore CloudWatch Metrics <br> - View and analyze Metrics <br> - Practice Search Expressions | 09/06/2026 | 09/06/2026 | https://000008.awsstudygroup.com/3-cloud-watch-metric/ |
-| Wednesday | - Practice Math Expressions <br> - Use Dynamic Labels <br> - Visualize metric data | 10/06/2026 | 10/06/2026 | https://000008.awsstudygroup.com/3-cloud-watch-metric/ |
-| Thursday | - Work with CloudWatch Logs <br> - Query logs using CloudWatch Logs Insights <br> - Create Metric Filters from Logs | 11/06/2026 | 11/06/2026 | https://000008.awsstudygroup.com/4-cloud-watch-logs/ |
-| Friday | - Create CloudWatch Alarms <br> - Configure SNS Notifications <br> - Test Alarm functionality | 12/06/2026 | 12/06/2026 | https://000008.awsstudygroup.com/5-cloud-watch-alarm/ |
-| Saturday | - Build CloudWatch Dashboards <br> - Add Metrics and Alarms to Dashboards <br> - Monitor data from a centralized view | 13/06/2026 | 13/06/2026 | https://000008.awsstudygroup.com/6-cloud-watch-dashboard/ |
-| Sunday | - Review created resources <br> - Perform resource cleanup <br> - Summarize knowledge gained during the week | 14/06/2026 | 14/06/2026 | https://000008.awsstudygroup.com/7-clean-up/ |
+| Mon | - **IAM Foundational Research:** Read the AWS IAM workshop overview. <br> - Deepen theory to understand the role of IAM in AWS. <br> - Begin to prepare the practical environment. | 15/06/2026 | 15/06/2026 | https://000009.awsstudygroup.com/ |
+| Tue | - **Identity and Authorization:** Learn about IAM Users, Groups, Roles, and Policies. <br> - Directly practice creating Users and Groups to organize virtual personnel. <br> - Grant permissions using Managed Policies to leverage standard AWS rule sets. | 16/06/2026 | 16/06/2026 | https://000009.awsstudygroup.com/ |
+| Wed | - **Fortifying Account Security:** Learn about Multi-Factor Authentication (MFA). <br> - Directly configure MFA for the account. <br> - Research AWS security principles to form a DevSecOps mindset. | 17/06/2026 | 17/06/2026 | https://000009.awsstudygroup.com/ |
+| Thu | - **Network Foundational Research:** Read the Amazon VPC workshop overview. <br> - Analyze theory and learn about VPC network architecture. <br> - Get familiar with network components such as IP, Subnet, Routing. | 18/06/2026 | 18/06/2026 | https://000010.awsstudygroup.com/ |
+| Fri | - **Virtual Network Creation:** Proceed to create a Virtual Private Cloud (VPC). <br> - Partition the network by configuring Public and Private Subnets. <br> - Set up an Internet Gateway and Route Table to pave the way for Internet communication. | 19/06/2026 | 19/06/2026 | https://000010.awsstudygroup.com/ |
+| Sat | - **Firewall Configuration:** Configure Security Groups and Network ACLs. <br> - Check the connection between resources using ping/ssh commands. <br> - Troubleshoot errors and complete the network configuration. | 20/06/2026 | 20/06/2026 | https://000010.awsstudygroup.com/ |
+| Sun | - **Evaluation and Cleanup:** Check the created resources. <br> - Execute Cleanup Resources to optimize lab costs. <br> - Write a report and summarize the knowledge learned during the week. | 21/06/2026 | 21/06/2026 | https://000009.awsstudygroup.com/ <br> https://000010.awsstudygroup.com/ |
 
 ---
 
-### Results Achieved in Week 7:
+### Week 7 Results: Deep-Dive Theoretical Summary
 
-#### Knowledge
+#### 1. Security Architecture (AWS IAM & Account Security)
+The first core knowledge I mastered was understanding IAM is the identity and access management service on AWS. I learned how to create and manage IAM Users, Groups, Roles, and Policies. My security mindset was upgraded by understanding the Principle of Least Privilege, ensuring every entity has exactly the right amount of permissions to work, no more, no less.
 
-**What is Amazon CloudWatch?**
+Additionally, I gained the ability to distinguish between AWS Managed Policies and Customer Managed Policies, and understood how to manage credentials and access rights. To protect the outermost boundary, I understand the role of Multi-Factor Authentication (MFA) and know how to configure MFA for an AWS account. Consequently, I firmly grasp and understand account security principles and credentials, specifically knowing how to protect the Root account and IAM Users.
 
-- Understood Amazon CloudWatch as a monitoring and observability service on AWS.
-- Learned how CloudWatch collects and analyzes Metrics and Logs.
-- Understood the importance of monitoring AWS resources and applications.
+#### 2. Network Infrastructure Architecture (Amazon VPC & Network Security)
+I understand the architecture and functions of Amazon VPC, which acts as a miniature data center in the cloud. Grasping the concept of CIDR Blocks, Subnets, and IP addresses helped me plan the network space logically. Furthermore, I understand the role of the Internet Gateway and Route Table in guiding data packets, enabling me to clearly distinguish between Public Subnets and Private Subnets.
 
-**CloudWatch Metrics**
-
-- Learned how to view and analyze Metrics.
-- Understood how to use Search Expressions for filtering data.
-- Used Math Expressions to calculate metric values.
-- Applied Dynamic Labels to improve data visualization.
-
-**CloudWatch Logs**
-
-- Learned how to collect and store Logs.
-- Queried Logs using CloudWatch Logs Insights.
-- Created Metric Filters from Log events.
-
-**CloudWatch Alarms**
-
-- Understood how CloudWatch Alarms work.
-- Configured thresholds for monitoring events.
-- Integrated SNS notifications for alerting.
-
-**CloudWatch Dashboards**
-
-- Built dashboards for system monitoring.
-- Displayed Metrics and Alarms on a single interface.
-- Monitored system performance in real time.
+Regarding the protection of network traffic, I understand the function of Security Groups (operating at the instance level) and understand the operating mechanism of Network ACLs (operating at the subnet level). I know how to configure Inbound and Outbound rules to strictly control data ingress and egress. Ultimately, I understand the principles of building secure network systems on AWS.
 
 ---
 
-#### Hands-on Practice
+### Hands-on Experience: Module Analysis
 
-##### Module 1 — Introduction
+**Module 1 — AWS IAM**
+- Log in and access the IAM service.
+- Create IAM Users and Groups, organizing users into function-based groups.
+- Assign permissions using Managed Policies instead of granting permissions directly to individuals.
+- Create an IAM Role to grant temporary permissions to services (e.g., EC2) to call APIs.
+- Enhance security by configuring Multi-Factor Authentication (MFA) via an Authenticator app.
+- Check access permissions to confirm the policies work correctly.
 
-- Accessed Amazon CloudWatch.
-- Reviewed CloudWatch architecture and core features.
-- Prepared the lab environment.
+**Module 2 — AWS Security**
+- Spend time to learn about security principles on AWS.
+- Set up and configure secure authentication methods.
+- Strictly apply the principle of least privilege in all policies.
+- Proactively check the account security configuration via the IAM Security Status.
 
-📸 *Evidence: Amazon CloudWatch Overview.*
+**Module 3 — Amazon VPC**
+- Read documentation to learn about Amazon VPC architecture.
+- Directly initialize a Virtual Private Cloud with a custom CIDR range.
+- Separate the architecture by creating Public and Private Subnets.
+- Open communication channels by configuring an Internet Gateway and setting up Route Tables.
 
-##### Module 2 — CloudWatch Metrics
+**Module 4 — Network Security**
+- Create and configure Security Groups to open ports 22 (SSH) and 80 (HTTP).
+- Add a network defense layer by setting up Network ACLs.
+- Launch virtual machines and check network connectivity.
+- Use diagnostic tools to verify the operation of network components.
 
-- Viewed AWS resource Metrics.
-- Used Search Expressions.
-- Practiced Math Expressions.
-- Configured Dynamic Labels.
-
-📸 *Evidence: CloudWatch Metrics.*
-
-##### Module 3 — CloudWatch Logs
-
-- Created and managed Log Groups.
-- Queried Logs using Logs Insights.
-- Created Metric Filters.
-
-📸 *Evidence: CloudWatch Logs.*
-
-##### Module 4 — CloudWatch Alarms
-
-- Created new Alarms.
-- Configured SNS Notifications.
-- Tested Alarm status changes.
-
-📸 *Evidence: CloudWatch Alarm.*
-
-##### Module 5 — CloudWatch Dashboards
-
-- Created a new Dashboard.
-- Added Metrics and Alarms.
-- Customized Dashboard widgets.
-
-📸 *Evidence: CloudWatch Dashboard.*
-
-##### Module 6 — Cleanup Resources
-
-- Reviewed created resources.
-- Removed unnecessary resources.
-- Verified successful cleanup.
-
-📸 *Evidence: Resource Cleanup.*
+**Module 5 — Cleanup Resources**
+- Ensure no hidden costs are generated by checking all created resources.
+- Delete resources that are no longer used in the correct order (delete Instances -> delete Subnets/IGW -> delete VPC).
+- Confirm the completion of the cleanup process.
 
 ---
 
-### Week 7 Evaluation:
+### Week 7 Results Evaluation:
 
-- Understood the role of Amazon CloudWatch within AWS.
-- Learned how to work with Metrics, Logs, and Alarms.
-- Successfully practiced Search Expressions and Math Expressions.
-- Created Metric Filters and CloudWatch Alarms.
-- Built a complete CloudWatch Dashboard.
-- Improved AWS monitoring and troubleshooting skills.
-
----
-
-### Challenges Encountered:
-
-- Understanding the relationship between Metrics, Logs, and Metric Filters.
-- Learning advanced features such as Search Expressions and Math Expressions.
-- Becoming familiar with CloudWatch Logs Insights.
-- Correctly configuring SNS Notifications.
+- Understood the role of AWS IAM in identity management and authorization.
+- Successfully created and managed IAM Users, Groups, Roles, and Policies.
+- Successfully configured Multi-Factor Authentication (MFA).
+- Understood AWS account security principles.
+- Successfully created and configured Amazon VPC.
+- Set up Public Subnets, Private Subnets, Route Tables, and Internet Gateways to form a closed network system.
+- Configured Security Groups and Network ACLs to protect the system.
+- Thereby, improved skills in managing security and network infrastructure on the AWS platform.
 
 ---
 
-### Solutions:
+### Difficulties and Technical Barriers:
 
-- Carefully followed the workshop instructions.
-- Practiced repeatedly with Metrics and Logs.
-- Verified SNS configuration before testing Alarms.
-- Referenced examples from AWS Documentation.
+- **Identity Concepts:** Initially, it was hard to distinguish between IAM Roles and IAM Users in some use cases.
+- **Authorization Mechanisms:** Due to the abundance of policy types, I was initially confused between Managed Policies and Inline Policies.
+- **Multi-layer Firewalls:** Distinguishing between Security Groups and Network ACLs was still unclear (one is stateful, the other is stateless).
+- **Network Planning:** It took time to understand how Route Tables and CIDR Blocks work because it requires complex subnet mask calculations.
+- **Troubleshooting:** Encountered some connection errors due to incorrect network configurations (forgot to attach the Route Table to the Subnet or accidentally blocked ports in NACL).
 
 ---
 
-### Next Week Plan:
+### Solutions and Remediation:
 
-- Learn AWS Identity and Access Management (IAM).
-- Practice creating Users, Groups, and Policies.
-- Explore Multi-Factor Authentication (MFA).
-- Study AWS account security best practices.
-- Prepare screenshots and documentation for the next weekly report.
+- **Supplement Theory:** Read the AWS Study Group materials and AWS Documentation carefully to systematize knowledge.
+- **Skill Practice:** Practice creating Users, Groups, Roles, and Policies multiple times to get used to the interface and authorization logic.
+- **Visualization:** Draw VPC architecture diagrams to easily visualize connection flows, ensuring no gateways are missed.
+- **Inspection Checklist:** Before testing the network, thoroughly check Route Tables, Security Groups, and Network ACLs before testing.
+- **Standard Compliance:** Resolutely apply the Least Privilege principle during the authorization process, even if granting full (Admin) rights seems like an easier way to bypass initial errors.
+
+---
+
+### Optimal Directions for Next Week:
+
+After building the network and security infrastructure via the Console interface, the next step is to move towards automation and professional operations using the Command Line.
+- Learn about the AWS Command Line Interface (AWS CLI).
+- Proceed to install and configure AWS CLI on a personal computer.
+- Upgrade skills by practicing managing AWS resources using the command line.
+- Integrate and work with Amazon S3, SNS, IAM, VPC, and EC2 via AWS CLI.
+- Finally, always prepare evidence images and complete the practical report for the following week.

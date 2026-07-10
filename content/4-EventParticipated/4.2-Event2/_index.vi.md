@@ -6,14 +6,14 @@ chapter: false
 pre: " <b> 4.2. </b> "
 ---
 
-# Bài thu hoạch “FCAJ Community Day - May 2026 Edition”
+# Bài thu hoạch "FCAJ Community Day - May 2026 Edition"
 
 ### Mục Đích Của Sự Kiện
 
-- Cập nhật xu hướng vĩ mô và định vị thị trường CNTT Việt Nam trong thời đại AI phát triển thần tốc.
-- Chia sẻ phương pháp thiết kế cấu trúc Prompt tối ưu hóa ngữ cảnh (Context Optimization) và cách kiểm soát tính ngẫu nhiên (Randomness) của LLM.
-- Giới thiệu giải pháp trợ lý phân tích dữ liệu doanh nghiệp thông qua Amazon Q Business (QuickSight/Q Desktop) kết hợp MCP server.
-- Chia sẻ kinh nghiệm thực chiến từ cuộc thi Hackathon và cách thiết kế hệ thống Multi-Agent chuẩn Enterprise áp dụng trong tài chính - ngân hàng.
+- Mang đến bức tranh vĩ mô mới nhất về thị trường CNTT Việt Nam giữa bối cảnh AI đang phát triển với tốc độ chóng mặt.
+- Đào sâu phương pháp tổ chức cấu trúc Prompt để tối ưu hóa ngữ cảnh (Context Optimization) và làm chủ tính ngẫu nhiên (Randomness) vốn có của LLM.
+- Trình diễn giải pháp trợ lý phân tích dữ liệu doanh nghiệp dựa trên Amazon Q Business (QuickSight/Q Desktop) kết hợp với MCP server.
+- Kể lại hành trình thực chiến tại cuộc thi Hackathon và cách xây dựng hệ thống Multi-Agent đạt chuẩn Enterprise cho lĩnh vực tài chính - ngân hàng.
 
 ### Danh Sách Diễn Giả
 
@@ -27,84 +27,97 @@ pre: " <b> 4.2. </b> "
 ### Nội Dung Nổi Bật
 
 #### 1. Định vị thị trường CNTT và Cơ hội nghề nghiệp mới trong thời đại AI
-- **Nghịch lý "Đèn LED" và sự bùng nổ phần mềm**: Khi AI giúp việc viết mã trở nên rẻ hơn (tương tự như bóng đèn LED giúp chi phí chiếu sáng giảm đi 1/10), nhu cầu phát triển phần mềm trên thế giới sẽ không giảm đi mà tăng lên một cách khủng khiếp. Ngay cả những người không thuộc ngành IT (luật sư, bác sĩ) hiện nay cũng có thể thắng các giải Hackathon lớn của Anthropic.
-- **Luồng gió công việc mới - Fix Code rác & Platform Engineering**: Do AI sinh code dễ dàng, thị trường sẽ xuất hiện một lượng lớn các sản phẩm MVP/đồ án bị lỗi hoặc không thể vận hành ổn định. Từ đó, nhu cầu tuyển dụng các kỹ sư đi "fix code rác", cải tiến hệ thống và các kỹ sư xây dựng nền tảng (Platform Engineering) để tự động hóa hạ tầng (IDP - Internal Developer Platform) cho các tổ chức lớn sẽ tăng rất mạnh trong dài hạn.
-- **Thực tế tuyển dụng tại Việt Nam**: Các ông lớn trên thế giới vẫn đang liên tục mở các Technical Hub tại Việt Nam để tận dụng nhân tài. Do đó, các kỹ sư Việt cần tập trung nâng cao khả năng tự tin, trình độ tiếng Anh, kiến trúc nghiệp vụ thực tế (Domain knowledge) và sản phẩm thực tế (Production-ready) thay vì chỉ dừng lại ở các bài tập demo nhỏ lẻ.
+
+- **Nghịch lý "Đèn LED" và sự bùng nổ phần mềm**: Lịch sử bóng đèn LED cho một bài học bất ngờ — khi chi phí chiếu sáng giảm còn 1/10, người ta không thắp sáng ít đi mà thắp sáng nhiều gấp bội. Phần mềm cũng vậy: AI khiến việc viết mã trở nên rẻ chưa từng có, và hệ quả là nhu cầu phát triển phần mềm toàn cầu sẽ không co lại mà bùng nổ dữ dội. Bằng chứng sống động: ngay cả những người ngoài ngành IT (luật sư, bác sĩ) giờ đây đã có thể giành giải tại các Hackathon lớn của Anthropic.
+- **Luồng gió công việc mới - Fix Code rác & Platform Engineering**: Khi ai cũng sinh được code bằng AI, thị trường sẽ ngập trong các sản phẩm MVP/đồ án đầy lỗi hoặc chạy chập chờn không thể vận hành ổn định. Chính điều đó mở ra hai luồng nhu cầu tuyển dụng tăng mạnh trong dài hạn: kỹ sư chuyên "dọn dẹp code rác" và cải tiến hệ thống, cùng đội ngũ Platform Engineering xây dựng nền tảng tự động hóa hạ tầng (IDP - Internal Developer Platform) cho các tổ chức quy mô lớn.
+- **Thực tế tuyển dụng tại Việt Nam**: Các tập đoàn công nghệ toàn cầu vẫn đều đặn mở Technical Hub tại Việt Nam để săn đón nhân tài bản địa. Bài toán đặt ra cho kỹ sư Việt: đầu tư vào sự tự tin, năng lực tiếng Anh, hiểu biết nghiệp vụ thực tế (Domain knowledge) và khả năng làm ra sản phẩm chạy được thật (Production-ready) — thay vì mãi dừng lại ở những bài demo nhỏ lẻ.
 
 #### 2. Kỹ thuật tối ưu hóa ngữ cảnh và Kiểm soát tính ngẫu nhiên (Randomness) của LLM
-- **Lỗi đổi Context liên tục**: Sai lầm phổ biến của người dùng là nhồi nhét quá nhiều chủ đề khác nhau vào cùng một phiên chat (hỏi từ đi du lịch, sửa CV cho đến code phần mềm), điều này làm biến đổi Context Window liên tục và khiến AI nhanh chóng bị "ảo tưởng" (hallucination).
-- **Cơ chế Temperature và điểm số Logit**: Bản chất của LLM là một "probabilistic engine" hoạt động bằng cách xếp hạng điểm số (logit) cho các từ vựng tiếp theo. Khi thiết lập `Temperature = 0`, AI sẽ chuyển từ cơ chế tính toán Softmax sang Argmax (luôn luôn chọn từ có điểm số cao nhất) để tạo ra câu trả lời mang tính định tính và nhất quán (consistent).
-- **Sự khác biệt giữa API Cloud và Local Host**: Ngay cả khi đặt `Temperature = 0`, các API của OpenAI hay Amazon Bedrock vẫn cho ra các kết quả khác nhau giữa các lượt chạy. Nguyên nhân cốt lõi là do GPU tính toán song song làm lệch số thập phân khi làm tròn, và do các nhà cung cấp áp dụng kỹ thuật tối ưu hóa thương mại (Inference Optimization) - gộp nhiều câu Prompts ngắn của các user khác nhau thành một lượt xử lý để giảm cost. Nếu muốn kiểm soát tuyệt đối 100% độ nhất quán, kỹ sư phải tự host Model trên hạ tầng Local.
+
+- **Lỗi đổi Context liên tục**: Thói quen tai hại mà rất nhiều người mắc phải: dồn đủ thứ chủ đề vào chung một phiên chat — từ hỏi lịch du lịch, nhờ sửa CV cho đến viết code. Context Window vì thế bị xáo trộn liên tục, và AI trượt vào trạng thái "ảo tưởng" (hallucination) nhanh hơn hẳn.
+- **Cơ chế Temperature và điểm số Logit**: Về bản chất, LLM là một "probabilistic engine" — nó chấm điểm (logit) cho từng từ ứng viên có thể xuất hiện tiếp theo rồi lựa chọn dựa trên xác suất. Khi kéo `Temperature = 0`, cơ chế chọn từ chuyển từ Softmax sang Argmax — luôn luôn lấy từ có điểm cao nhất — nhờ đó câu trả lời trở nên định tính và nhất quán (consistent) qua các lần chạy.
+- **Sự khác biệt giữa API Cloud và Local Host**: Một sự thật ít người biết: kể cả khi đã đặt `Temperature = 0`, gọi API của OpenAI hay Amazon Bedrock nhiều lần vẫn có thể nhận về kết quả khác nhau. Hai thủ phạm đứng sau: phép tính song song trên GPU gây lệch số thập phân khi làm tròn, và các kỹ thuật tối ưu thương mại (Inference Optimization) của nhà cung cấp — gộp nhiều prompt ngắn của nhiều người dùng vào cùng một lượt xử lý để tiết kiệm chi phí. Muốn kiểm soát độ nhất quán tuyệt đối 100%, con đường duy nhất là tự host model trên hạ tầng Local.
 
 #### 3. Hệ sinh thái Amazon Q Business & Trợ lý phân tích dữ liệu thế hệ mới
-- **Xây dựng cánh tay nối dài bằng MCP (Model Context Protocol)**: Khái niệm AI Agent ngày nay không chỉ dừng lại ở việc trả lời văn bản, mà phải có khả năng hành động (Action). Bằng cách cắm các cổng MCP, AI Agent có thể tương tác trực tiếp, đặt lịch họp, gửi mail tự động hoặc kết nối trực tiếp với hệ thống Jira, Confluence, Microsoft Cloud, Google Suite.
-- **Trợ lý phân tích dữ liệu tự động**: Người dùng doanh nghiệp không có kiến thức về BI (Business Intelligence) chỉ cần đưa file dữ liệu Excel thô vào Amazon Q Business (hoặc QuickSight Desktop), hệ thống sẽ tự động phân tích và trực quan hóa thành một Dashboard hoàn chỉnh cực kỳ nhanh chóng.
+
+- **Xây dựng cánh tay nối dài bằng MCP (Model Context Protocol)**: AI Agent thời nay không thể chỉ dừng ở việc trả lời bằng văn bản — nó phải hành động được (Action). Thông qua các cổng MCP, Agent có thể trực tiếp đặt lịch họp, tự động gửi mail, hay kết nối thẳng vào hệ thống Jira, Confluence, Microsoft Cloud, Google Suite của doanh nghiệp.
+- **Trợ lý phân tích dữ liệu tự động**: Với Amazon Q Business (hoặc QuickSight Desktop), một nhân viên doanh nghiệp không hề biết gì về BI (Business Intelligence) chỉ cần thả file Excel dữ liệu thô vào — hệ thống lập tức tự phân tích và dựng lên một Dashboard trực quan hoàn chỉnh trong thời gian ngắn đáng kinh ngạc.
 
 #### 4. Case Study: Dự án UTMorpho thắng giải Hackathon trong 36 giờ liên tục
-- **Ý tưởng giải quyết nỗi đau thực tế (Pain point)**: Thay vì chọn những ý tưởng vĩ mô, nhóm tập trung giải quyết việc tiết kiệm thời gian và Token cho các lập trình viên khi thiết kế giao diện (UI). Thông thường mỗi lần muốn chỉnh sửa một chi tiết nhỏ trên giao diện do AI tạo ra, ta phải yêu cầu AI gen lại từ đầu.
-- **Kiến trúc Multi-Agent của UTMorpho**: Dự án sử dụng mô hình Serverless trên AWS phối hợp 3 con Agent chuyên biệt:
-  - *Agent 1 (Vision Agent)*: Đọc hình ảnh/bản vẽ phác thảo từ camera của người dùng và bóc tách thành file cấu trúc JSON.
-  - *Agent 2 (Layout Agent)*: Tiếp nhận file JSON và tiến hành tính toán cấu trúc CSS, bố cục layout và kích thước.
-  - *Agent 3 (Design Agent)*: Nhận thông tin từ Agent 2 và biên dịch thành mã nguồn HTML/CSS hoàn chỉnh theo thời gian thực (Streaming UI).
-- **Tính năng nổi bật**: Tích hợp một trình Editor trực quan cho phép lập trình viên trực tiếp kéo thả, thay đổi vị trí component ngay trên giao diện được hiển thị và xuất link HTML public để đồng nghiệp cùng review.
+
+- **Ý tưởng giải quyết nỗi đau thực tế (Pain point)**: Nhóm không chạy theo những ý tưởng vĩ mô hào nhoáng mà nhắm thẳng vào một nỗi đau rất cụ thể của lập trình viên: mỗi khi muốn sửa một chi tiết nhỏ trên giao diện do AI sinh ra, họ buộc phải yêu cầu AI gen lại toàn bộ từ đầu — vừa mất thời gian vừa đốt Token.
+- **Kiến trúc Multi-Agent của UTMorpho**: Dự án chạy trên mô hình Serverless của AWS với 3 Agent chuyên biệt phối hợp nhịp nhàng:
+  - *Agent 1 (Vision Agent)*: Tiếp nhận hình ảnh/bản phác thảo từ camera người dùng, bóc tách nội dung thành file cấu trúc JSON.
+  - *Agent 2 (Layout Agent)*: Đọc file JSON và tính toán cấu trúc CSS, bố cục layout cùng kích thước các thành phần.
+  - *Agent 3 (Design Agent)*: Nhận đầu ra của Agent 2, biên dịch thành mã HTML/CSS hoàn chỉnh và hiển thị theo thời gian thực (Streaming UI).
+- **Tính năng nổi bật**: Trang bị một trình Editor trực quan cho phép lập trình viên kéo thả, di chuyển vị trí component ngay trên giao diện đang hiển thị, đồng thời xuất link HTML public để chia sẻ cho đồng nghiệp cùng review.
 
 #### 5. Kiến trúc Multi-Agent chuẩn Enterprise cho nghiệp vụ Ngân hàng (VPBank Practice)
-- **Bài toán Nghiệp vụ - Đánh giá tín dụng cho Startup**: Hệ thống phê duyệt khoản vay truyền thống đòi hỏi doanh nghiệp phải cung cấp báo cáo tài chính 3 năm liên tiếp và tài sản thế chấp vật lý. Điều này khiến các Startup (vốn chỉ có tài sản trí tuệ và mới vận hành từ 3-6 tháng) không thể tiếp cận nguồn vốn. Giải pháp là thiết kế hệ thống Multi-Agent để phân tích đa chiều các dữ liệu phi truyền thống.
+
+- **Bài toán Nghiệp vụ - Đánh giá tín dụng cho Startup**: Quy trình duyệt vay truyền thống đòi hỏi báo cáo tài chính 3 năm liên tiếp cùng tài sản thế chấp vật lý — một cánh cửa gần như đóng sập với các Startup vốn chỉ sở hữu tài sản trí tuệ và mới hoạt động được 3-6 tháng. Lời giải được đề xuất: một hệ thống Multi-Agent phân tích đa chiều dựa trên các nguồn dữ liệu phi truyền thống.
 - **Thiết kế Hệ thống Multi-Agent chuyên biệt**:
-  - *Credit Committee Agent (Manager/Orchestrator)*: Đóng vai trò chủ tọa hội đồng, phân phối nhiệm vụ và tổng hợp báo cáo cuối cùng.
-  - *Financial Analyst Agent*: Tập trung xử lý sâu về báo cáo tài chính ngắn hạn và dòng tiền doanh nghiệp.
-  - *Market Research Agent*: Phân tích thị phần (Tam, Sam, Som), đối thủ cạnh tranh và xu hướng thị trường.
-  - *Team Evaluator Agent*: Thu thập dữ liệu, đánh giá năng lực của các Founders dựa trên hồ sơ công nghệ, hoạt động trên Twitter(X), LinkedIn, Facebook.
-  - *Risk Assessor Agent*: Đảm nhận vai trò quan trọng nhất - kiểm soát ranh giới hoạt động của các con Agent khác, lọc dữ liệu đầu ra và đầu vào (Input/Output filtering) để chống rò rỉ thông tin bảo mật và ngăn chặn tấn công Prompt Injection theo tiêu chuẩn nghiêm ngặt của Ngân hàng Nhà nước.
+  - *Credit Committee Agent (Manager/Orchestrator)*: Giữ ghế chủ tọa hội đồng — phân phối nhiệm vụ cho các Agent thành viên và tổng hợp bản báo cáo cuối cùng.
+  - *Financial Analyst Agent*: Chuyên trách phân tích sâu báo cáo tài chính ngắn hạn và dòng tiền của doanh nghiệp.
+  - *Market Research Agent*: Đánh giá thị phần (Tam, Sam, Som), đối thủ cạnh tranh và các xu hướng thị trường liên quan.
+  - *Team Evaluator Agent*: Thu thập dữ liệu và thẩm định năng lực đội ngũ Founders qua hồ sơ công nghệ cùng dấu chân trên Twitter(X), LinkedIn, Facebook.
+  - *Risk Assessor Agent*: Gánh vai trò then chốt nhất — giám sát ranh giới hoạt động của mọi Agent còn lại, lọc dữ liệu hai chiều (Input/Output filtering) nhằm chống rò rỉ thông tin mật và chặn đứng các đòn tấn công Prompt Injection, tuân thủ tiêu chuẩn nghiêm ngặt của Ngân hàng Nhà nước.
 
 ### Những Gì Học Được
 
 #### Tư Duy Thiết Kế
-- **Tư duy hướng nghiệp vụ thực tế (Business-Driven Mindset)**: Khi thiết kế bất kỳ một giải pháp công nghệ nào trong doanh nghiệp lớn, phải luôn trả lời được 4 câu hỏi cốt lõi: Ai xài? Xài cái gì? Tại sao người ta phải xài? Khi nào là lúc thích hợp để triển khai?
-- **Tư duy phân tách trách nhiệm (Separation of Concerns)**: Mỗi con AI Agent chỉ nên đảm nhận đúng một vai trò chuyên môn duy nhất dựa trên Backstory và System Prompt rõ ràng để tránh quá tải Context Window và tối ưu hóa phân phối sự chú ý (Attention) của mô hình.
+
+- **Tư duy hướng nghiệp vụ thực tế (Business-Driven Mindset)**: Mọi giải pháp công nghệ trong doanh nghiệp lớn đều phải vượt qua bài kiểm tra 4 câu hỏi trước khi bắt tay thiết kế: Ai xài? Xài cái gì? Tại sao người ta phải xài? Khi nào là thời điểm thích hợp để triển khai?
+- **Tư duy phân tách trách nhiệm (Separation of Concerns)**: Mỗi AI Agent chỉ nên gánh đúng một vai trò chuyên môn, được định hình rõ ràng qua Backstory và System Prompt riêng — vừa tránh làm quá tải Context Window, vừa giúp mô hình phân phối sự chú ý (Attention) hiệu quả nhất.
 
 #### Kiến Trúc Kỹ Thuật
-- Nắm vững **Cơ chế kiểm soát tính định tính (Determinism)** của mô hình LLM thông qua việc cấu hình các tham số `Temperature`, `Top P`, và `Repeat Penalty` tùy thuộc vào định dạng đầu ra (Văn bản sáng tạo hay mã JSON/Code).
-- Hiểu sâu về kiến trúc hạ tầng mạng nội bộ **AWS Backbone & PoP (Points of Presence)** của CloudFront: Cách CDN gộp các request đa tầng để bảo vệ Origin Server khỏi các đợt tấn công volumetric DDoS hoặc Syn Flush bằng tính năng Syn Proxy.
-- Hiểu được tầm quan trọng của việc quản lý hạ tầng bằng mã nguồn thông qua **Terraform (Infrastructure as Code)** để quản lý các phiên bản tài nguyên và khả năng tái lập (Reproduce) hệ thống trên nhiều Region khác nhau của AWS.
+
+- Làm chủ **Cơ chế kiểm soát tính định tính (Determinism)** của LLM thông qua bộ tham số `Temperature`, `Top P`, và `Repeat Penalty` — điều chỉnh linh hoạt tùy theo đầu ra cần sáng tạo (văn bản) hay cần chính xác tuyệt đối (JSON/Code).
+- Hiểu sâu về hạ tầng mạng nội bộ **AWS Backbone & PoP (Points of Presence)** đứng sau CloudFront: cách CDN gộp request theo nhiều tầng để che chắn Origin Server trước các đợt tấn công volumetric DDoS hay Syn Flush nhờ tính năng Syn Proxy.
+- Nhận thức rõ giá trị của quản lý hạ tầng bằng mã nguồn với **Terraform (Infrastructure as Code)**: kiểm soát phiên bản tài nguyên và tái lập (Reproduce) toàn bộ hệ thống trên nhiều Region khác nhau của AWS.
 
 #### Chiến Lược Hiện Đại Hóa
-- **Chiến lược đo lường ROI (Return on Investment)**: Một dự án AI muốn được ban lãnh đạo Enterprise phê duyệt cần phải chứng minh bằng những con số cụ thể (Numbers speak louder than words), ví dụ như tính toán được chu kỳ hoàn vốn (Payback period) và số tiền tiết kiệm được cho doanh nghiệp hàng năm thay vì chỉ đưa ra bản demo công nghệ.
-- **Chiến lược kiểm thử liên tục (Testing, Testing, Testing)**: Để một hệ thống AI có thể Production-ready trong môi trường khắt khe, các kỹ sư cần phải thực hiện các bài test động, test sâu ở tầng downstream services để đảm bảo hệ thống có thể handle được mọi trường hợp khi AI sinh lỗi format.
+
+- **Chiến lược đo lường ROI (Return on Investment)**: Muốn ban lãnh đạo Enterprise gật đầu với một dự án AI, phải nói chuyện bằng những con số cụ thể (Numbers speak louder than words) — chu kỳ hoàn vốn (Payback period) là bao lâu, mỗi năm tiết kiệm cho doanh nghiệp bao nhiêu tiền — chứ không phải chỉ trình một bản demo công nghệ đẹp mắt.
+- **Chiến lược kiểm thử liên tục (Testing, Testing, Testing)**: Con đường đưa một hệ thống AI đạt chuẩn Production trong môi trường khắt khe là các bài test động, test sâu xuống tận tầng downstream services — đảm bảo hệ thống đứng vững trong mọi kịch bản AI sinh sai format.
 
 ### Ứng Dụng Vào Công Việc
 
-- **Cấu hình tham số Temperature mindful hơn**: Đặt `Temperature = 0` hoặc `0.1` khi cần AI sinh các định dạng cấu trúc chuẩn như JSON/HTML cho dự án hiện tại nhằm giảm tỷ lệ sai lệch cấu trúc dấu ngoặc, dấu phẩy.
-- **Áp dụng kiến trúc Multi-Agent phòng ngừa lỗi**: Thay vì bắt một khung chat xử lý toàn bộ quy trình, tôi sẽ chia nhỏ bài toán ra thành các sub-agents hoạt động độc lập (theo mô hình dự án UTMorpho) và dùng một Agent quản lý để kiểm tra chéo kết quả.
-- **Nâng cao tính bảo mật cho ứng dụng**: Triển khai các lớp lọc dữ liệu nhạy cảm (Input/Output filtering) bằng AWS Lambda trước khi truyền dữ liệu qua các mô hình ngôn ngữ lớn nhằm tuân thủ quy định bảo mật của tổ chức.
-- **Chuyển đổi sang quản lý hạ tầng bằng Terraform**: Bắt đầu viết mã nguồn Terraform cho các dịch vụ AWS CloudFront, S3 của hệ thống để thay thế việc cấu hình thủ công (Click engineering) trên AWS Console, giúp dễ dàng quản lý và rotate các API Keys/Access Keys định kỳ.
-- **Tập trung vào kiến thức Backend nền tảng**: Rèn luyện tư duy kỹ nghệ phần mềm cốt lõi (Software Engineering), master cấu trúc dữ liệu và API contract vì AI chỉ là công cụ hỗ trợ xây dựng sản phẩm nhanh hơn, tư duy hệ thống của lập trình viên vẫn là yếu tố quyết định.
+- **Cấu hình tham số Temperature mindful hơn**: Chủ động đặt `Temperature = 0` hoặc `0.1` mỗi khi cần AI sinh định dạng có cấu trúc chặt như JSON/HTML trong dự án hiện tại — giảm hẳn tỷ lệ lỗi lệch dấu ngoặc, dấu phẩy.
+- **Áp dụng kiến trúc Multi-Agent phòng ngừa lỗi**: Không dồn cả quy trình vào một khung chat duy nhất nữa — bài toán sẽ được chẻ thành các sub-agents hoạt động độc lập (học theo mô hình UTMorpho), kèm một Agent quản lý đứng trên kiểm tra chéo kết quả.
+- **Nâng cao tính bảo mật cho ứng dụng**: Dựng các lớp lọc dữ liệu nhạy cảm (Input/Output filtering) bằng AWS Lambda ngay trước cửa ngõ truyền dữ liệu vào các mô hình ngôn ngữ lớn, đáp ứng quy định bảo mật nội bộ của tổ chức.
+- **Chuyển đổi sang quản lý hạ tầng bằng Terraform**: Khởi động việc viết Terraform cho các dịch vụ CloudFront, S3 của hệ thống, dần thay thế lối cấu hình thủ công (Click engineering) trên Console — vừa dễ quản lý phiên bản, vừa thuận tiện rotate API Keys/Access Keys theo định kỳ.
+- **Tập trung vào kiến thức Backend nền tảng**: Kiên trì rèn tư duy kỹ nghệ phần mềm cốt lõi (Software Engineering), nắm chắc cấu trúc dữ liệu và API contract — bởi AI chỉ là công cụ giúp xây sản phẩm nhanh hơn, còn tư duy hệ thống của người kỹ sư mới là yếu tố quyết định sau cùng.
 
 ### Trải nghiệm trong event
 
-Được hòa mình vào workshop **“FCAJ Community Day”** lần này là một trải nghiệm bùng nổ về mặt tư duy. Không còn gói gọn trong các kiến thức học thuật sách vở, sự kiện đã mang đến những câu chuyện "xương máu" từ môi trường doanh nghiệp thực tế. Một số trải nghiệm nổi bật:
+Tham dự workshop **"FCAJ Community Day"** lần này với tôi là một cú hích lớn về mặt tư duy. Sự kiện bước hẳn ra khỏi khuôn khổ kiến thức sách vở để mang đến những câu chuyện "xương máu" đúc rút từ môi trường doanh nghiệp thật. Một vài dấu ấn khó quên:
 
 #### Học hỏi từ các diễn giả có chuyên môn cao
-- Các diễn giả từ AWS Việt Nam, VPBank, VIB và Gothamic X mang lại những bài học vô giá về sự khác biệt giữa làm dự án cá nhân ở nhà và làm sản phẩm thật cho hàng triệu khách hàng trong ngành Ngân hàng (nơi bảo mật thông tin và tính tuân thủ luôn được đặt lên hàng đầu).
+
+- Các diễn giả đến từ AWS Việt Nam, VPBank, VIB và Gothamic X đã cho tôi thấy khoảng cách thật sự giữa việc làm dự án cá nhân ở nhà và việc vận hành sản phẩm phục vụ hàng triệu khách hàng trong ngành Ngân hàng — nơi bảo mật thông tin và tính tuân thủ luôn là ưu tiên tối thượng.
 
 #### Trải nghiệm kỹ thuật thực tế
-- Được khai phá về mặt tư duy khi chứng kiến cách các AI Agent phối hợp theo mô hình Multi-Agent, tự động phân tích thị trường toàn diện từ chỉ số tài chính, dữ liệu mạng xã hội cho đến chân dung nhà sáng lập doanh nghiệp.
-- Hiểu được thực tế khốc liệt đằng sau các thuật toán tối ưu chi phí của các nhà cung cấp Cloud lớn và lý do tại sao AI vẫn có sự ngẫu nhiên dù cấu hình nhiệt độ bằng không.
+
+- Thực sự "mở não" khi quan sát các AI Agent phối hợp theo mô hình Multi-Agent: tự động phân tích thị trường một cách toàn diện, từ chỉ số tài chính, dữ liệu mạng xã hội cho đến chân dung từng nhà sáng lập doanh nghiệp.
+- Vỡ ra sự thật khốc liệt phía sau các thuật toán tối ưu chi phí của những nhà cung cấp Cloud lớn — và hiểu vì sao AI vẫn cho kết quả ngẫu nhiên ngay cả khi nhiệt độ đã đặt về không.
 
 #### Ứng dụng công cụ hiện đại
-- Trực quan hóa dữ liệu chỉ bằng một vài câu lệnh tiếng Việt đơn giản qua bản demo của Amazon Q Business và QuickSight. Cách ứng dụng giao thức MCP (Model Context Protocol) mở ra một kỷ nguyên mới giúp các kỹ sư có thể tạo ra những "cánh tay nối dài" thực sự cho trí tuệ nhân tạo.
+
+- Chứng kiến dữ liệu được trực quan hóa chỉ bằng vài câu lệnh tiếng Việt giản đơn qua bản demo Amazon Q Business và QuickSight. Giao thức MCP (Model Context Protocol) thực sự mở ra một kỷ nguyên mới — nơi kỹ sư có thể chế tạo những "cánh tay nối dài" đúng nghĩa cho trí tuệ nhân tạo.
 
 #### Kết nối và trao đổi
-- Ban tổ chức đã tạo điều kiện kết nối rất tuyệt vời giữa các tầng (bao gồm cả các bạn ở tầng 36 thông qua hệ thống Lucky Draw). Sự kiện thúc đẩy tinh thần chủ động bắt chuyện, tìm kiếm cộng sự và truyền cảm hứng làm việc nhóm cực kỳ mạnh mẽ cho các bạn sinh viên trẻ.
+
+- Ban tổ chức đã kết nối rất khéo léo người tham dự giữa các tầng (kể cả các bạn ở tầng 36 thông qua hệ thống Lucky Draw). Sự kiện thắp lên tinh thần chủ động bắt chuyện, tìm kiếm cộng sự và truyền một nguồn cảm hứng làm việc nhóm mạnh mẽ cho các bạn sinh viên trẻ.
 
 #### Bài học rút ra
-- AI đang làm cho việc phát triển phần mềm ngày một rẻ hơn, nhu cầu thị trường sẽ bùng nổ và mở ra cơ hội khổng lồ cho những ai có tư duy hệ thống tốt để đi làm các bài toán lớn.
-- Đừng bao giờ lạm dụng AI theo kiểu sao chép nguyên văn (Ctrl+C & Ctrl+V) mà không hiểu bản chất mã nguồn, vì hậu quả trên môi trường Production của doanh nghiệp là vô cùng lớn.
-- Xây dựng một hệ thống công nghệ, điều quan trọng nhất không phải là nó chạy được, mà là nó phải chạy một cách **an toàn**, **đáng tin cậy** và thực sự **mang lại giá trị cho người dùng**.
+
+- AI đang kéo chi phí phát triển phần mềm xuống thấp chưa từng thấy — nhu cầu thị trường vì thế sẽ bùng nổ, và cơ hội khổng lồ sẽ thuộc về những ai sở hữu tư duy hệ thống đủ tốt để giải các bài toán lớn.
+- Tuyệt đối không lạm dụng AI theo lối sao chép nguyên văn (Ctrl+C & Ctrl+V) mà không hiểu bản chất mã nguồn — cái giá phải trả trên môi trường Production của doanh nghiệp là vô cùng đắt.
+- Với một hệ thống công nghệ, "chạy được" chưa bao giờ là đích đến — nó phải chạy một cách **an toàn**, **đáng tin cậy** và thực sự **mang lại giá trị cho người dùng**.
 
 #### Một số hình ảnh khi tham gia sự kiện
 
 ![Ảnh minh chứng: tham gia event](</images/4-EventParticipated/Event2/event2(0).jpg>)
 ![Ảnh minh chứng: tham gia event](</images/4-EventParticipated/Event2/evt2(1).jpg>)
 
-> Tổng thể, sự kiện không chỉ cung cấp những kiến thức kỹ thuật chuyên sâu về Prompt Engineering và mô hình phát triển phần mềm thời đại AI, mà quan trọng hơn hết là truyền ngọn lửa đam mê, kỷ luật tự học và định hình một tư duy nghề nghiệp đúng đắn cho thế hệ kỹ sư công nghệ tương lai.
+> Nhìn lại toàn bộ sự kiện, giá trị nhận được không chỉ dừng ở khối kiến thức kỹ thuật chuyên sâu về Prompt Engineering hay mô hình phát triển phần mềm trong kỷ nguyên AI — điều đọng lại lớn hơn cả là ngọn lửa đam mê, tinh thần kỷ luật tự học và một tư duy nghề nghiệp đúng đắn được truyền lại cho thế hệ kỹ sư công nghệ kế tiếp.

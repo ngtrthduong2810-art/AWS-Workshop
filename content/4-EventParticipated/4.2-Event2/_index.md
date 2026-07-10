@@ -6,128 +6,118 @@ chapter: false
 pre: " <b> 4.2. </b> "
 ---
 
-# Event Report: “FCAJ Community Day - May 2026 Edition”
+# "FCAJ Community Day - May 2026 Edition" Reflection Report
 
-### Objectives of the Event
+### Event Objectives
 
-* Update macro trends and position the Vietnamese IT market in the era of rapidly advancing AI.
-* Share methodologies for designing Context-Optimized Prompt structures and controlling Large Language Model (LLM) Randomness.
-* Introduce enterprise data analytics assistant solutions using Amazon Q Business (QuickSight/Q Desktop) integrated with MCP servers.
-* Share practical hands-on experiences from Hackathons and design principles for Enterprise-grade Multi-Agent systems applied in the Banking and Finance sector.
+- Provide the latest macroeconomic picture of the Vietnamese IT market amidst the rapidly developing AI landscape.
+- Deep dive into Prompt structuring methods for Context Optimization and mastering the inherent Randomness of LLMs.
+- Demonstrate an enterprise data analysis assistant solution based on Amazon Q Business (QuickSight/Q Desktop) integrated with an MCP server.
+- Recount the hands-on journey at the Hackathon and how to build an Enterprise-standard Multi-Agent system for the banking and finance sector.
 
-### Speakers
+### Speaker Lineup
 
-* **Mr. Nguyen Gia Hung** - Solutions Architect at AWS Vietnam & Founder of FCAJ (Sharing macro market directions).
-* **Mr. Tinh Truong** - Platform Engineer at Gothamic X (Sharing Context Optimization Techniques and LLM Randomness).
-* **Mr. Hai Anh** - Solutions Architect at Pacific Vietnam (Sharing Amazon Q Business & MCP).
-* **Mr. Nguyen Han Thinh** - DevOps Engineer (Sharing Flat-rate Pricing mechanisms and advanced security features of Amazon CloudFront).
-* **Uyen, Mach & Ms. Thao** - Hackathon Winning Team (Sharing their 36-hour journey developing the UTMorpho project).
-* **Final Speaker (FinTech Engineer)** - FinTech Solutions Advisor at VPBank (Sharing Multi-Agent architectures applied in banking).
+- **Mr. Nguyen Gia Hung** - Solutions Architect at AWS Vietnam & Founder of FCAJ (Sharing on macroeconomic market orientation).
+- **Mr. Tinh Truong** - Platform Engineer at Gothamic X (Sharing on LLM Context Optimization and Randomness techniques).
+- **Mr. Hai Anh** - Solutions Architect at Pacific Vietnam (Sharing on Amazon Q Business & MCP).
+- **Mr. Nguyen Han Thinh** - DevOps Engineer (Sharing on the Flat-rate Pricing mechanism and advanced security of Amazon CloudFront).
+- **Ms. Uyen, Mr. Mach & Ms. Thao** - Hackathon Winner Team (Sharing on the 36-hour journey of developing the UTMorpho project).
+- **Final Speaker (FinTech Engineer)** - FinTech Solutions Consultant at VPBank (Sharing on Multi-Agent architecture applied in banking).
 
 ### Key Highlights
 
 #### 1. IT Market Positioning and New Career Opportunities in the AI Era
 
-* **The "LED Light" Paradox and Software Explosion**: As AI makes coding cheaper (similar to how LED lightbulbs cut lighting costs to 1/10), the global demand for software development will skyrocket rather than decrease. Today, even non-IT professionals (such as lawyers and doctors) are winning major Hackathons hosted by Anthropic.
-* **New In-Demand Job Trends - Fixing "AI Garbage Code" & Platform Engineering**: Due to the ease of AI code generation, the market will face a massive influx of buggy MVPs and unstable projects. Consequently, long-term recruitment demand will surge for engineers specialized in fixing poorly written code, optimization, and Platform Engineering to automate Internal Developer Platforms (IDP) for enterprises.
-* **Recruitment Reality in Vietnam**: Global tech giants continue to establish Technical Hubs in Vietnam to tap into local talent. Therefore, Vietnamese engineers must focus on building self-confidence, improving English proficiency, acquiring actual Domain Knowledge, and creating production-ready solutions rather than relying purely on minor demo exercises.
+- **The "LED Bulb" Paradox and the Software Boom**: The history of the LED bulb offers a surprising lesson—when lighting costs dropped to 1/10, people didn't light less; they lit significantly more. The same applies to software: AI makes writing code cheaper than ever, and as a result, the global demand for software development will not shrink but explode fiercely. Vivid proof: even non-IT professionals (lawyers, doctors) can now win prizes at major Anthropic Hackathons.
+- **A New Wave of Jobs - Fixing Junk Code & Platform Engineering**: When anyone can generate code using AI, the market will be flooded with MVP products or projects full of bugs or running unsteadily, unable to operate reliably. This opens up two rapidly growing long-term recruitment demands: engineers specializing in "cleaning up junk code" and system improvement, along with Platform Engineering teams building infrastructure automation platforms (IDP - Internal Developer Platform) for large-scale organizations.
+- **Recruitment Reality in Vietnam**: Global tech corporations are still steadily opening Technical Hubs in Vietnam to hunt for local talent. The challenge for Vietnamese engineers: invest in confidence, English proficiency, practical business understanding (Domain knowledge), and the ability to create truly Production-ready products—instead of staying stuck on isolated demo projects.
 
 #### 2. Context Optimization Techniques and Controlling LLM Randomness
 
-* **The Constant Context-Switching Error**: A common mistake among users is cramming too many unrelated topics into a single chat session (asking about travel, CV optimization, and software programming all at once). This constantly alters the Context Window, causing the AI to hallucinate quickly.
-* **Temperature Mechanisms and Logit Scores**: Fundamentally, an LLM is a probabilistic engine that ranks logit scores for the next token. When setting `Temperature = 0`, the AI switches its calculation from Softmax to Argmax (always selecting the highest-scoring token) to produce deterministic and consistent answers.
-* **The Difference Between Cloud APIs and Local Hosts**: Even with `Temperature = 0`, APIs from OpenAI or Amazon Bedrock can still yield slightly different results across separate runs. The core reason lies in GPU parallel computing causing floating-point rounding discrepancies, coupled with commercial Inference Optimization techniques (where providers batch short prompts from different users to reduce costs). To achieve 100% absolute consistency, engineers must host the model on local infrastructure.
+- **The Error of Constant Context Switching**: A disastrous habit many people have: cramming all sorts of topics into a single chat session—from asking for travel itineraries and fixing CVs to writing code. Consequently, the Context Window is constantly shuffled, and the AI slips into a "hallucination" state much faster.
+- **Temperature Mechanism and Logit Scores**: Fundamentally, an LLM is a "probabilistic engine"—it scores (logits) each candidate word that might appear next and selects based on probability. When dragging `Temperature = 0`, the word selection mechanism switches from Softmax to Argmax—always taking the highest-scoring word—making the answer deterministic and consistent across runs.
+- **The Difference Between Cloud APIs and Local Hosts**: A little-known fact: even when setting `Temperature = 0`, calling the OpenAI or Amazon Bedrock API multiple times can still yield different results. Two culprits are behind this: parallel floating-point operations on GPUs causing decimal drifts during rounding, and vendors' commercial optimization techniques (Inference Optimization)—batching many short prompts from multiple users into a single processing run to save costs. If you want to control 100% absolute consistency, the only way is to self-host the model on Local infrastructure.
 
-#### 3. Amazon Q Business Ecosystem & Next-Gen Data Analytics Assistants
+#### 3. Amazon Q Business Ecosystem & Next-Generation Data Analysis Assistant
 
-* **Building Extended Arms via MCP (Model Context Protocol)**: The concept of an AI Agent today goes beyond generating text—it must be capable of taking Action. By plugging in MCP hosts, AI Agents can interact directly with systems, schedule meetings, send automated emails, or connect seamlessly with Jira, Confluence, Microsoft Cloud, and Google Suite.
-* **Automated Data Analysis Assistant**: Business users without any BI (Business Intelligence) background can simply upload raw Excel sheets to Amazon Q Business (or QuickSight Desktop), and the system will automatically analyze and visualize data into a comprehensive Dashboard within minutes.
+- **Building Extensions with MCP (Model Context Protocol)**: Modern AI Agents cannot just stop at generating text responses—they must be able to take Action. Through MCP ports, Agents can directly schedule meetings, automatically send emails, or connect straight into enterprise systems like Jira, Confluence, Microsoft Cloud, and Google Suite.
+- **Automated Data Analysis Assistant**: With Amazon Q Business (or QuickSight Desktop), an enterprise employee with zero BI (Business Intelligence) knowledge just needs to drop a raw Excel data file in—the system instantly self-analyzes and builds a completely visual Dashboard in an incredibly short time.
 
 #### 4. Case Study: UTMorpho Project Wins Hackathon in 36 Continuous Hours
 
-* **Solving Real-World Pain Points**: Instead of chasing generic macro ideas, the team focused on saving time and tokens for front-end developers during UI adjustments. Typically, to modify a tiny detail on an AI-generated interface, developers have to request the AI to regenerate everything from scratch.
-* **Multi-Agent Architecture of UTMorpho**: The project utilizes a Serverless model on AWS coordinating 3 specialized agents:
-* *Agent 1 (Vision Agent)*: Reads images or sketches from the user's camera and parses them into a structured JSON file.
-* *Agent 2 (Layout Agent)*: Receives the JSON file and calculates CSS structures, layouts, and dimensions.
-* *Agent 3 (Design Agent)*: Takes the layout information and compiles it into clean, complete HTML/CSS code in real-time (Streaming UI).
+- **An Idea Solving a Real Pain Point**: The team did not chase after flashy macro ideas but targeted a very specific pain point for developers: whenever they want to fix a tiny detail on an AI-generated interface, they are forced to ask the AI to regenerate everything from scratch—wasting both time and Tokens.
+- **UTMorpho's Multi-Agent Architecture**: The project runs on AWS Serverless architecture with 3 specialized Agents coordinating smoothly:
+  - *Agent 1 (Vision Agent)*: Receives images/sketches from the user's camera, extracting the content into a structured JSON file.
+  - *Agent 2 (Layout Agent)*: Reads the JSON file and calculates the CSS structure, layout arrangement, and component dimensions.
+  - *Agent 3 (Design Agent)*: Receives the output of Agent 2, compiles it into complete HTML/CSS code, and displays it in real-time (Streaming UI).
+- **Highlight Features**: Equipped with a visual Editor allowing developers to drag, drop, and move component positions right on the displaying interface, while simultaneously exporting a public HTML link to share with colleagues for review.
 
+#### 5. Enterprise-Standard Multi-Agent Architecture for Banking Operations (VPBank Practice)
 
-* **Key Feature**: Integrates an intuitive visual Editor that allows developers to drag, drop, and rearrange components directly on the rendered interface and export a public HTML link for peer review.
-
-#### 5. Enterprise-Grade Multi-Agent Architecture for Banking Business (VPBank Practice)
-
-* **Business Problem - Credit Scoring for Startups**: Traditional loan approval systems require businesses to provide financial audits for 3 consecutive years and physical collateral. This prevents early-stage startups (which only possess intellectual property and have been operating for 3–6 months) from accessing capital. The solution is designing a Multi-Agent system to analyze multi-dimensional, non-traditional data points.
-* **Specialized Multi-Agent System Design**:
-* *Credit Committee Agent (Manager/Orchestrator)*: Acts as the council chair, distributing tasks and synthesizing the final report.
-* *Financial Analyst Agent*: Performs deep-dive analysis on short-term financial reports and corporate cash flows.
-* *Market Research Agent*: Analyzes market share (TAM, SAM, SOM), competitors, and market trends.
-* *Team Evaluator Agent*: Gathers and evaluates the founders' capability based on tech portfolios, and social activity across Twitter (X), LinkedIn, and Facebook.
-* *Risk Assessor Agent*: Holds the most critical role—monitoring the guardrails of other agents, filtering inputs/outputs to prevent data leakage, and mitigating Prompt Injection attacks to meet the strict compliance standards of the State Bank of Vietnam.
-
-
-
----
+- **Business Problem - Credit Evaluation for Startups**: The traditional loan approval process requires financial reports for 3 consecutive years and physical collateral—a door almost completely shut for Startups that only own intellectual property and have been operating for just 3-6 months. Proposed solution: a multidimensional analysis Multi-Agent system based on non-traditional data sources.
+- **Specialized Multi-Agent System Design**:
+  - *Credit Committee Agent (Manager/Orchestrator)*: Holds the council chair—distributing tasks to member Agents and synthesizing the final report.
+  - *Financial Analyst Agent*: Specializes in deep analysis of the enterprise's short-term financial reports and cash flows.
+  - *Market Research Agent*: Evaluates market share (TAM, SAM, SOM), competitors, and related market trends.
+  - *Team Evaluator Agent*: Collects data and appraises the capability of the Founders team via technology profiles and their footprints on Twitter(X), LinkedIn, Facebook.
+  - *Risk Assessor Agent*: Bears the most crucial role—monitoring the operational boundaries of all other Agents, applying two-way data filtering (Input/Output filtering) to prevent confidential information leaks and block Prompt Injection attacks, complying with the strict standards of the State Bank.
 
 ### Key Takeaways
 
 #### Design Thinking
 
-- **Business-Driven Mindset**: When designing any technological solution for large enterprises, one must always answer 4 core questions: Who uses it? What do they use it for? Why must they use it? When is the right time to deploy it?
-- **Separation of Concerns (SoC)**: Each AI Agent should be assigned to a single specialized role supported by a clear backstory and System Prompt. This prevents Context Window overload and optimizes the model's attention allocation.
+- **Business-Driven Mindset**: Every technology solution in large enterprises must pass a 4-question test before design begins: Who uses it? What are they using? Why do they have to use it? When is the right time to deploy?
+- **Separation of Concerns Mindset**: Each AI Agent should carry out exactly one specialized role, clearly defined through its own Backstory and System Prompt—this both prevents Context Window overload and helps the model distribute its Attention most efficiently.
 
 #### Technical Architecture
 
-- Mastered **Determinism Control Mechanisms** in LLMs by configuring parameters like `Temperature`, `Top P`, and `Repeat Penalty` depending on the required output format (Creative text vs. structured JSON/Code).
-- Gained a deep understanding of **AWS Backbone & CloudFront PoP (Points of Presence)** network infrastructures: How CDNs aggregate multi-tier requests to protect Origin Servers from volumetric DDoS or SYN Flood attacks using features like SYN Proxy.
-- Realized the importance of managing infrastructure as code via **Terraform (IaC)** to track resource versions and maintain reproducibility across multiple AWS regions.
+- Mastering the **Determinism control mechanism** of LLMs through the `Temperature`, `Top P`, and `Repeat Penalty` parameters—adjusting flexibly depending on whether the output needs to be creative (text) or absolutely precise (JSON/Code).
+- Deeply understanding the **AWS Backbone & PoP (Points of Presence)** internal network infrastructure behind CloudFront: how the CDN consolidates requests across multiple tiers to shield the Origin Server from volumetric DDoS or Syn Flood attacks using the Syn Proxy feature.
+- Clearly recognizing the value of Infrastructure as Code management with **Terraform**: controlling resource versions and reproducing the entire system across multiple AWS Regions.
 
 #### Modernization Strategy
 
-- **ROI (Return on Investment) Measurement Strategy**: An AI project aiming for Enterprise executive approval must prove its worth through hard data (Numbers speak louder than words), such as calculating the payback period and annual corporate cost savings instead of just showcasing a technical demo.
-- **Continuous Testing Strategy (Testing, Testing, Testing)**: For an AI system to be production-ready in strict environments, engineers must perform dynamic and deep downstream integration testing to guarantee the system handles edge cases when the AI generates incorrect formats.
+- **ROI (Return on Investment) Measurement Strategy**: To get Enterprise leadership to nod yes to an AI project, you must speak with specific numbers (Numbers speak louder than words)—what the payback period is, how much money it saves the business annually—not just present a fancy tech demo.
+- **Continuous Testing Strategy**: The path to bringing an AI system to Production standard in a rigorous environment is dynamic testing, testing deep down to downstream services—ensuring the system stands firm in any scenario where AI generates incorrect formats.
 
----
+### Application to Work
 
-### Practical Applications to Work
-
-- **Mindful Configuration of Temperature**: Set `Temperature = 0` or `0.1` when generating structured formats like JSON/HTML for current projects to reduce syntax errors in brackets and commas.
-- **Adopting Multi-Agent Architectures to Prevent Failures**: Instead of making a single chat interface handle an entire workflow, break down problems into independent sub-agents (following the UTMorpho model) and use a manager agent to cross-check results.
-- **Enhancing Application Security**: Implement sensitive data filtering layers (Input/Output filtering) via AWS Lambda before passing data to LLMs to comply with organizational security regulations.
-- **Transitioning to Infrastructure Management with Terraform**: Start writing Terraform code for AWS CloudFront and S3 services to eliminate manual configuration ("Click Engineering") on the AWS Console, enabling streamlined management and periodic rotation of API/Access Keys.
-- **Focusing on Core Backend Knowledge**: Cultivate foundational software engineering skills, master data structures, and API contracts. AI is merely a tool that accelerates product development; the engineer's system design capabilities remain the ultimate deciding factor.
-
----
+- **More mindful Temperature parameter configuration**: Proactively setting `Temperature = 0` or `0.1` whenever the AI needs to generate highly structured formats like JSON/HTML in current projects—drastically reducing bracket and comma deviation errors.
+- **Applying preventative Multi-Agent architecture**: No longer cramming the whole process into a single chat window—problems will be broken down into independently operating sub-agents (mimicking the UTMorpho model), accompanied by a management Agent positioned above to cross-check results.
+- **Enhancing application security**: Building sensitive data filtering layers (Input/Output filtering) using AWS Lambda right at the data transmission gateway into large language models, meeting the organization's internal security regulations.
+- **Transitioning to Terraform infrastructure management**: Initiating Terraform scripting for the system's CloudFront and S3 services, gradually replacing manual configurations (Click engineering) on the Console—making version management easier and API Keys/Access Keys periodic rotation more convenient.
+- **Focusing on foundational Backend knowledge**: Persistently honing core Software Engineering mindsets, firmly grasping data structures and API contracts—because AI is just a tool to help build products faster, while the engineer's systems thinking is the ultimate deciding factor.
 
 ### Event Experience
 
-Immersing myself in this **“FCAJ Community Day”** workshop was a mind-shifting experience. Moving away from textbook theories, the event brought forward raw, real-world corporate lessons. Highlights of the experience included:
+Attending the **"FCAJ Community Day"** workshop this time was a massive cognitive boost for me. The event stepped completely outside the framework of textbook knowledge to bring "flesh and blood" stories distilled from the real corporate environment. A few unforgettable highlights:
 
-#### Learning from High-Caliber Speakers
+#### Learning from Highly Specialized Speakers
 
-- Speakers from AWS Vietnam, VPBank, VIB, and Gothamic X shared invaluable lessons regarding the vast gap between building personal hobby projects at home versus deploying real products for millions of clients in the banking industry, where security and compliance are paramount.
+- The speakers from AWS Vietnam, VPBank, VIB, and Gothamic X showed me the real gap between doing personal projects at home and operating products serving millions of customers in the Banking industry—where information security and compliance are always the top priority.
 
-#### Practical Technical Exposure
+#### Practical Technical Experience
 
-- My technical outlook expanded upon witnessing how AI agents collaborate under a Multi-Agent framework, automatically performing holistic market analysis ranging from financial indicators and social media data to the professional background of business founders.
-- Understood the fierce reality behind the cost-optimization algorithms of major Cloud providers, and why AI still behaves probabilistically even when the temperature parameter is set to absolute zero.
+- Truly "mind-opening" observing AI Agents coordinating under a Multi-Agent model: automatically and comprehensively analyzing the market, from financial metrics and social media data to the profiles of individual business founders.
+- Uncovered the harsh truth behind the cost-optimization algorithms of major Cloud providers—and understood why AI still yields random results even when the temperature is set to zero.
 
-#### Utilizing Modern Tools
+#### Applying Modern Tools
 
-- Witnessed data visualization achieved through simple Vietnamese natural language commands via the live demo of Amazon Q Business and QuickSight. The adoption of MCP (Model Context Protocol) opens a new frontier, allowing engineers to build genuine "extended arms" for artificial intelligence.
+- Witnessed data being visualized using just a few simple Vietnamese commands through the Amazon Q Business and QuickSight demo. The MCP (Model Context Protocol) truly opens up a new era—where engineers can craft genuine "extended arms" for artificial intelligence.
 
-#### Networking and Engagement
+#### Networking and Exchange
 
-- The organizers provided an exceptional networking environment across different seating tiers (including engaging those on the 36th floor via a Lucky Draw system). The event strongly fostered a spirit of proactivity, encouraging attendees to strike up conversations, seek collaborators, and inspire team synergy among young students.
+- The organizers very skillfully connected attendees across different floors (even those on the 36th floor via the Lucky Draw system). The event ignited a spirit of proactively initiating conversations, seeking collaborators, and infused young students with a powerful motivation for teamwork.
 
-#### Core Conclusions
+#### Lessons Learned
 
-- AI is driving down the cost of software development, which will spark a market explosion and present massive opportunities for those equipped with strong system design skills to tackle complex problems.
-- Never abuse AI through blind copying and pasting (Ctrl+C & Ctrl+V) without understanding the underlying code architecture, as the repercussions in enterprise production environments are severe.
-- When building any technology system, the most critical factor is not just that it runs, but that it operates **securely**, **reliably**, and genuinely **delivers user value**.
+- AI is dragging software development costs to unprecedented lows—market demand will therefore explode, and massive opportunities will belong to those possessing good enough systems thinking to solve big problems.
+- Absolutely do not abuse AI by copy-pasting verbatim (Ctrl+C & Ctrl+V) without understanding the source code's nature—the price to pay in a corporate Production environment is exceptionally high.
+- For a technology system, "running" has never been the finish line—it must run **safely**, **reliably**, and truly **bring value to users**.
 
-#### Event Imagery
+#### Some Event Photos
 
-![Event Participation Evidence Image](</images/4-EventParticipated/Event2/event2(0).jpg>)
-![Event Participation Evidence Image](</images/4-EventParticipated/Event2/evt2(1).jpg>)
+![Evidence photo: participating in event](</images/4-EventParticipated/Event2/event2(0).jpg>)
+![Evidence photo: participating in event](</images/4-EventParticipated/Event2/evt2(1).jpg>)
 
-> In summary, the event not only delivered deep technical insights into Prompt Engineering and AI-era software development models, but more importantly, it ignited a passion for disciplined self-learning and shaped the right professional mindset for the next generation of tech engineers.
+> Looking back at the entire event, the value received did not just stop at the deep technical knowledge of Prompt Engineering or software development models in the AI era—what resonated most was the fire of passion, the spirit of self-study discipline, and a proper professional mindset passed down to the next generation of tech engineers.

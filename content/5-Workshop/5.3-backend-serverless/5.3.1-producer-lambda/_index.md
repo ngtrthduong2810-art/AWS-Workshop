@@ -1,5 +1,5 @@
 ---
-title: "5.3.1 Producer Lambda"
+title: "Producer Lambda"
 date: 2026-07-07
 weight: 1
 chapter: false
@@ -8,9 +8,9 @@ pre: " <b> 5.3.1. </b> "
 
 ## Role
 
-Receives the REST request from the client (with a JWT already verified by the Cognito Authorizer), packages it into a message, pushes it to the SQS Main Queue, and returns `202 Accepted` immediately — without waiting for the Worker to finish processing.
+Receives REST requests from the client (including the JWT already verified by the Cognito Authorizer), packages the message, pushes it to the SQS Main Queue, and immediately returns `202 Accepted` — without waiting for the Worker to finish processing.
 
-## Main code (`src/producer/index.mjs`)
+## Main Code (`src/producer/index.mjs`)
 
 ```javascript
 export const handler = async (event) => {
@@ -34,11 +34,12 @@ export const handler = async (event) => {
     body: JSON.stringify({ message: "Processing started", jobId: message.jobId })
   };
 };
+
 ```
 
-`userId` is read directly from `event.requestContext.authorizer.claims.sub` — API Gateway already verifies the JWT through the Cognito Authorizer before this Lambda is invoked, so there's no need to verify the token manually in code.
+`userId` is retrieved directly from `event.requestContext.authorizer.claims.sub` — API Gateway automatically verifies the JWT via the Cognito Authorizer before this Lambda is invoked, so there is no need to manually verify the token in the code.
 
-## SAM Template — exposing it as a REST endpoint
+## SAM Template — expose as a REST endpoint
 
 ```yaml
 ProducerFunction:
@@ -59,18 +60,18 @@ ProducerFunction:
           RestApiId: !Ref RestApi
           Path: /check-gmail
           Method: POST
+
 ```
 
-> **Fixed from code review:** The first draft had 2 duplicate resources (`ProducerFunction` with no Events + a separate `CheckGmailApiEvent` that actually received the request) — merged into the single resource above to avoid dead code in the template.
+> **Correction from code review:** The initial version had 2 duplicate resources (`ProducerFunction` without attached Events + `CheckGmailApiEvent` that actually received the request) — they have been merged into a single resource as shown above to avoid dead code in the template.
 
-## Deployment result
+## Deployment Results
 
 REST API endpoint: `https://rjc76njhya.execute-api.us-east-1.amazonaws.com/prod`
 
-Tested with `curl.exe` using a real JWT token (obtained via `aws cognito-idp initiate-auth`), returning the expected `202 Accepted`:
+Tested using `curl.exe` with a real JWT token (retrieved via `aws cognito-idp initiate-auth`), correctly returning `202 Accepted`:
 
 ```json
 {"message":"Processing started","jobId":"job-1783438359558-mq2qy4"}
 ```
-
-![Producer test succeeded](/images/5-Workshop/5.3-backend-serverless/producer-test-202.jpg)
+![Test Producer Complete](/images/5-Workshop/5.3-Backend-serverless/producer-test-202.jpg)

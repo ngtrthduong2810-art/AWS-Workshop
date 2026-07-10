@@ -6,101 +6,102 @@ chapter: false
 pre: " <b> 4.3. </b> "
 ---
 
-# "FCAJ Community Day - June 2026 Edition" Workshop Report
+# "FCAJ Community Day - June 2026 Edition" Reflection Report
 
 ### Event Objectives
-- **High-scale Architecture Design**: Introduce a highly scalable URL Shortener service architecture deployed on the AWS cloud ecosystem.
-- **Data Analytics Competency Mapping**: Analyze real-world workflows, core skill sets, and career progression mindsets for a Data Analytics Engineer within Multinational Corporations (MNCs).
-- **Demystifying Production DevOps**: Evaluate the active job market, compensation benchmarks, hiring demands, and the unyielding foundational engineering skill sets required by an expert DevOps engineer.
-- **Connecting Value Chains & Civic Mindset**: Share a continuous tech journey moving from a curious student to an AWS Partner, while integrating the "Right Work" philosophy to contribute to the nation's digital backbone infrastructure.
+- **High-scale Architecture**: Introduce a scalable URL Shortener service architecture on the AWS ecosystem.
+* **Data capability development orientation**: Analyze the practical work, core skill set, and mindset roadmap for a Data Analytics Engineer in multinational corporations (MNCs).
+- **Decoding the practical DevOps role**: Assess the market landscape, income levels, recruitment demand, and immutable foundational skill sets of a professional DevOps engineer.
+- **Connecting the value chain and citizenship mindset**: Share the journey from a curious student to an AWS technology partner, combining the "Do the right thing" philosophy to contribute to the national digital lifeblood.
 
 ### Speaker Lineup
 
-- **Mr. Dinh Trung Kien** - Lead Developer at a Startup.
+- **Mr. Dinh Trung Kien** - Lead Developer at Startup.
 - **Mr. Nguyen Minh Tho** - Student & Cloud Contributor.
 - **Mr. Dat Pham** - Data Analytics Engineer at a Multinational Corporation.
 - **Mr. Cuong Nguyen** - Process Engineer.
-- **Mr. Trong H. Truong** - DevOps Engineer at Endava Vietnam.
+- **Mr. Trong H.Truong** - DevOps Engineer at Endava Vietnam.
 - **Mr. Danh Hoang Hieu Nghi** - AI Engineer, AWS Community Builder & SBG Leader.
 
 ---
 
 ### Key Highlights
 
-#### 1. Architecting a Scalable URL Shortener Solution on AWS
-- **Traditional Legacy Bottlenecks (Naive Flow)**: Traditional on-demand short code generation workflows introduce severe architectural challenges, including high read latency, security vulnerabilities, single points of failure, and extreme difficulty in handling sudden, massive traffic spikes.
-- **Advanced Key Generation Service (KGS) Patterns**:
-  - *Separation of Concerns*: The active Read path and Write path operate completely independently, enabling granular, isolated optimizations matching specific downstream traffic profiles.
-  - *Pre-computation over On-demand Execution*: Utilizes isolated container tasks running on **Amazon ECS** to continuously calculate and pre-generate safe alphanumeric short codes well before a user request hits the server. These hashes are instantly streamed into **Amazon ElastiCache for Redis** memory queues using `LPUSH key_queue`.
-  - *Ultra-low Latency Initialization Flow*: When an end-user triggers a URL shortening request, the active SpringBoot backend container execution logic simply performs an atomic `RPOP` command to grab a pre-computed token directly out of Redis memory, instantly logging the structural mappings into **Amazon DynamoDB** using it as the Primary Key (PK). This decoupled system guarantees immediate response states and permanently eliminates code collision risks.
-  - *Cache-aside Architecture Pattern*: Downstream link redirection requests (Forward flow) prioritize near-instant memory lookups against the Redis cluster state (Cache hit). The system only falls back to query the main transactional DynamoDB engine upon a clean Cache miss, dropping computing stress and flattening response latency bounds.
-  - *Edge Layer Defensive Strategy*: Pushes deep edge inspection rules via **AWS WAF** alongside global static content caching structures via **Amazon CloudFront** distribution points as close to the target client as possible, systematically isolating and killing malicious vectors before malicious traffic hits core cloud systems.
+#### 1. Scalable URL Shortener architecture on AWS
+- **The pain of traditional systems (Naive Flow)**: The traditional on-demand short code generation process often faces major issues with Read Latency, security vulnerabilities, Single Point of Failure, and difficulty scaling during traffic spikes.
+- **Advanced Key Generation Service (KGS) architecture**:
+  - *Separation of Concerns*: The Read path and Write path operate completely independently, optimized separately according to traffic characteristics.
+  - *Pre-computation over On-demand*: Use Containers on **Amazon ECS** to pre-compute and generate short codes before receiving user requests. These codes are then continuously pushed into the **Amazon ElastiCache for Redis** queue via the `LPUSH key_queue` command.
+  - *Lightning-fast initialization process*: When a user requests to shorten a link, the Backend service (SpringBoot running on ECS) simply executes the `RPOP` command to immediately fetch a pre-generated code from Redis and write the information to **Amazon DynamoDB** as the Primary Key (PK). This process happens instantly and completely eliminates the risk of code collisions (Collision-free).
+  - *Cache-aside Pattern*: The Forward flow prioritizes looking up in the Redis Server cache first (Cache hit). The system only queries the DynamoDB database when a Cache miss occurs, minimizing load pressure and keeping latency to an absolute minimum.
+  - *Defense at the Edge*: Push the entire **AWS WAF** security layer and **Amazon CloudFront** static distribution caching layer as close to the user as possible, stopping threats before they touch the system's core.
 
-#### 2. Enterprise Realities and Growth Mindsets for Data Analytics Engineers inside MNCs
-- **Isolated Domain Realities**:
-  - *Tech and E-commerce Ecosystems (e.g., Kamereo)*: Highly focused on orchestrating operational performance reporting pipelines, designing robust analytical dashboards to flag anomalous data drifts, and aligning cross-department investigations to locate the root cause of GMV fluctuations.
-  - *Heavy Manufacturing Ecosystems (e.g., Colgate-Palmolive)*: Centered on capturing telemetry logs from physical machinery and distributed industrial IoT sensors across internal production lines to track hardware optimization opportunities and depress operational assembly line costs.
-- **The Core 4 Skills Mandate**: Structural critical thinking, clear cross-functional project management communication, advanced data storytelling, and concrete problem-solving execution under business constraints.
-- **The 5-Stage Career Mapping Matrix**: Shifting focus away from arbitrary corporate titles to master progressive engineering competency tiers: `Follower` (Executes deterministic checklists) $\rightarrow$ `Learner` (Proactive contextual discovery) $\rightarrow$ `Problem Solver` (Owns and drives end-to-end solutions) $\rightarrow$ `System Thinker` (Analyzes global cross-dependencies and holistic system health) $\rightarrow$ `Super Star` (Sets technical vision and scales organizational capabilities).
-- **Cultivating a True No-Blame Post-Mortem Culture**: Highlighting standard operational maturity frameworks inside global tech environments. When highly critical system failures or blackouts hit production stacks, engineering squads do not hunt for a human scapegoat. Instead, they isolate the structural bug, review the underlying codebase, and harden the core infrastructure to systematically prevent regression.
+#### 2. Practical work and growth mindset of a Data Analytics Engineer at MNCs
 
-#### 3. Analyzing the Modern Production DevOps Engineering Landscape
-- **Vietnam Market and Salary Benchmarks**: Industry hiring analytical indicators from ITviec and the JT1 Salary Guide demonstrate that DevOps and Cloud Engineer specializations continuously secure top-tier market demand indices and premium engineering salary brackets. Gross target ranges span from **16 - 28 million VND/month** for entry-level Junior tracks, climbing to **65 - 100 million VND/month** for verified Expert/Lead roles.
-- **Industry Stereotypes vs. Real-world Scope**: DevOps is fundamentally not limited to merely writing basic shell build scripts, hacking out basic CI/CD pipeline parameters, or editing basic Dockerfiles and Kubernetes manifests. The active architectural scope is highly fluid and scales depending on enterprise scale, cross-team operational topologies, and infrastructure maturity frameworks.
-- **"Tools Change, Fundamentals Stay"**: Tooling landscapes mutate constantly, but foundational computing primitives are permanent. High-performance engineers focus on mastering rock-solid baseline systems engineering competencies: Linux kernel internals, networking primitives (TCP/IP stack, DNS routing), programming masteries (Python/Golang), systems level structural engineering, and the discipline to thoroughly dissect *"Why"* an infrastructure layout operates before deciding *"How"* to build it.
+- **Differences in work domains**:
+  - At Tech/E-commerce companies (like Kamereo): Focus on building periodic reports to monitor operational performance, designing data trend Dashboards to detect anomalies, and coordinating across departments to find Root Causes to optimize GMV.
+  - At manufacturing corporations (like Colgate-Palmolive): Participate in factory machinery and IoT equipment data projects to find opportunities for production cost optimization and equipment efficiency enhancement.
+- **4 mandatory skills**: Critical thinking, coordinating communication skills, Data storytelling, and practical problem-solving capability.
+- **5-step career path roadmap**: A mindset that doesn't overemphasize Titles but focuses on upgrading capabilities through each step: `Follower` (Checklist executor) $\rightarrow$ `Learner` (Proactive learner) $\rightarrow$ `Problem Solver` (Committed problem solver) $\rightarrow$ `System Thinker` (Panoramic systems thinker) $\rightarrow$ `Super Star` (Vision builder and leader).
+- **No-Blame Post-Mortem culture**: Deeply portrays the tech culture at multinational corporations. When a severe system crash occurs, engineers sit together to review the source code, find infrastructure architecture loopholes to fix them at the root instead of criticizing or assigning blame to individuals.
 
----
+#### 3. The comprehensive picture of a DevOps Engineer in reality
+- **Market and income in Vietnam (2025 - 2026)**: According to survey reports from ITviec and JT1 Salary Guide, DevOps Engineer and Cloud Engineer roles always remain in the group with the highest recruitment demand and salaries in the market. Income ranges from **16 - 28 million VND/month** for Juniors and can reach **65 - 100 million VND/month** for Lead/Expert levels.
+- **Prejudice vs. Reality**: DevOps is not just someone who writes a few CI/CD pipelines, configures Docker/Kubernetes, or sits on call at midnight. The Scope of work heavily depends on the company's size, departmental structure, and the maturity of the enterprise's infrastructure.
+- **"Fundamentals Stay"**: Technological tools can change constantly over time, but foundational knowledge will always remain. A good DevOps engineer must master root skills: Linux Operating System, Networking basics, Programming languages (Python/Golang), System Thinking, and the ability to ask *"Why"* before learning *"How"*.
 
 ### Key Takeaways
 
 #### Design Thinking
-- **Pre-computation Architectural Mindset**: Mastered the strategy of converting blocking, real-time computational tasks into asynchronous background execution sequences, provisioning cloud assets in advance to satisfy user traffic profiles at sub-millisecond speeds.
-- **No-Blame Engineering Mentality**: Understood that production outages represent systemic failures in process design or infrastructure resilience. Building a transparent, psychological-safety-focused incident analysis pipeline is the single highest-leverage strategy to harden organizational stability.
+
+- **Pre-computation mindset**: Learned how to shift heavy, real-time bottleneck-prone tasks into asynchronous background tasks, preparing resources in advance to serve end-users with the lowest latency.
+- **No-Blame mindset**: Understood that system failures are due to flaws in processes or architecture; building an open post-incident discussion culture is key to upgrading the stability of the entire organization.
 
 #### Technical Architecture
-- Deepened understanding of **KGS (Key Generation Service)** design mechanics using a distributed setup with Redis memory caching layers and DynamoDB tables to balance high-throughput transactional states without data collisions.
-- Learned how corporate operational key performance metrics (Fulfillment pipelines, Last Mile Cost tracking, Fill Rate optimization targets) are effectively exposed and modeled through enterprise business intelligence environments.
-- Articulated the precise configuration parameters needed to integrate layered perimeter defense patterns across AWS cloud infrastructure by combining AWS WAF, CloudFront distributions, and AWS KMS cryptographic management blocks.
+
+- Mastered the **KGS (Key Generation Service)** deployment model combining Redis (in-memory) and DynamoDB to handle high-load problems and prevent data duplication.
+- Understood how to distribute operational performance metrics (Fulfillment, Last Mile Cost, Fill Rate) through visual data analysis Dashboards.
+- Clearly distinguished security defense layers at the cloud edge through the combination of AWS WAF, CloudFront, and AWS KMS.
 
 #### Modernization Strategy
-- Internalized the complex paradigm shift of transitioning from localized "Functional code execution" to fully compliant "Enterprise Global Standards." This translates to mastering GMP, GSP, and GDP compliance for physical logistics pipelines, and enforcing strict alignments against ISO 27001 info-sec protocols, SOC 2 compliance reporting, and GDPR data sovereignty governance parameters for digital cloud infrastructure.
 
----
+- Comprehended the shift chain from "Getting it done" to "Doing it to global standards". For the physical supply chain, it's complying with GMP, GSP, GDP; for the digital supply chain and cloud infrastructure, it's mandatory to achieve rigorous certifications like ISO 27001, SOC 2, and GDPR.
 
-### Practical Applications
+### Application to Work
 
-- **Deploying Cache-aside Frameworks in Portfolio Stacks**: Integrating a dedicated Redis memory cluster right in front of relational databases within internal sandbox projects to systematically optimize API endpoint throughput.
-- **Adopting a System Thinker Approach**: Enforcing a strict design routine during development to actively trace how local code alterations or microservice parameter edits affect downstream dependencies and global cloud optimization costs (FinOps).
-- **Deepening Mastery of Core Fundamentals**: Allocating focused learning loops to master Linux storage subsystems, low-level networking routing controls, and enterprise Git workflow patterns (Git branching strategies), rather than memorizing syntax blocks of high-level automation wrappers.
-- **Executing the "Right Work" Ideology**: Nurturing a disciplined, self-governed technical mindset to serve real-world societal problem spaces, systematically preparing capabilities to inherit and drive enterprise-scale digital backbone infrastructure upon graduation.
+- **Apply Cache-aside in projects**: Set up an additional Redis Cache layer in front of the main Database of personal Backend applications to optimize API response speeds.
+- **Build a System Thinker mindset**: When writing code or configuring systems, form the habit of evaluating whether this change cross-impacts other modules or cloud resource costs (FinOps).
+- **Focus on Fundamentals**: Dedicate more time to deeply learn the Linux kernel, advanced network administration commands, and Git branching strategies instead of just rote-learning automation tool syntaxes.
+- **Practice the "Do the right thing" philosophy**: Forge strong internal self-governance, work with a spirit of service to solve real-world social problems, and aim to shoulder large digital systems after graduation.
 
----
+### Event Experience
 
-### Personal Event Experience
+- Attending the **“FCAJ Community Day - June 2026 Edition”** event on June 13, 2026, brought an extremely explosive and practical series of technological experiences.
 
-- Participating in the **“FCAJ Community Day - June 2026 Edition”** on June 13, 2026, delivered a profoundly impactful, realistic insight into modern distributed systems engineering.
+#### Learning from highly specialized speakers
 
-#### Learning from High-Caliber Speakers
-- Engaging with highly articulate tech leaders sharing battle-tested production insights was exceptionally inspiring. The structural advice to *"Use AI to augment your senior-level engineering capabilities rather than shutting down your critical thinking"* shared by the DevOps panel serves as a definitive roadmap for self-directed learning in this new era of software engineering.
+- Extremely engaging sharings from highly experienced seniors. The advice of *"Using AI to elevate skills, not to turn off your brain"* from the DevOps speakers awakened me to the self-study methodology in the new technology era.
 
-#### Practical Engineering Exposure
-- Analyzing a fully detailed architectural breakdown of an AWS high-scale infrastructure stack was an incredible learning experience. Watching request vectors route through Route 53, strike the ALB layer, and dynamically fan out to Fargate tasks and Redis cluster configurations replaced abstract classroom theory with actual High Availability engineering realities.
+#### Practical technical experience
 
-#### Deploying Modern Tooling
-- Gaining direct access to live enterprise operations dashboards illustrated exactly how unstructured, massive datasets are compressed into actionable strategic business narratives, enabling management teams to make hyper-accurate, data-driven decisions.
+- Received detailed analysis of a large-scale, high-load AWS infrastructure architecture diagram. Dissecting each request flow from Route 53, passing through the ALB, and load balancing down to Fargate and Redis services helped me deeply understand what a High Availability system is.
 
-#### Networking and Collaboration
-- The organizers cultivated a brilliantly collaborative space, seamlessly weaving physical meetup spaces with interactive Google Meet rooms gathering over 30 remote engineers. Interacting directly with AWS Community Builders to discuss the explicit trade-offs between optimization costs and accuracy boundaries dramatically broadened my technical architectural perspective.
+#### Applying modern tools
 
-#### Core Lessons
-- Modern cloud tooling ecosystems will eventually shift and age out, but strong foundational systems knowledge and systemic architectural design paradigms will always endure, serving as an engineer's ultimate defense against market disruption.
-- Continuous engineering success requires an absolute commitment to hands-on experimentation (Hands-on Labs) and a proactive drive to contribute knowledge straight back into the technical ecosystem (Share Back) to scale personal market impact.
+- Gained access to actual operational Dashboard templates in enterprises, thereby understanding how to turn dry, raw data rows into meaningful stories that support the board of directors in making accurate business decisions.
 
-#### Event Participation Evidence Photo
+#### Networking and exchange
 
-![Event Participation Evidence Photo](</images/4-EventParticipated/Event3/event3(0).jpg>)
-![Event Participation Evidence Photo](</images/4-EventParticipated/Event3/evt3(1).jpg>)
+- The event was incredibly cozy, featuring an in-person discussion space and online networking sessions via Google Meet with over 30 companion members. Discussing and listening to the concerns and developmental orientations from AWS Community Builders significantly expanded my professional network.
 
-> In summary, this June installment of Community Day succeeded in shifting my engineering horizon far beyond standard API scripting. It provided a permanent career foundation, bridging the gap between isolated code snippets and the robust, secure, and resilient infrastructure required by modern enterprises.
+#### Lessons learned
 
-```
+- All trendy tools and technologies will become obsolete over the years; only foundational knowledge and strong systems thinking are the keys to helping an engineer adapt to any market fluctuations.
+- Always proactively learn through practice (Hands-on Labs) and give back to the community (Share Back) to continuously elevate personal value on the technology map.
+
+#### Some photos when participating in the event
+
+![Evidence photo: participating in event](</images/4-EventParticipated/Event3/event3(0).jpg>)
+![Evidence photo: participating in event](</images/4-EventParticipated/Event3/evt3(1).jpg>)
+
+> In short, the event brought an extremely sharp and comprehensive technological lens. These are not just supplementary knowledge for the internship report, but also a compass helping me clearly define the path to becoming a proper and internationally standard cloud solutions engineer.

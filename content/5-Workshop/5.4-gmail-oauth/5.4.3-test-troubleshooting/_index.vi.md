@@ -116,3 +116,7 @@ Cognito (xác thực) → REST API → SQS → Worker
 ```
 
 Phần còn lại của dự án là xây dựng client Flutter kết nối vào hệ thống này — trình bày ở mục tiếp theo.
+
+#### 6. Ghi chú vận hành
+
+Hệ thống hiện chạy trên Lambda runtime **Node.js 20.x**. Theo lộ trình hỗ trợ được nhận thông qua mail của AWS Lambda, Node.js 20.x đã hết vòng đời hỗ trợ chính thức (EOL) từ 30/4/2026; function vẫn chạy bình thường nhưng không còn được vá bảo mật. Các mốc ảnh hưởng thực tế còn xa: từ 01/02/2027 không tạo được function mới bằng runtime này, từ 03/03/2027 không cập nhật được function cũ qua Console (vẫn cập nhật được qua SAM/CLI). Vì phạm vi đồ án hoàn thành trước các mốc này, việc nâng cấp runtime được để lại như một hạng mục bảo trì trong tương lai.

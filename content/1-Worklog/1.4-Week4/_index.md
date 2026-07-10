@@ -1,263 +1,109 @@
 ---
-title: "Week 4 Worklog"
-date: 2026-05-11
+title: "Worklog Week 4"
+date: 2026-05-05
 weight: 4
 chapter: false
-pre: "  1.4.  "
+pre: " <b> 1.4. </b> "
 ---
 
-### Week 4 Objectives:
+### Week 4 Objectives: Building Data Architecture and Application Tier Separation
 
-* Explore the overall landscape of Amazon RDS and its vital role in cloud database architecture.
-* Understand the core features of RDS, including: managed service, automated backups, scalability, Multi-AZ architecture, and Read Replicas.
-* Setup a VPC network, Subnets, and configure Security Groups for both EC2 and RDS.
-* Create a DB Subnet Group to establish a standard network environment for database deployment.
-* Install and launch an EC2 virtual machine to act as an application server connecting directly to RDS.
-* Provision an RDS Database Instance and gather crucial information such as Endpoint, Port, and Username.
-* Deploy the AWS FCJ Management application to the environment and configure it to communicate with the RDS database.
-* Familiarize with database operations like backup, manual snapshot creation, and restore.
-* Clean up and delete all provisioned resources after completing the lab to optimize costs.
+After mastering compute capacity (EC2), week 4 marks a significant milestone in designing a Tiered Architecture. The focus this week is separating the Data Tier from the Application Tier using a fully managed database service. Deep-dive objectives include:
+
+* **Explore Database as a Service (DBaaS):** Discover the broad picture of Amazon RDS and its importance in cloud database architecture compared to self-hosted solutions.
+* **Grasp Automated Management Mechanisms:** Clearly understand RDS core features including: managed service, automated backups, scalability, Multi-AZ architecture, and Read Replicas.
+* **Provision Core Network for Data:** Proceed to set up the VPC network, Subnets, and configure Security Groups for both EC2 and RDS, ensuring the database is completely invisible to the Internet.
+* **Secure Data Partitioning:** Build a DB Subnet Group to create a standard network space for deploying High Availability databases.
+* **Architect the Application Environment:** Install and launch an EC2 virtual machine acting as the Application Server directly connecting to RDS.
+* **Practical Data Deployment:** Establish the RDS Database Instance, concurrently collecting vital information like Endpoint, Port, and Username for system integration.
+* **Continuous Integration:** Deploy the AWS FCJ Management application to the environment and configure environment variables to successfully communicate with the RDS database.
+* **Ensure Business Continuity:** Familiarize with database backup, snapshot creation, and restore operations.
+* **Financial Discipline:** Thoroughly delete initialized resources after completing the practical lab to optimize costs (FinOps).
 
 ---
 
-### Tasks to be Implemented This Week:
+### Tasks to be Implemented this Week:
 
-| Day | Task Category | Start Date | End Date | References |
+| Day | Deep-Dive Tasks | Start Date | End Date | Reference Sources |
 | --- | --- | --- | --- | --- |
-| Mon | - Research introductory documentation on Amazon RDS. <br>
-
-<br> - Clarify concepts: RDS, OLTP systems, DB Instance, Endpoint. <br>
-
-<br> - List supported database engines: MySQL, PostgreSQL, MariaDB, SQL Server, Oracle, and Aurora. | 11/05/2026 | 11/05/2026 | [https://000005.awsstudygroup.com/](https://000005.awsstudygroup.com/) |
-| Tue | - Module 2.1: Create a VPC. <br>
-
-<br> - Setup a VPC network including both Public and Private Subnets. <br>
-
-<br> - Deploy across multiple Availability Zones to ensure high availability for RDS. | 12/05/2026 | 12/05/2026 | [https://000005.awsstudygroup.com/](https://000005.awsstudygroup.com/) |
-| Wed | - Module 2.2: Create EC2 Security Group. <br>
-
-<br> - Module 2.3: Create RDS Security Group. <br>
-
-<br> - Establish firewall rules (open ports) for EC2 and configure RDS to only allow incoming traffic from the EC2 Security Group. | 13/05/2026 | 13/05/2026 | [https://000005.awsstudygroup.com/](https://000005.awsstudygroup.com/) |
-| Thu | - Module 2.4: Create DB Subnet Group. <br>
-
-<br> - Module 3: Create EC2 Instance. <br>
-
-<br> - Provision an Amazon Linux virtual machine, attach a Key Pair, and establish a remote connection via SSH using MobaXterm. | 14/05/2026 | 14/05/2026 | [https://000005.awsstudygroup.com/](https://000005.awsstudygroup.com/) |
-| Fri | - Module 4: Create RDS Database Instance. <br>
-
-<br> - Proceed to create the database, select the engine, set up account credentials, and attach the corresponding VPC and Security Group. <br>
-
-<br> - Verify the Available status and retrieve connection details (Endpoint, Port). | 15/05/2026 | 15/05/2026 | [https://000005.awsstudygroup.com/](https://000005.awsstudygroup.com/) |
-| Sat | - Module 5: Application Deployment. <br>
-
-<br> - Download the AWS FCJ Management source code from the repository. <br>
-
-<br> - Setup the Node.js environment, npm libraries, and MySQL client. <br>
-
-<br> - Initialize the database, data tables (user), and run the application on port 5000. | 16/05/2026 | 16/05/2026 | [https://000005.awsstudygroup.com/](https://000005.awsstudygroup.com/) |
-| Sun | - Module 6: Backup and Restore. <br>
-
-<br> - Test the backup, snapshot, and RDS restoration features. <br>
-
-<br> - Module 7: Clean up resources. <br>
-
-<br> - Delete all resources (EC2, RDS, Snapshots, Security Groups, VPC, etc.) to avoid incurring additional charges. | 17/05/2026 | 17/05/2026 | [https://000005.awsstudygroup.com/](https://000005.awsstudygroup.com/) |
+| Mon | - **Foundational Research:** Read Amazon RDS introduction documents. <br> - Clarify the nature of OLTP systems, DB Instances, Endpoints. <br> - Categorize Database Engines (MySQL, PostgreSQL, Aurora, etc.). | 11/05/2026 | 11/05/2026 | [https://000005.awsstudygroup.com/](https://000005.awsstudygroup.com/) |
+| Tue | - **Tiered Network Design:** Module 2.1: Create a VPC. <br> - Set up a VPC network including Public (for App) and Private Subnets (for DB). <br> - Span the architecture across multiple Availability Zones for redundancy. | 12/05/2026 | 12/05/2026 | [https://000005.awsstudygroup.com/](https://000005.awsstudygroup.com/) |
+| Wed | - **Firewall Setup:** Module 2.2: Create EC2 Security Group & Module 2.3: Create RDS Security Group. <br> - Route Security Group chaining: RDS only accepts traffic from EC2. | 13/05/2026 | 13/05/2026 | [https://000005.awsstudygroup.com/](https://000005.awsstudygroup.com/) |
+| Thu | - **Infrastructure Preparation:** Module 2.4: Create DB Subnet Group. <br> - Module 3: Create EC2 Instance (App Server). <br> - SSH connection into the server via MobaXterm. | 14/05/2026 | 14/05/2026 | [https://000005.awsstudygroup.com/](https://000005.awsstudygroup.com/) |
+| Fri | - **Database Initialization:** Module 4: Create RDS Database Instance. <br> - Select engine, identify, allocate resources, and attach VPC/Security Group. <br> - Extract Endpoint and Port when in Available status. | 15/05/2026 | 15/05/2026 | [https://000005.awsstudygroup.com/](https://000005.awsstudygroup.com/) |
+| Sat | - **Application Deployment:** Module 5: Application Deployment. <br> - Clone source code, install Node.js, configure `.env` environment variables. <br> - Initialize data tables and run the web app on port 5000. | 16/05/2026 | 16/05/2026 | [https://000005.awsstudygroup.com/](https://000005.awsstudygroup.com/) |
+| Sun | - **Operations & Cleanup:** Module 6: Backup and Restore. <br> - Module 7: Thorough Clean up resources (EC2, RDS, Snapshot, SG, VPC). | 17/05/2026 | 17/05/2026 | [https://000005.awsstudygroup.com/](https://000005.awsstudygroup.com/) |
 
 ---
 
-### Week 4 Achievements:
+### Week 4 Results: Deep-Dive Theoretical Summary
 
-#### Knowledge
+#### 1. Managed Services Philosophy
+Instead of installing MySQL on an EC2 instance myself (Self-managed), I thoroughly understand the power of Amazon RDS. It is a fully managed relational database service. RDS frees engineers from "undifferentiated heavy lifting" such as OS installation, security patching, or setting up backups. Consequently, the technical team can focus entirely on schema design and query optimization.
 
-**What is Amazon RDS?**
+#### 2. Database Networking Architecture
+A secure system is one that does not expose itself to the Internet. I mastered the concept of separating the application tier (Public Subnet - containing EC2) and the data tier (Private Subnet - containing RDS).
+Specifically, the **DB Subnet Group** concept is crucial: it is a collection of subnets spanning at least 2 Availability Zones. This forces AWS to have space to allocate redundancy resources (Standby Replica) in a Multi-AZ architecture, ensuring high availability even if one physical data center fails.
 
-* Grasped that it is a relational database service fully managed by the AWS ecosystem.
-* Recognized the convenience of RDS as it allows operating a database without worrying about maintaining physical servers or operating systems.
-* It is well-suited for systems with demanding transaction processing (orders, users, payments) or clearly structured data warehouses.
-* Learned the list of compatible engines including: Amazon Aurora, Oracle, SQL Server, MySQL, PostgreSQL, and MariaDB.
+#### 3. Security Group Chaining
+This is the most valuable network security (NetSec) knowledge of the week. Instead of opening port `3306` of RDS to a specific IP range, I utilized the **Security Group Chaining** mechanism. I configured the RDS Security Group so that its Source is the ID of the EC2 Security Group. This principle creates a circle of trust: The database rejects all connections except those originating from my own application servers, establishing a solid Zero Trust architecture.
 
-**Managed Service in RDS**
+#### 4. Application Integration and Configuration Management
+I understand that an application should never hardcode database connection information into the source code. Using an `.env` file to load environment variables (DB_HOST, DB_USER, DB_PASS) at runtime makes the application flexible. When the RDS Endpoint changes (e.g., after restoring a snapshot), I only need to modify the `.env` file without having to recompile the source code.
 
-* Understood the nature of a "managed service", freeing users from the burden of server OS administration.
-* Routine maintenance tasks such as patching, software updates, backups, scaling, and failover are handled automatically by AWS.
-* Saves time so the technical team can focus on optimizing data structures and application development.
-
-**VPC, Subnets, and DB Subnet Group**
-
-* Grasped the concept of a VPC as an isolated virtual network environment to protect AWS resources.
-* Differentiated and learned how to deploy two types of subnets: public and private.
-* Public subnets are allocated for EC2 instances to communicate with the Internet.
-* Private subnets are used to host RDS, hiding the database from public network risks.
-* Understood the definition of a DB Subnet Group as a cluster of subnets specifically designated for the RDS system.
-* Comprehended the DB Subnet Group design principle: it must span at least 2 Availability Zones for fault tolerance.
-
-**Security Groups for EC2 and RDS**
-
-* Viewed Security Groups as virtual firewalls providing instance-level protection (for both EC2 and RDS).
-* For EC2, required to open basic communication ports:
-* `22` for SSH
-* `80` for HTTP
-* `443` for HTTPS
-* `5000` for the custom application
-
-
-* For RDS (e.g., using MySQL/Aurora), required to allow access via port `3306`.
-* Applied the principle of least privilege: Do not expose the database port to the Internet; only allow inbound traffic originating from the EC2 instance's Security Group.
-
-**EC2 Instance as an Application Server**
-
-* Mastered the steps to launch an EC2 instance running Amazon Linux.
-* Selected the correct image (Amazon Linux 2023 AMI).
-* Configured a cost-effective instance type (`t2.micro` or `t3.micro`).
-* Managed Key Pairs for secure authentication during connection.
-* Used MobaXterm to SSH into the system via Public IP/DNS.
-
-**RDS Database Instance**
-
-* Proficiently provisioned an RDS Database Instance using the Standard create option.
-* Learned how to customize parameters: engine type, version, login credentials (master user/pass), and assigned the VPC and Security Group.
-* Recognized the state transition process of the database from `Creating` to `Available`.
-* Knew how to extract the connection string (Endpoint) and port information to configure the app server.
-
-**Deploying an Application Connected to RDS**
-
-* Learned how to download source code from GitHub to the EC2 server environment.
-* Completed the installation of Node.js, the npm package manager, and dependencies (Express, dotenv, MySQL).
-* Declared a `.env` environment file to secure sensitive information: Endpoint, database name, username, and password.
-* Connected to the newly created database, set up the `first_cloud_users` database, created the `user` table, and inserted test data.
-* Started the web app via the `npm start` command and tested its functionality on the browser over port `5000`.
-
-**Backup and Restore in RDS**
-
-* Understood the difference between automated backups and manual snapshots.
-* Monitored backups in the Maintenance & backups section on the console.
-* Learned how to export a snapshot and use it to stand up a completely new DB Instance.
-* Understood that after restoration, the system will assign a different Endpoint, requiring updates to the connection configuration on the application side.
-
-**Resource Cleanup**
-
-* Mastered the procedure to remove the RDS Database Instance, Snapshots, and related DB Subnet Groups.
-* Terminated the EC2 virtual machine immediately after finishing the lab.
-* Sequentially deleted network components such as Security Groups, NAT Gateways, Elastic IPs, and the VPC.
-* Realized the importance of cross-checking the Cost Explorer or Billing Dashboard to ensure no unexpected charges occur due to leftover resources.
+#### 5. Disaster Recovery
+I am highly aware of the difference between Automated Backups (cyclical automated backups supporting Point-in-time recovery) and Manual Snapshots (permanent manual backups created by users). An important operational lesson: when recovering (Restore) from a Snapshot, AWS does not overwrite the old database but creates an entirely new DB Instance with a new Endpoint.
 
 ---
 
-#### Practice
+### Hands-on Experience: Module Analysis
 
-**Module 1 — Introduction**
+**Module 1 & 2 — Initializing Network Foundation and Firewalls**
+- Started with setting up the virtual network space (VPC), declaring the IPv4 CIDR range, creating a Public Subnet for EC2, and a Private Subnet for RDS across 2 distinct Availability Zones.
+- Built a Security Group for EC2 (App Tier) allowing Inbound ports `22`, `80`, `443`, and `5000`. Tightened security by only allowing SSH from my personal IP.
+- Created a Security Group for RDS (Data Tier) opening port `3306`, specifying the Source as the ID of the EC2 Security Group.
+- Created a DB Subnet Group, gathering Private Subnets to act as a secure launching pad for database initialization.
 
-* Researched the general introduction to the Amazon RDS solution.
-* Clarified the nature of a managed relational database service.
-* Compared the differences between using RDS and self-hosting a database on an EC2 instance.
-* Familiarized with industry terminology:
-* DB Instance
-* Connection string (Endpoint)
-* Database Engine
-* Maintenance Window
-* Backup & Snapshot
-* Multi-AZ Architecture
-* Read Replica
+**Module 3 & 4 — Launching Application Server and Database**
+- **App Server:** Launched an Amazon Linux 2023 virtual machine (`t2.micro` or `t3.micro`), attached the EC2 Security Group, and used a Key Pair to SSH via MobaXterm.
+- **Database:** Launched the RDS Database Instance using the Standard Create option. Identified the DB, declared the Master user/password, and attached it to the newly created VPC, DB Subnet Group, and RDS Security Group. Monitored the state transition from `Creating` to `Available` and extracted the Endpoint connection string.
 
+**Module 5 — Practical Application Deployment (Deployment)**
+- SSHed into EC2, installed Git, Cloned the AWS FCJ Management project.
+- Set up the Node.js runtime environment, installed npm dependencies and the MySQL client.
+- Created an `.env` file to declare `DB_HOST` (the RDS Endpoint), `DB_NAME`, `DB_USER`, `DB_PASS`.
+- Used the MySQL client to test direct connection to RDS, created the `first_cloud_users` database and `user` table, inserted sample data.
+- Ran the `npm start` command and successfully tested web app access in the browser via port `5000`.
 
-* 📸 *Screenshot: The Introduction interface of the Amazon RDS course.*
+**Module 6 & 7 — Backup and Cleanup Discipline (FinOps)**
+- Tested the Manual Snapshot creation feature and surveyed the Restore process into a new database cluster.
+- Terminated the EC2 virtual machine.
+- Deleted the RDS Database Instance (paying attention to unchecking the final snapshot creation to avoid hidden storage fees).
+- Sequentially removed the DB Subnet Group, Security Group, Route Table, IGW, and finally the VPC to return a clean environment.
 
-**Module 2.1 — Create a VPC**
+---
 
-* Established a virtual private network (VPC) for the RDS lab.
-* Declared the IPv4 CIDR range.
-* Configured a public subnet specifically for EC2.
-* Configured a private subnet specifically for the RDS database.
-* Selected 2 different Availability Zones to enhance fault tolerance.
-* Enabled auto-assign public IPv4 for the appropriate subnet.
-* 📸 *Screenshot: Successfully initialized VPC.*
-* 📸 *Screenshot: List of Public and Private subnets.*
+### Difficulties and Technical Barriers:
 
-**Module 2.2 — Create EC2 Security Group**
+- **Database Connection Timeout:** Initially, the application couldn't connect to RDS. The most common cause is forgetting to configure the correct Source in the RDS Security Group (mistakenly choosing an IP instead of the EC2 Security Group) or mistakenly placing RDS in a Public Subnet.
+- **Environment Variable Management:** Sometimes mistyping the Endpoint or missing the port in the `.env` file leads to the Node.js application throwing "Access Denied" or "Host not found" errors.
+- **Initialization Latency:** The RDS creation process takes quite a bit of time (5-10 minutes). This can cause impatience, leading to rushed operations when the database is not truly in the `Available` state yet.
+- **Resource Orphan Risks:** RDS is a fairly expensive service if left running in the background. Besides deleting the Instance, automated Snapshots retained after deleting the database will also incur EBS storage costs.
 
-* Built a Security Group acting as a network filter for the EC2 server.
-* Added Inbound rules:
-* Port `22` (Used for SSH)
-* Port `80` (Used for HTTP)
-* Port `443` (Used for HTTPS)
-* Port TCP `5000` (For the custom application)
+---
 
+### Solutions and Best Practices:
 
-* Tightened security by only allowing SSH from the personal machine's IP address.
-* Saved this Security Group ID for use in subsequent steps.
-* 📸 *Screenshot: Completed EC2 Security Group creation.*
-* 📸 *Screenshot: Details of the configured Inbound rules.*
+- **Apply the "Security Group Chaining" Principle:** Always Double-check the RDS Inbound rules. Ensure absolutely no rule contains `0.0.0.0/0` on port 3306.
+- **Log Debugging:** When the Node.js application errors out, build the habit of reading logs on the terminal (stdout/stderr) or using the `mysql -h <endpoint> -u admin -p` command from EC2 to ping-test the network connection before hunting for bugs in the code.
+- **Waiting State Discipline:** Only perform Endpoint extraction and connection operations when the RDS Status turns green (`Available`).
+- **Strict Cleanup Checklist:** When deleting RDS, the system usually asks "Create final snapshot?". For lab environments, this option must always be Unchecked. Check the "Snapshots" tab to ensure no residual backups are left behind.
 
-**Module 2.3 — Create RDS Security Group**
+---
 
-* Set up an independent network filter for RDS.
-* Created an Inbound rule to allow port `3306` (for MySQL/Aurora).
-* In the Source section, specified to only accept traffic from the previously created EC2 Security Group, strictly avoiding the "Anywhere" option.
-* Verified that the RDS Security Group was placed into the correct lab VPC.
-* 📸 *Screenshot: Completed RDS Security Group configuration.*
-* 📸 *Screenshot: Rule restricting connections only from EC2.*
+### Optimal Directions for Next Week:
 
-**Module 2.4 — Create DB Subnet Group**
-
-* Logged into the Amazon RDS management console.
-* Navigated to the DB Subnet Group creation section.
-* Bound it to the newly created VPC.
-* Selected subnets belonging to at least 2 distinct Availability Zones.
-* Ensured only private subnets were added to enhance database security.
-* Verified the information after the system reported successful creation.
-* 📸 *Screenshot: DB Subnet Group interface after creation.*
-* 📸 *Screenshot: List of child subnets inside the Subnet Group.*
-
-**Module 3 — Create EC2 Instance**
-
-* Proceeded to Launch a new Amazon Linux instance.
-* Specified the operating system as Amazon Linux 2023 AMI.
-* Configured basic hardware specifications suitable for learning needs.
-* Specified a Key Pair for SSH access.
-* Attached the previously prepared EC2 Security Group.
-* Activated the instance and waited for the status to show `running`.
-* Used MobaXterm to connect to the server.
-* Checked the command prompt (terminal) to confirm successful login.
-* 📸 *Screenshot: EC2 status showing as running.*
-* 📸 *Screenshot: Successful SSH terminal window.*
-
-**Module 4 — Create RDS Database Instance**
-
-* Returned to the Amazon RDS management dashboard.
-* Clicked Create database.
-* Enabled the Standard create option for full configuration freedom.
-* Selected the corresponding database engine as instructed.
-* Set an identifier name for the DB Instance.
-* Provided master username and password information.
-* Connected the instance to the corresponding VPC, DB Subnet Group, and RDS Security Group.
-* Started the database creation process.
-* Waited until the status transitioned from `Creating` to `Available`.
-* Recorded the information: Endpoint, Port, and Username.
-* 📸 *Screenshot: RDS Database creation process in progress.*
-* 📸 *Screenshot: Database transitioned to Available status.*
-* 📸 *Screenshot: Details panel containing Endpoint and Port.*
-
-**Module 5 — Application Deployment**
-
-* Established an SSH connection to the EC2 server.
-* Installed the Git tool on the Amazon Linux platform.
-* Cloned the AWS FCJ Management project to the virtual machine.
-* Set up the Node.js execution environment and npm package manager.
-* Installed all the necessary application dependencies.
-* Installed the MySQL client package to communicate with the database via command line.
-* Initialized the `.env` environment variable file with the parameters:
-* `DB_HOST`
-* `DB_NAME`
-* `DB_USER`
-* `DB_PASS`
-
-
-* Used the Endpoint information to test the connection to RDS.
-* Initialized a database named `first_cloud_users`.
-* Built the `user` data table.
-* Inserted a few sample records for testing.
-* Started the web app using the command:
-
-```bash
-npm start
+The architecture has taken clear shape. However, operating everything currently relies on manual "clicks" and lacks a holistic expenditure management mechanism.
+- Moving into the next week, the focus will shift to **FinOps** with the AWS Budgets service to learn how to set up automated financial barriers.
+- Understand the difference between cash flow control (Cost) and resource control (Usage).
+- Prepare the foundation to eventually automate infrastructure instead of manually creating each Subnet, RDS, or EC2.
