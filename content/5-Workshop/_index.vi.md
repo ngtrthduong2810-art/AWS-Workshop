@@ -20,9 +20,9 @@ Thông qua workshop này, người học sẽ hiểu được quy trình triển
 
 #### Nội dung
 
-1. [Tổng quan về Workshop](5.1-Workshop-overview/)
-2. [Chuẩn bị môi trường](5.2-Prerequiste/)
-3. [Triển khai Backend Serverless trên AWS](5.3-Backend/)
-4. [Tích hợp Gmail OAuth](5.4-Gmail-OAuth/)
-5. [VPC Endpoint Policies](5.5-Flutter-app/)
-6. [Dọn dẹp tài nguyên](5.6-Cleanup/)
+1. [Tổng quan về Workshop](5.1-overview/)
+2. [Chuẩn bị môi trường](5.2-prerequisite/)
+3. [Triển khai Backend Serverless trên AWS](5.3-backend-serverless/)
+4. [Tích hợp Gmail OAuth](5.4-gmail-oauth/)
+5. [Flutter App & Luồng End-to-End](5.5-flutter-app/)
+6. [Dọn dẹp tài nguyên](5.6-cleanup/)

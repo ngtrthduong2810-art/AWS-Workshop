@@ -20,9 +20,9 @@ Through this workshop, learners will understand the process of deploying a real-
 
 #### Table of Contents
 
-1. [Workshop Overview](5.1-Workshop-overview/)
-2. [Prerequisites](5.2-Prerequiste/)
-3. [Deploying Serverless Backend on AWS](5.3-Backend/)
-4. [Integrating Gmail OAuth](5.4-Gmail-OAuth/)
-5. [VPC Endpoint Policies](5.5-Flutter-app/)
-6. [Clean up](5.6-Cleanup/)
+1. [Workshop Overview](5.1-overview/)
+2. [Prerequisites](5.2-prerequisite/)
+3. [Deploying Serverless Backend on AWS](5.3-backend-serverless/)
+4. [Integrating Gmail OAuth](5.4-gmail-oauth/)
+5. [Flutter App & End-to-End Flow](5.5-flutter-app/)
+6. [Clean up](5.6-cleanup/)

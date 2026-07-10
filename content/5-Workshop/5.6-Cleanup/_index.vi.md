@@ -83,7 +83,7 @@ Log group thường tự xoá cùng Lambda function khi qua `sam delete`. Nếu 
 2. Chọn tất cả → **Actions** → **Delete log group(s)**.
 
 
-![Danh sách CloudWatch Log groups còn sót lại](/images/5-Workshop/5.6-cleanup/thê.jpg)
+![Danh sách CloudWatch Log groups còn sót lại](/images/5-Workshop/5.6-cleanup/cleanup-cloudwatch-logs.jpg)
 
 #### 5.6.7 Bảng tổng hợp tài nguyên cần dọn
 
