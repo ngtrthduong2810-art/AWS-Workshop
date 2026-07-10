@@ -1,5 +1,5 @@
 ---
-title: "5.3 Serverless Backend"
+title: "Serverless Backend"
 date: 2026-07-07
 weight: 3
 chapter: false

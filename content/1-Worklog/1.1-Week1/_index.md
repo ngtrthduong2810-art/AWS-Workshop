@@ -1,6 +1,6 @@
 ---
 title: "Worklog Week 1"
-date: 2026-04-14
+date: 2026-04-17
 weight: 1
 chapter: false
 pre: " <b> 1.1. </b> "
@@ -21,7 +21,7 @@ The first week is the most crucial stepping stone for transitioning from a tradi
 
 | Day | Deep-Dive Tasks | Start Date | End Date | Reference Documents |
 | --- | --- | --- | --- | --- |
-| Mon | - **Cultural Integration:** Network and get acquainted with the FCJ team. <br> - Thoroughly study the regulations and operational rules at the internship site to ensure a professional workflow. | 20/04/2026 | 20/04/2026 | https://www.notion.so/Group-description-TP-HCM-347df829a730809a8f63d39505644917 |
+| Mon | - **Cultural Integration:** Network and get acquainted with the FCJ team. <br> - Thoroughly study the regulations and operational rules at the internship site to ensure a professional workflow. | 17/04/2026 | 17/04/2026 | https://www.notion.so/Group-description-TP-HCM-347df829a730809a8f63d39505644917 |
 | Tue | - **Foundational Research:** Explore Module 01-01: The Nature of Cloud Computing. <br> - Analyze Module 01-02: AWS's Position and Differentiation compared to competitors. <br> - Explore Module 01-03: Planning the Cloud Conquest Roadmap. <br> - Explore Module 01-04: Decoding AWS Global Infrastructure to understand how to design highly available systems. | 21/04/2026 | 21/04/2026 | https://cloudjourney.awsstudygroup.com/ |
 | Wed | - **Tools and Security:** Study Module 01-05: AWS Management Tools Handbook. <br> - Study Module 01-06: Cost Optimization Strategy & Interacting with AWS Support. <br> - Module 01-07: Deep dive research and practical application. <br> - **Practical Deployment:** <br>&emsp;+ Lab01-01: Successfully initialize an AWS account. <br>&emsp;+ Lab01-02: Set up Virtual MFA protection layer. <br>&emsp;+ Lab01-03: Delegate permissions via creating an Admin group & user. <br>&emsp;+ Lab01-04: Test the authentication Support request process. | 22/04/2026 | 22/04/2026 | https://000001.awsstudygroup.com/ <br> https://000002.awsstudygroup.com/ |
 | Thu | - **Execute Budget Management (FinOps):** <br>&emsp;+ Lab07-01: Rapidly deploy Budgets via Templates. <br>&emsp;+ Lab07-02: Configure Cost Budgets with alert thresholds. <br>&emsp;+ Lab07-03: Set up Usage Budgets to monitor resources. <br>&emsp;+ Lab07-04: Monitor commitments via RI Budgets. <br>&emsp;+ Lab07-05: Manage Savings Plans Budget packages. <br>&emsp;+ Lab07-06: Perform a clean up of all Budgets after testing. | 23/04/2026 | 23/04/2026 | https://000001.awsstudygroup.com/ |
