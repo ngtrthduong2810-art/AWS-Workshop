@@ -1,5 +1,5 @@
 ---
-title: "5.2 Các bước chuẩn bị"
+title: "Các bước chuẩn bị"
 date: 2026-07-07
 weight: 2
 chapter: false
