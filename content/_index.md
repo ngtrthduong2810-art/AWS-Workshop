@@ -1,6 +1,6 @@
 ---
 title: "Internship Report"
-date: 2026-04-14
+date: 2026-04-17
 weight: 1
 chapter: false
 ---
@@ -25,7 +25,7 @@ chapter: false
 
 &emsp; **Internship Position:** FCJ Cloud Intern
 
-&emsp; **Internship Duration:** From 14/04/2026 to 14/07/2026
+&emsp; **Internship Duration:** From 17/04/2026 to 30/07/2026
 
 ![Your profile picture](/images/avatar.jpg)
 
